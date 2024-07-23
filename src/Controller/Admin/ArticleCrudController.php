@@ -119,7 +119,13 @@ class ArticleCrudController extends AbstractCrudController
                 ->setRequired(false)
                 ->setHelp('Format accepté : PDF - 1 Mo Maxi')
                 ->setEntryIsComplex(true)
-                ->useEntryCrudForm(FichierCrudController::class),
+                ->useEntryCrudForm(FichierCrudController::class)
+                ->setColumns(6)
+                ->hideOnIndex(),
+            CollectionField::new('fichiers', 'Fichiers')
+                ->setColumns(6)
+                ->hideOnForm()
+                ->setTemplatePath('admin/fields/document-fichier.html.twig'),
 
             FormField::addTab('SEO'),
             TextField::new('seoTitle', 'Titre SEO')

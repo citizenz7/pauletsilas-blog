@@ -30,6 +30,7 @@ class FichierCrudController extends AbstractCrudController
             ImageField::new('fichierFile', 'Fichiers')
                 ->setColumns(6)
                 ->hideOnIndex()
+                ->hideOnDetail()
                 ->setBasePath('uploads/files/articles')
                 ->setUploadDir('public/uploads/files/articles')
                 ->setUploadedFileNamePattern('[name]-[uuid].[extension]')

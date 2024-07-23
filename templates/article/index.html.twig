@@ -2,13 +2,13 @@
 
 {% block title %}Article index{% endblock %}
 
-{% block importmap %}{{ importmap(['app', 'article']) }}{% endblock %}
+{% block importmap %}{{ importmap(['app', 'articles']) }}{% endblock %}
 
 {% block body %}
-    <section class="article">
-        <h1>Article index</h1>
+    <section class="articles">
+        <h1>Tous les articles</h1>
 
-        <table class="table">
+        {# <table class="table">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -42,8 +42,8 @@
                     <td>{{ article.seoTitle }}</td>
                     <td>{{ article.seoDescription }}</td>
                     <td>
-                        <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
-                        {# <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a> #}
+                        <a href="{{ path('app_article_show', {'slug': article.slug}) }}">show</a>
+                        <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
                     </td>
                 </tr>
             {% else %}
@@ -52,8 +52,29 @@
                 </tr>
             {% endfor %}
             </tbody>
-        </table>
+        </table> #}
 
         {# <a href="{{ path('app_article_new') }}">Create new</a> #}
+
+        <div class="cards">
+            {% for article in articles %}
+                <div class="card">
+                    <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" class="img" alt="{{ article.mainImageAlt }}">
+                    <div class="card-body">
+                        <div class="categories">
+                            {% for category in article.categories %}
+                                <a class="cat" href="#">{{ category.title }}</a>
+                            {% endfor %}
+                        </div>
+                        <h2 class="title">{{ article.title }}</h2>
+                        <div class="meta">
+                            Publié le {{ article.postedAt|date('d/m/Y') }}, par {{ article.author }}, {% if article.updatedAt is not empty %} mis à jour le {{ article.updatedAt|date('d/m/Y') }}{% endif %}
+                        </div>
+                        <div class="text">{{ article.intro|raw }}</div>
+                        <a href="{{ path('app_article_show', {'slug': article.slug}) }}" class="btn-show">Voir</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </section>
 {% endblock %}

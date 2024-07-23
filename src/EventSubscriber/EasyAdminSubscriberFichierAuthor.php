@@ -3,12 +3,12 @@
 namespace App\EventSubscriber;
 
 use App\Entity\User;
-use App\Entity\Article;
+use App\Entity\Fichier;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class EasyAdminSubscriberArticleAuthor implements EventSubscriberInterface
+class EasyAdminSubscriberFichierAuthor implements EventSubscriberInterface
 {
     public function __construct(private TokenStorageInterface $tokenStorage)
     {
@@ -17,24 +17,23 @@ class EasyAdminSubscriberArticleAuthor implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            BeforeEntityPersistedEvent::class => ['setArticleAuthor']
+            BeforeEntityPersistedEvent::class => ['setFichierAuthor']
         ];
     }
 
-    public function setArticleAuthor(BeforeEntityPersistedEvent $event): void
+    public function setFichierAuthor(BeforeEntityPersistedEvent $event): void
     {
-        $article = $event->getEntityInstance();
+        $fichier = $event->getEntityInstance();
 
-        if (!$article instanceof Article) {
+        if (!$fichier instanceof Fichier) {
             return;
         }
 
         $user = $this->tokenStorage->getToken()?->getUser();
-
         if (!$user instanceof User) {
             return;
         }
 
-        $article->setAuthor($user);
+        $fichier->setAuthor($user);
     }
 }

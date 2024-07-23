@@ -63,16 +63,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $authorBio = null;
 
-    /**
-     * @var Collection<int, Fichier>
-     */
-    #[ORM\OneToMany(targetEntity: Fichier::class, mappedBy: 'author', orphanRemoval: true)]
-    private Collection $fichiers;
-
     public function __construct()
     {
         $this->articles = new ArrayCollection();
-        $this->fichiers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -267,35 +260,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): string
     {
         return $this->firstname.' '.$this->lastname;
-    }
-
-    /**
-     * @return Collection<int, Fichier>
-     */
-    public function getFichiers(): Collection
-    {
-        return $this->fichiers;
-    }
-
-    public function addFichier(Fichier $fichier): static
-    {
-        if (!$this->fichiers->contains($fichier)) {
-            $this->fichiers->add($fichier);
-            $fichier->setAuthor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFichier(Fichier $fichier): static
-    {
-        if ($this->fichiers->removeElement($fichier)) {
-            // set the owning side to null (unless already changed)
-            if ($fichier->getAuthor() === $this) {
-                $fichier->setAuthor(null);
-            }
-        }
-
-        return $this;
     }
 }

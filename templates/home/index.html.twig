@@ -21,9 +21,9 @@
                             <a href="">{{ category.title }}</a>
                         {% endfor %}
                     </p>
-                    {% if article.fichiers %}
+                    {% if article.fichiers is not empty %}
                         <p class="joinfile">
-                            <a href="{{ path('app_article_show', {'slug': article.slug}) }}">
+                            <a href="{{ path('app_article_show', {'slug': article.slug}) }}#fichiers">
                                 <i class="fa-regular fa-file-pdf"></i>
                                 {{ article.fichiers|length }}
                             </a>

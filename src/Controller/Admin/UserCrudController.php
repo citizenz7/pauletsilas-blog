@@ -5,16 +5,19 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\SecurityBundle\Security;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -46,12 +49,13 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            FormField::addTab('Informations'),
             TextField::new('lastname', 'Nom')
                 ->setColumns(3),
             TextField::new('firstname', 'Prénom')
                 ->setColumns(3),
             EmailField::new('email', 'Adresse e-mail')
-                ->setColumns(6)
+                ->setColumns(3)
                 ->setRequired(false),
             ChoiceField::new('roles', 'Rôle')
                 ->setColumns(3)
@@ -64,12 +68,21 @@ class UserCrudController extends AbstractCrudController
                     'ROLE_USER' => 'info',
                     'ROLE_ADMIN' => 'success'
                 ]),
+
+            FormField::addTab('Image de profil'),
             ImageField::new('image', 'Image de profile')
                 ->setColumns(6)
                 ->setBasePath('uploads/img/users')
                 ->setUploadDir('public/uploads/img/users')
                 ->setRequired(false)
                 ->setUploadedFileNamePattern('[name]-[uuid].[extension]'),
+
+            FormField::addTab('Bio'),
+            TextEditorField::new('authorBio', 'Biographie courte')
+                ->setColumns(12)
+                ->hideOnIndex()
+                ->setFormType(CKEditorType::class),
+
             BooleanField::new('active', 'Actif ?')
                 ->setpermission('ROLE_ADMIN')
                 ->hideOnForm(),
@@ -84,6 +97,8 @@ class UserCrudController extends AbstractCrudController
 
             ->setPageTitle('index', 'Mon profil')->setEntityPermission('ROLE_USER')
             ->setPageTitle('edit', 'Modifier mon profil')->setEntityPermission('ROLE_USER')
+
+            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
 
             ->setDefaultSort(['lastname' => 'ASC'])
             ->setPaginatorPageSize(15)

@@ -1,9 +1,0 @@
-{% for value in field.value %}
-    <a class="badge badge-success" href="/admin?crudAction=detail&crudControllerFqcn=App%5CController%5CAdmin%5CChantCrudController&entityId={{ value.id }}">
-        {{ value }}
-    </a>
-{% else %}
-    <span class="badge badge-secondary">
-        Aucun
-    </span>
-{% endfor %}

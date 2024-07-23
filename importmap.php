@@ -24,6 +24,10 @@ return [
         'path' => './assets/js/article.js',
         'entrypoint' => true,
     ],
+    'articles' => [
+        'path' => './assets/js/articles.js',
+        'entrypoint' => true,
+    ],
     'login' => [
         'path' => './assets/js/login.js',
         'entrypoint' => true,

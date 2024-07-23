@@ -37,12 +37,12 @@
             <img src="{{ asset('uploads/img/users/' ~ article.author.image) }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
             <div>
                 Posté par <a href="#">{{ article.author }}</a>
-                <p>{{ article.author.authorBio|raw }}</p>
+                {{ article.author.authorBio|raw }}
             </div>
         </div>
 
         {% if article.mediapic is not empty %}
-            <h2 class="galerie-title">Galerie photos</h2>
+            <h2 id="pics" class="galerie-title">Galerie photos</h2>
             <div class="mediapics">
                 {% for pic in article.mediapic %}
                     <a href="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" target="_blank">
@@ -53,7 +53,7 @@
         {% endif %}
 
         {% if article.fichiers is not empty %}
-            <h2 class="galerie-title">Documents PDF</h2>
+            <h2 id="fichiers" class="galerie-title">Documents PDF</h2>
             <div class="fichiers">
                 {% for file in article.fichiers %}
                     <a href="{{ asset('uploads/files/articles/' ~ file.fichierFile) }}">
