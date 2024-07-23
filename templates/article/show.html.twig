@@ -13,17 +13,11 @@
 
 {% block body %}
     <section class="article">
-        {#
-        <a href="{{ path('app_article_index') }}">back to list</a>
-
-        <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-
-        {{ include('article/_delete_form.html.twig') }}
-        #}
+        <h1>{{ article.title }}</h1>
 
         <div class="categories">
             {% for cat in article.categories %}
-                <a href="#">{{ cat.title }}</a>
+                <a class="cat" href="#">{{ cat.title }}</a>
             {% endfor %}
         </div>
 
@@ -33,8 +27,6 @@
                 | Mis à jour le : {{ article.updatedAt|date('d-m-Y') }}
             {% endif %}
         </div>
-
-        <h1>{{ article.title }}</h1>
 
         <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.mainImageAlt }}" class="img">
 
@@ -53,7 +45,7 @@
             <h2 class="galerie-title">Galerie photos</h2>
             <div class="mediapics">
                 {% for pic in article.mediapic %}
-                    <a href="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" target="_blank" class="glightbox3" data-gallery="gallery">
+                    <a href="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" target="_blank">
                         <img src="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" alt="{{ pic.imageAlt }}">
                     </a>
                 {% endfor %}

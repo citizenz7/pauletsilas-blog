@@ -5,11 +5,12 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Entity\Media;
 use App\Entity\Article;
+use App\Entity\Fichier;
 use App\Entity\Setting;
 use App\Entity\Category;
-use App\Entity\Fichier;
 use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
@@ -20,11 +21,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
+
 class DashboardController extends AbstractDashboardController
 {
     public function __construct(
         private UserRepository $userRepository,
-        private ArticleRepository $articleRepository
+        private ArticleRepository $articleRepository,
+        private Security $security
     )
     {
     }
@@ -77,6 +80,8 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        $user = $this->security->getUser();
+
         yield MenuItem::linkToRoute('Visiter le site', 'fas fa-home', 'app_home');
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-cog');
 
@@ -101,8 +106,12 @@ class DashboardController extends AbstractDashboardController
         // PARAMETRES
         // -------------------------------------
         yield MenuItem::section('Paramètres du site')->setCssClass('text-warning fw-bold shadow');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
-        yield MenuItem::linkToCrud('Configuration du site', 'fa fa-cogs', Setting::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class)->setPermission('ROLE_ADMIN');
+
+        if (!$user instanceof User || !$this->security->isGranted('ROLE_ADMIN')) {
+            yield MenuItem::linkToCrud('Mon profil', 'fas fa-user', User::class);
+        }
+        yield MenuItem::linkToCrud('Configuration du site', 'fa fa-cogs', Setting::class)->setPermission('ROLE_ADMIN');
     }
 
         public function configureAssets(): Assets

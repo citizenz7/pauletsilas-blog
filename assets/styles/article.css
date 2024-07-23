@@ -6,15 +6,16 @@
 }
 
 .article h1 {
-    font-size: clamp(22px, 6vw, 30px);
+    font-size: clamp(22px, 6vw, 32px);
     color: var(--title-color);
-    margin: 5px 0 10px 0;
+    margin-bottom: 4px;
 }
 
-.article a {
+/* .article a {
     color: var(--link-color);
     text-decoration: none;
-}
+    margin: 0 25px;
+} */
 
 .article a:hover {
     color: var(--link-hover-color);
@@ -23,10 +24,10 @@
 .article .categories {
     display: flex;
     gap: 7px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
-.article .categories a {
+.article .categories .cat {
     font-size: clamp(10px, 1.5vw, 12px);
     color: var(--color-white);
     font-weight: 400;
@@ -38,19 +39,20 @@
     position: relative;
 }
 
-.article .categories a:hover {
+.article .categories .cat:hover {
     background-color: var(--bg-button-color-hover);
 }
 
 .article .meta {
     font-size: clamp(11px, 1.5vw, 12px);
+    margin-bottom: 15px;
 }
 
 .article .img {
     max-width: 100%;
     height: auto;
     width: 100%;
-    max-height: 300px;
+    max-height: 550px;
     object-fit: cover;
     margin-bottom: 15px;
 }
@@ -153,6 +155,15 @@
     text-align: center;
 }
 
+.article .fichiers a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.article .fichiers a:hover {
+    color: var(--link-hover-color);
+}
+
 
 
 
@@ -163,6 +174,10 @@
 }
 
 @media screen and (max-width: 768px) {
+    .article a {
+        margin: 0 7px;
+    }
+
     .article .mediapics img {
         width: 100%;
     }

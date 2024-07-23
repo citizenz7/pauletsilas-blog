@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Il y a déjà un compte avec cette adresse e-mail.')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -60,7 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $CreatedAt = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $authorBio = null;
 
     public function __construct()
@@ -245,20 +245,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function __toString(): string
-    {
-        return $this->firstname.' '.$this->lastname;
-    }
-
     public function getAuthorBio(): ?string
     {
         return $this->authorBio;
     }
 
-    public function setAuthorBio(string $authorBio): static
+    public function setAuthorBio(?string $authorBio): static
     {
         $this->authorBio = $authorBio;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->firstname.' '.$this->lastname;
     }
 }

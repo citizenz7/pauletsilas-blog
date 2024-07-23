@@ -1,8 +1,21 @@
 .home {
     max-width: 1320px;
-    margin: calc(var(--header-height) + 55px) auto 35px auto;
+    margin: calc(var(--header-height) + 35px) auto 35px auto;
     padding: 15px 0 35px 0;
     position: relative;
+}
+
+.home .main-title {
+    font-size: clamp(20px, 1.5vw, 30px);
+    font-weight: 800;
+    font-family: var(--title-font-family);
+    color: var(--title-color);
+    position: relative;
+    margin-bottom: 35px;
+    text-align: center;
+    background-color: var(--title-bg-color);
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .home a {

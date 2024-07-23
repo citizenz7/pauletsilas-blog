@@ -3,24 +3,25 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Bundle\SecurityBundle\Security;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserCrudController extends AbstractCrudController
 {
-    public function __construct(private UserPasswordHasherInterface $passwordHasher)
+    public function __construct(private Security $security)
     {
     }
 
@@ -29,32 +30,17 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
-        if ($entityInstance instanceof User) {
-            $this->hashUserPassword($entityInstance);
+        $queryBuilder = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $queryBuilder;
         }
-        parent::persistEntity($entityManager, $entityInstance);
-    }
 
-    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        if ($entityInstance instanceof User) {
-            $this->hashUserPassword($entityInstance);
-        }
-        parent::updateEntity($entityManager, $entityInstance);
-    }
-
-    private function hashUserPassword($user)
-    {
-        if ($user->getPassword()) {
-            $user->setPassword(
-                $this->passwordHasher->hashPassword(
-                    $user,
-                    $user->getPassword()
-                )
-            );
-        }
+        $queryBuilder = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters)
+            ->andWhere('entity.email = :email')
+            ->setParameter('email', $this->security->getUser()->getUserIdentifier());
+        return $queryBuilder;
     }
 
     public function configureFields(string $pageName): iterable
@@ -78,10 +64,6 @@ class UserCrudController extends AbstractCrudController
                     'ROLE_USER' => 'info',
                     'ROLE_ADMIN' => 'success'
                 ]),
-            TextField::new('password', 'Mot de passe')
-                ->setColumns(3)
-                ->onlyWhenCreating()
-                ->setFormType(PasswordType::class),
             ImageField::new('image', 'Image de profile')
                 ->setColumns(6)
                 ->setBasePath('uploads/img/users')
@@ -97,9 +79,12 @@ class UserCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'Liste des utilisateurs')
-            ->setPageTitle('edit', 'Modifier un utilisateur')
-            ->setPageTitle('new', 'Ajouter un utilisateur')
+            ->setPageTitle('index', 'Liste des utilisateurs')->setEntityPermission('ROLE_ADMIN')
+            ->setPageTitle('edit', 'Modifier un utilisateur')->setEntityPermission('ROLE_ADMIN')
+
+            ->setPageTitle('index', 'Mon profil')->setEntityPermission('ROLE_USER')
+            ->setPageTitle('edit', 'Modifier mon profil')->setEntityPermission('ROLE_USER')
+
             ->setDefaultSort(['lastname' => 'ASC'])
             ->setPaginatorPageSize(15)
             ->showEntityActionsInlined(true)
@@ -113,20 +98,20 @@ class UserCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return $actions
-            ->add(Crud::PAGE_INDEX, Action::DETAIL, Action::NEW, Action::DELETE)
-            // ->add(Crud::PAGE_INDEX, Action::DETAIL, Action::DELETE)
+            ->add(Crud::PAGE_INDEX, Action::DETAIL, Action::DELETE)
             // On DESACTIVE le bouton NEW
-            // ->disable(Action::NEW)
-            ->update(Crud::PAGE_INDEX,Action::NEW,function(Action $action){
-                return $action->setIcon('fas fa-newspaper pe-1')->setLabel('Ajouter un utilisateur');
-            })
+            ->disable(Action::NEW)
+
+            // On ajuste les permissions
+            ->setPermission(Action::DELETE, 'ROLE_ADMIN')
+
             ->update(Crud::PAGE_INDEX, Action::DETAIL, function(Action $action){
                 return $action->setIcon('fas fa-eye text-info')->setLabel('')->addCssClass('text-dark');
             })
-            ->update(Crud::PAGE_INDEX,Action::EDIT,function(Action $action){
+            ->update(Crud::PAGE_INDEX,Action::EDIT, function(Action $action){
                 return $action->setIcon('fas fa-edit text-warning')->setLabel('')->addCssClass('text-dark');
             })
-            ->update(Crud::PAGE_INDEX,Action::DELETE,function(Action $action){
+            ->update(Crud::PAGE_INDEX,Action::DELETE, function(Action $action){
                 return $action->setIcon('fas fa-trash text-danger')->setLabel('')->addCssClass('text-dark');
             });
     }

@@ -7,10 +7,7 @@
             <li><a href="#">A propos</a></li>
             <li><a href="#">Recherche</a></li>
             {% if app.user %}
-                {% if is_granted('ROLE_ADMIN') %}
-                    <li><a href="{{ path('admin') }}">Admin</a></li>
-                {% endif %}
-                <li><a href="{#{{ path('app_user_show') }}#}">Mon compte</a></li>
+                <li><a href="{{ path('admin') }}">Tableau de bord</a></li>
                 <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
             {% else %}
                 <li><a href="{{ path('app_login') }}">Connexion</a></li>

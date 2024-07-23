@@ -32,6 +32,10 @@ return [
         'path' => './assets/js/register.js',
         'entrypoint' => true,
     ],
+    'reset-password' => [
+        'path' => './assets/js/reset-password.js',
+        'entrypoint' => true,
+    ],
     'admin' => [
         'path' => './assets/js/admin.js',
         'entrypoint' => true,
@@ -44,5 +48,5 @@ return [
     ],
     '@hotwired/turbo' => [
         'version' => '7.3.0',
-    ],
+    ]
 ];
