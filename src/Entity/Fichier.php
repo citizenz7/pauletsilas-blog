@@ -22,6 +22,10 @@ class Fichier
     #[ORM\ManyToOne(inversedBy: 'fichiers')]
     private ?Article $article = null;
 
+    #[ORM\ManyToOne(inversedBy: 'fichiers')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -66,5 +70,17 @@ class Fichier
     public function __toString(): string
     {
         return $this->title;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): static
+    {
+        $this->author = $author;
+
+        return $this;
     }
 }

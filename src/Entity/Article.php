@@ -240,6 +240,11 @@ class Article
             if ($mediapic->getArticle() === $this) {
                 $mediapic->setArticle(null);
             }
+
+            $mediapicPath = __DIR__.'/../../public/uploads/img/articles/pics/'.$mediapic->getImage();
+            if (file_exists($mediapicPath)) {
+                unlink($mediapicPath);
+            }
         }
 
         return $this;
