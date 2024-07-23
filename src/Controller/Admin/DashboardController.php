@@ -88,7 +88,7 @@ class DashboardController extends AbstractDashboardController
         // -------------------------------------
         // PAGES
         // -------------------------------------
-        yield MenuItem::section('Pages');
+        yield MenuItem::section('Pages')->setCssClass('text-warning fw-bold shadow');
         // yield MenuItem::linkToCrud('Page d\'accueil', 'fas fa-file-alt', Homepage::class)->setAction('detail')->setEntityId(1);
         // yield MenuItem::linkToCrud('A propos', 'fas fa-info', Homepage::class)->setAction('detail')->setEntityId(1);
         // yield MenuItem::linkToCrud('Page Contact', 'fas fa-file-alt', Contact::class)->setAction('detail')->setEntityId(1);
@@ -96,7 +96,7 @@ class DashboardController extends AbstractDashboardController
         // -------------------------------------
         // SECTIONS
         // -------------------------------------
-        yield MenuItem::section('Sections');
+        yield MenuItem::section('Sections')->setCssClass('text-warning fw-bold shadow');
         yield MenuItem::linkToCrud('Articles', 'fas fa-newspaper', Article::class);
         yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Images', 'fas fa-images', Media::class);

@@ -59,12 +59,15 @@ class CategoryCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Categories')
             ->setSearchFields(['title', 'slug'])
             ->setDefaultSort(['title' => 'ASC'])
-            ->showEntityActionsInlined(true)
-            ->setEntityPermission('ROLE_ADMIN');
+            ->showEntityActionsInlined(true);
     }
 
     public function configureActions(Actions $actions): Actions{
         return $actions
+            ->setPermission(Action::DELETE, 'ROLE_ADMIN')
+            ->setPermission(Action::EDIT, 'ROLE_ADMIN')
+            ->setPermission(Action::NEW, 'ROLE_ADMIN')
+
             ->update(Crud::PAGE_INDEX,Action::NEW,function(Action $action){
                 return $action->setIcon('fas fa-tags pe-1')->setLabel('Ajouter une catégorie');
             })
