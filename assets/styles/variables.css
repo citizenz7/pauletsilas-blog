@@ -1,0 +1,65 @@
+:root {
+    --body-font-size: clamp(13px, 1.5vw, 16px);
+    --body-font-family: 'Poppins', sans-serif;
+    --body-font-color: #333;
+    --body-bg-color: #fcfcfc;
+
+    --color-white: #fff;
+    --color-black: #000;
+
+    --color-danger: #ff0000;
+    --color-danger-hover: #000000;
+
+    --color-bg-alert: #f8d7da;
+    --color-border-alert: #f5c6cb;
+    --color-bg-alert-danger: #f8d7da;
+    --color-border-alert-danger: #f5c6cb;
+
+    /* TITLE */
+    --title-font-family: 'Rubik', sans-serif;
+    --title-color: #333;
+    --title-color-hover: #ff9900;
+
+    /* LINKS */
+    --link-color: #007bff;
+    --link-hover-color: #0056b3;
+    --link-active-color: #004080;
+
+    /* BUTTON */
+    --bg-button-color: #007bff;
+    --bg-button-color-hover: #0069d9;
+
+    /* FORMS */
+    --input-color: #f2f2f2;
+    --input-font-color: #595959;
+    --input-border-color: #bbbbbb;
+    --input-border-color-focus: #007bff;
+
+    /* HEADER */
+    --header-bg-color: #333333e3;
+    --header-font-color: #fff;
+    --header-height: 80px;
+
+    /* FOOTER */
+    --footer-bg-color: #333333e3;
+    --footer-font-color: #fff;
+    --footer-height: 80px;
+
+    /* HOME */
+    --title-articles-bg-color: #0077f786;
+
+    /* LOGIN */
+    --color-bg-btn-login: #0056b3;
+    --color-font-btn-login: #fff;
+    --color-bg-btn-login-hover: #004080;
+
+    /* ARTICLE */
+    --intro-bg-color: #f2f2f2;
+    --border-pics-title: #ccc;
+    --bg-author-bio: #f2f2f2;
+
+    /* USER */
+    --color-bg-btn-user: #0011ff;
+    --color-font-btn-user: #fff;
+    --color-bg-btn-user-hover: #ff7300;
+}

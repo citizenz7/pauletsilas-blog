@@ -23,3 +23,10 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+
+/migrations/
+/public/uploads/img/
+/site-sync-preprod.sh
+/site-sync-prod.sh
+/mysqldump.sql
+/mysqldump.zip

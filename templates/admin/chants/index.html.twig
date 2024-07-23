@@ -1,0 +1,38 @@
+{% extends '@EasyAdmin/crud/index.html.twig' %}
+
+{% block page_title 'Liste des Chants' %}
+
+{# {% block body %}
+    <h1>Liste des chants</h1>
+    {{ parent() }}
+{% endblock %} #}
+
+{# {% block main %}
+    {{ parent() }}
+{% endblock %} #}
+
+{% block main %}
+    <h1>Liste des Chants</h1>
+
+    {% block list_table %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <!-- Ajoutez plus de colonnes au besoin -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for entity in entities %}
+                    {# {% dump(entity.instance.title) %} #}
+                    <tr>
+                        <td>{{ entity.instance.id }}</td>
+                        <td>{{ entity.instance.title }}</td>
+                        <!-- Ajoutez plus de colonnes au besoin -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
+{% endblock %}

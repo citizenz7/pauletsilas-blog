@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte{% endblock %}
+
+{% block importmap %}{{ importmap(['app', 'register']) }}{% endblock %}
+
+{% block body %}
+    <section class="register">
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}
+
+        <h1>Créer un compte</h1>
+
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+
+            <button type="submit" class="btn">Créer un compte</button>
+        {{ form_end(registrationForm) }}
+    </section>
+{% endblock %}

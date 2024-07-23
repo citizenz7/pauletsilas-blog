@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article : {{ article.title }}{% endblock %}
+
+{% block javascripts %}
+    {% block importmap %}{{ importmap(['app', 'article']) }}{% endblock %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
+
+{% block body %}
+    <section class="article">
+        {#
+        <a href="{{ path('app_article_index') }}">back to list</a>
+
+        <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+
+        {{ include('article/_delete_form.html.twig') }}
+        #}
+
+        <div class="categories">
+            {% for cat in article.categories %}
+                <a href="#">{{ cat.title }}</a>
+            {% endfor %}
+        </div>
+
+        <div class="meta">
+            Posté le : {{ article.postedAt|date('d-m-Y') }}
+            {% if article.updatedAt %}
+                | Mis à jour le : {{ article.updatedAt|date('d-m-Y') }}
+            {% endif %}
+        </div>
+
+        <h1>{{ article.title }}</h1>
+
+        <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.mainImageAlt }}" class="img">
+
+        <div class="intro">{{ article.intro|raw }}</div>
+        <div class="content">{{ article.content|raw }}</div>
+
+        <div class="author-bio">
+            <img src="{{ asset('uploads/img/users/' ~ article.author.image) }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
+            <div>
+                Posté par <a href="#">{{ article.author }}</a>
+                <p>{{ article.author.authorBio|raw }}</p>
+            </div>
+        </div>
+
+        {% if article.mediapic is not empty %}
+            <h2 class="galerie-title">Galerie photos</h2>
+            <div class="mediapics">
+                {% for pic in article.mediapic %}
+                    <a href="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" target="_blank" class="glightbox3" data-gallery="gallery">
+                        <img src="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" alt="{{ pic.imageAlt }}">
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if article.fichiers is not empty %}
+            <h2 class="galerie-title">Documents PDF</h2>
+            <div class="fichiers">
+                {% for file in article.fichiers %}
+                    <a href="{{ asset('uploads/files/articles/' ~ file.fichierFile) }}">
+                    <i class="fa-solid fa-file-pdf fa-4x"></i><br>{{ file.title }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue !{% endblock %}
+
+{% block importmap %}{{ importmap(['app', 'home']) }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
+{% block body %}
+
+    <section class="home">
+        <div class="cards">
+            {% for article in articles %}
+                <div class="card">
+                    <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.title }}" class="img">
+                    <p class="categories">
+                        {% for category in article.categories %}
+                            <a href="">{{ category.title }}</a>
+                        {% endfor %}
+                    </p>
+                    {% if article.fichiers %}
+                        <p class="joinfile">
+                            <a href="{{ path('app_article_show', {'slug': article.slug}) }}">
+                                <i class="fa-regular fa-file-pdf"></i>
+                                {{ article.fichiers|length }}
+                            </a>
+                        </p>
+                    {% endif %}
+                    <div class="meta">
+                        <span class="date">Posté le {{ article.postedAt|date('d/m/Y') }}</span>,
+                        <span class="author">par <a href="">{{ article.author }}</a></span>
+                    </div>
+                    <h2 class="title">
+                        <a href="{{ path('app_article_show', {'slug': article.slug}) }}">
+                            {{ article.title }}
+                        </a>
+                    </h2>
+                    <div class="intro">{{ article.intro|raw }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}
