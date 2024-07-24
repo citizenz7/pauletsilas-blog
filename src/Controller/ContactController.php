@@ -7,16 +7,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class AproposController extends AbstractController
+class ContactController extends AbstractController
 {
-    #[Route('/apropos', name: 'app_apropos')]
+    #[Route('/contact', name: 'app_contact')]
     public function index(
         SettingRepository $settingRepository
     ): Response
     {
         $settings = $settingRepository->findOneBy([]);
 
-        return $this->render('apropos/index.html.twig', [
+        return $this->render('contact/index.html.twig', [
             'settings' => $settings
         ]);
     }

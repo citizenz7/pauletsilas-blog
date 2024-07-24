@@ -44,6 +44,26 @@ return [
         'path' => './assets/js/reset-password.js',
         'entrypoint' => true,
     ],
+    'contact' => [
+        'path' => './assets/js/contact.js',
+        'entrypoint' => true,
+    ],
+    'apropos' => [
+        'path' => './assets/js/apropos.js',
+        'entrypoint' => true,
+    ],
+    'recherche' => [
+        'path' => './assets/js/recherche.js',
+        'entrypoint' => true,
+    ],
+    'cgu' => [
+        'path' => './assets/js/cgu.js',
+        'entrypoint' => true,
+    ],
+    'confidentialite' => [
+        'path' => './assets/js/confidentialite.js',
+        'entrypoint' => true,
+    ],
     'admin' => [
         'path' => './assets/js/admin.js',
         'entrypoint' => true,
