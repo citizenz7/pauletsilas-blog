@@ -42,9 +42,9 @@
     --header-height: 80px;
 
     /* FOOTER */
-    --footer-bg-color: #333333e3;
+    --footer-bg-color: #000000de;
     --footer-font-color: #fff;
-    --footer-height: 80px;
+    --footer-height: 110px;
 
     /* HOME */
     --title-articles-bg-color: #0077f786;
@@ -59,6 +59,8 @@
     --border-pics-title: #ccc;
     --bg-author-bio: #f2f2f2;
     --bg-meta: #f2f2f2;
+    --bg-articles-button: #333333e3;
+    --bg-articles-button-hover: #000000e3;
 
     /* USER */
     --color-bg-btn-user: #0011ff;

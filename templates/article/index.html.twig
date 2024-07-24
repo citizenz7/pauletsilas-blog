@@ -1,80 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article index{% endblock %}
+{% block title %}Tous les articles{% endblock %}
 
 {% block importmap %}{{ importmap(['app', 'articles']) }}{% endblock %}
 
 {% block body %}
     <section class="articles">
         <h1>Tous les articles</h1>
-
-        {# <table class="table">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Slug</th>
-                    <th>Intro</th>
-                    <th>Content</th>
-                    <th>MainImage</th>
-                    <th>MainImageAlt</th>
-                    <th>PostedAt</th>
-                    <th>UpdatedAt</th>
-                    <th>Active</th>
-                    <th>SeoTitle</th>
-                    <th>SeoDescription</th>
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for article in articles %}
-                <tr>
-                    <td>{{ article.id }}</td>
-                    <td>{{ article.title }}</td>
-                    <td>{{ article.slug }}</td>
-                    <td>{{ article.intro }}</td>
-                    <td>{{ article.content }}</td>
-                    <td>{{ article.mainImage }}</td>
-                    <td>{{ article.mainImageAlt }}</td>
-                    <td>{{ article.postedAt ? article.postedAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ article.active ? 'Yes' : 'No' }}</td>
-                    <td>{{ article.seoTitle }}</td>
-                    <td>{{ article.seoDescription }}</td>
-                    <td>
-                        <a href="{{ path('app_article_show', {'slug': article.slug}) }}">show</a>
-                        <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="13">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table> #}
-
-        {# <a href="{{ path('app_article_new') }}">Create new</a> #}
-
         <div class="cards">
             {% for article in articles %}
                 <div class="card">
-                    <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" class="img" alt="{{ article.mainImageAlt }}">
+                    <a href="{{ path('app_article_show', {'slug': article.slug}) }}">
+                        <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" class="img" alt="{{ article.mainImageAlt }}">
+                    </a>
                     <div class="card-body">
                         <div class="categories">
                             {% for category in article.categories %}
                                 <a class="cat" href="#">{{ category.title }}</a>
                             {% endfor %}
                         </div>
-                        <h2 class="title">{{ article.title }}</h2>
+                        <h2 class="title">
+                            <a href="{{ path('app_article_show', {'slug': article.slug}) }}">
+                                {{ article.title }}
+                            </a>
+                        </h2>
                         <div class="meta">
                             Publié le {{ article.postedAt|date('d/m/Y') }}, par {{ article.author }}, {% if article.updatedAt is not empty %} mis à jour le {{ article.updatedAt|date('d/m/Y') }}{% endif %}
                         </div>
                         <div class="text">{{ article.intro|raw }}</div>
-                        <a href="{{ path('app_article_show', {'slug': article.slug}) }}" class="btn-show">Voir</a>
+                        {# <a href="{{ path('app_article_show', {'slug': article.slug}) }}" class="btn-show">Voir</a> #}
                     </div>
                 </div>
             {% endfor %}
+        </div>
+
+        <div class="navigation">
+            {{ knp_pagination_render(articles) }}
         </div>
     </section>
 {% endblock %}

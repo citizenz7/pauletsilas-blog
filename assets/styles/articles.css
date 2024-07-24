@@ -14,8 +14,8 @@
 .articles .cards {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    justify-content: space-between;
+    gap: 45px;
+    /* justify-content: space-evenly; */
     margin-top: 35px;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .articles .cards .card .card-body .categories .cat {
-    font-size: clamp(10px, 1.5vw, 12px);
+    font-size: clamp(8px, 1.5vw, 10px);
     color: var(--color-white);
     font-weight: 400;
     text-decoration: none;
@@ -50,6 +50,10 @@
     background-color: var(--color-black);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
+}
+
+.articles .cards .card .card-body .categories .cat:hover {
+    color: var(--title-color-hover);
 }
 
 .articles .cards .card .card-body .meta {
@@ -76,12 +80,22 @@
 }
 
 .articles .cards .card .card-body .title {
-    font-size: clamp(15px, 1.5vw, 18px);
+    font-size: clamp(14px, 1.5vw, 17px);
     font-weight: 700;
     font-family: var(--body-font-family);
     color: var(--body-font-color);
     margin-top: 3px;
     position: relative;
+}
+
+.articles .cards .card .card-body .title a {
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+}
+
+.articles .cards .card .card-body .title a:hover {
+    color: var(--title-color-hover);
 }
 
 .articles .cards .card .img {
@@ -91,8 +105,9 @@
     max-width: 100%;
     width: 100%;
     height: 200px;
-    border-radius: 5px;
-    position: relative;
+    /* border-radius: 5px; */
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
     transition: all 0.3s ease-in-out;
@@ -104,7 +119,7 @@
 }
 
 .articles .cards .card .card-body .btn-show {
-    background-color: var(--bg-button-color);
+    background-color: var(--bg-articles-button);
     color: var(--color-white);
     padding: 6px 10px;
     border-radius: 5px;
@@ -118,26 +133,63 @@
 }
 
 .articles .cards .card .card-body .btn-show:hover {
-    background-color: var(--bg-button-color-hover);
+    background-color: var(--bg-articles-button-hover);
 }
 
-@media screen and (max-width: 1400px) {
+.articles .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.articles .pagination a {
+    color: var(--color-white);
+    text-decoration: none;
+    background-color: var(--link-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: clamp(12px, 1.25vw, 13px);
+}
+
+.articles .pagination a:hover {
+    background-color: var(--link-hover-color);
+}
+
+
+
+
+
+@media screen and (max-width: 1285px) {
+    .articles .cards {
+        gap: 5px;
+    }
+
     .articles .cards .card {
-        width: 31%;
+        width: 33%;
         padding: 0 15px;
     }
 }
 
 @media screen and (max-width: 1200px) {
+    .articles .cards {
+        gap: 20px;
+    }
+
     .articles .cards .card {
-        width: 48%;
+        width: 49%;
         padding: 0 15px;
     }
 }
 
 @media screen and (max-width: 1024px) {
+    .articles .cards {
+        gap: 15px;
+    }
+
     .articles .cards .card {
-        width: 48%;
+        width: 49%;
         padding: 0 15px;
     }
 
@@ -147,22 +199,34 @@
 }
 
 @media screen and (max-width: 992px) {
+    .articles .cards {
+        gap: 15px;
+    }
+
     .articles .cards .card {
-        width: 48%;
+        width: 49%;
         padding: 15px;
     }
 }
 
 @media screen and (max-width: 768px) {
+    .articles .cards {
+        gap: 10px;
+    }
+
     .articles .cards .card {
-        width: 48%;
+        width: 49%;
         padding: 15px;
     }
 }
 
 @media screen and (max-width: 576px) {
+    .articles .cards {
+        gap: 7px;
+    }
+
     .articles .cards .card {
-        width: 48%;
+        width: 49%;
         padding: 15px;
     }
 }

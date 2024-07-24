@@ -60,3 +60,24 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 ### Mise en PROD
 1. `php bin/console importmap:install` : re-installer les fichiers JS sur un autre serveur
 2. `php bin/console asset-map:compile` : compiler les assets dans public à chaque fois qu'il y a un changement de fichier CSS
+
+
+yield CollectionField::new('images')
+   ->setEntryType(ProductImageType::class);
+
+class ProductImageType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder->add('imageFile', VichImageType::class, [
+            'label' => 'Image',
+        ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => ProductImage::class,
+        ]);
+    }
+}

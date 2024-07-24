@@ -1,7 +1,15 @@
 <footer>
     <div class="footer">
         <p>
-            &copy; {{ 'now'|date('Y') }} - {{ settings.siteName }} | <a class="cgu-footer" href="#">C.G.U.</a>
+            &copy; {{ 'now'|date('Y') }} - {{ settings.siteName }}
+        </p>
+        <p class="links">
+            <a href="{{ path('app_home') }}">Accueil</a>
+            <a href="{{ path('app_article_index') }}">Blog</a>
+            <a href="#">Contact</a>
+            <a href="#">A propos</a>
+            <a href="#">C.G.U.</a>
+            <a href="#">Politique confidentialité</a>
         </p>
     </div>
 </footer>

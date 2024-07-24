@@ -115,7 +115,7 @@ footer {
     z-index: 999;
     width: 100%;
     height: var(--footer-height);
-    padding: 15px 0;
+    padding: 25px 0;
     background-color: var(--footer-bg-color);
     color: var(--footer-font-color);
 }
@@ -127,10 +127,20 @@ footer .footer {
     text-align: center;
 }
 
-footer .footer .cgu-footer {
+footer .footer .links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 5px 0;
+}
+
+footer .footer .links a {
     text-decoration: none;
     color: var(--color-white);
-    margin-bottom: 15px;
+}
+
+footer .footer .links a:hover {
+    color: var(--title-color-hover);
 }
 
 /* FORMS */

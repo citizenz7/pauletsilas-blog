@@ -7,6 +7,7 @@ use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Repository\SettingRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,11 +19,23 @@ class ArticleController extends AbstractController
     #[Route('/', name: 'app_article_index', methods: ['GET'])]
     public function index(
         ArticleRepository $articleRepository,
-        SettingRepository $settingRepository
+        SettingRepository $settingRepository,
+        Request $request,
+        EntityManagerInterface $em,
+        PaginatorInterface $paginator
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
-        $articles = $articleRepository->findBy(['active' => true], ['postedAt' => 'DESC']);
+        // $articles = $articleRepository->findBy(['active' => true], ['postedAt' => 'DESC']);
+
+        $dql = "SELECT a FROM App\Entity\Article a WHERE a.active = true ORDER BY a.postedAt DESC";
+        $query = $em->createQuery($dql);
+
+        $articles = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            6 /*limit per page*/
+        );
 
         return $this->render('article/index.html.twig', [
             'settings' => $settings,

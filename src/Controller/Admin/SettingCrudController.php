@@ -63,6 +63,17 @@ class SettingCrudController extends AbstractCrudController
             TextField::new('siteVille', 'Ville')
                 ->setColumns(3)
                 ->hideOnIndex(),
+
+            FormField::addTab('Présentation'),
+            ImageField::new('siteSloganImage', 'Image présentation')
+                ->setColumns(6)
+                ->setRequired(false)
+                ->setBasePath('uploads/img')
+                ->setUploadDir('public/uploads/img')
+                ->setUploadedFileNamePattern('[name]-[uuid].[extension]'),
+            TextEditorField::new('siteSlogan', 'Présentation du site')
+                ->setColumns(12)
+                ->hideOnIndex(),
         ];
     }
 

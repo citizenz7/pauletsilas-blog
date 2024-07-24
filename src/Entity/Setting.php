@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\SettingRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SettingRepository::class)]
@@ -36,6 +37,12 @@ class Setting
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $siteVille = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $siteSlogan = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $siteSloganImage = null;
 
     public function getId(): ?int
     {
@@ -134,6 +141,30 @@ class Setting
     public function setSiteVille(?string $siteVille): static
     {
         $this->siteVille = $siteVille;
+
+        return $this;
+    }
+
+    public function getSiteSlogan(): ?string
+    {
+        return $this->siteSlogan;
+    }
+
+    public function setSiteSlogan(string $siteSlogan): static
+    {
+        $this->siteSlogan = $siteSlogan;
+
+        return $this;
+    }
+
+    public function getSiteSloganImage(): ?string
+    {
+        return $this->siteSloganImage;
+    }
+
+    public function setSiteSloganImage(string $siteSloganImage): static
+    {
+        $this->siteSloganImage = $siteSloganImage;
 
         return $this;
     }

@@ -1,6 +1,47 @@
+.presentation {
+    margin: calc(var(--header-height)) auto 15px auto;
+    position: relative;
+}
+
+.presentation h1 {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(32px, 3vw, 42px);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
+    font-weight: 900;
+    font-family: var(--title-font-family);
+    color: var(--color-white);
+    text-align: center;
+    padding: 10px;
+}
+
+.presentation p {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(15px, 3vw, 21px);
+    color: var(--color-white);
+    font-weight: 600;
+    /* margin-bottom: 5px; */
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
+}
+
+.presentation img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    object-fit: cover;
+    position: relative;
+}
+
 .home {
     max-width: 1320px;
-    margin: calc(var(--header-height) + 35px) auto 35px auto;
+    margin: 0 auto 35px auto;
     padding: 15px 0 35px 0;
     position: relative;
 }
@@ -69,7 +110,7 @@
 
 .home .cards .card .joinfile {
     position: absolute;
-    top: 215px;
+    top: 240px;
     right: 10px;
     z-index: 999;
     display: flex;
@@ -153,6 +194,16 @@
         width: 48%;
         padding: 0 15px;
     }
+
+    .home .cards .card .categories {
+        top: 10px;
+        left: 25px;
+    }
+
+    .home .cards .card .joinfile {
+        top: 240px;
+        right: 25px;
+    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -174,7 +225,7 @@
     }
 
     .home .cards .card .joinfile {
-        top: 190px;
+        top: 240px;
         right: 20px;
         z-index: 1;
     }
