@@ -8,7 +8,7 @@
     top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: clamp(35px, 2.5vw, 45px);
+    font-size: clamp(30px, 2.5vw, 45px);
     font-weight: 900;
     font-family: var(--title-font-family);
     color: var(--color-white);
@@ -56,4 +56,12 @@
     border-radius: 10px;
     position: relative;
     z-index: 1;
+}
+
+
+@media screen and (max-width: 768px) {
+    .presentation h1 {
+        top: 60%;
+        width: 100%;
+    }
 }

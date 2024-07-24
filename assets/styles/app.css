@@ -201,4 +201,13 @@ footer .footer .links a:hover {
         height: 25px;
         cursor: pointer;
     }
+
+    footer {
+        padding: 18px 0;
+    }
+
+    footer .footer .links {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 }
