@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
 use App\Repository\SettingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -19,6 +20,7 @@ class ArticleController extends AbstractController
     #[Route('/', name: 'app_article_index', methods: ['GET'])]
     public function index(
         ArticleRepository $articleRepository,
+        CategoryRepository $categoryRepository,
         SettingRepository $settingRepository,
         Request $request,
         EntityManagerInterface $em,
@@ -26,8 +28,9 @@ class ArticleController extends AbstractController
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
-        // $articles = $articleRepository->findBy(['active' => true], ['postedAt' => 'DESC']);
+        $categories = $categoryRepository->findAll();
 
+        // Pagination
         $dql = "SELECT a FROM App\Entity\Article a WHERE a.active = true ORDER BY a.postedAt DESC";
         $query = $em->createQuery($dql);
 
@@ -37,11 +40,116 @@ class ArticleController extends AbstractController
             6 /*limit per page*/
         );
 
+        // Group articles by author's first name
+        $allArticles = $articleRepository->findBy(['active' => true], []);
+
+        $groupedArticles = [];
+
+        foreach ($allArticles as $article) {
+            $authorFirstName = $article->getAuthor()->getFirstName();
+            if (!isset($groupedArticles[$authorFirstName])) {
+                $groupedArticles[$authorFirstName] = [];
+            }
+            $groupedArticles[$authorFirstName][] = $article;
+        }
+
         return $this->render('article/index.html.twig', [
             'settings' => $settings,
-            'articles' => $articles
+            'articles' => $articles,
+            'categories' => $categories,
+            'groupedArticles' => $groupedArticles
         ]);
     }
+
+    #[Route('/articles/asc', name: 'app_article_index_asc', methods: ['GET'])]
+    public function indexAsc(
+        ArticleRepository $articleRepository,
+        CategoryRepository $categoryRepository,
+        SettingRepository $settingRepository,
+        Request $request,
+        EntityManagerInterface $em,
+        PaginatorInterface $paginator
+    ): Response {
+        $settings = $settingRepository->findOneBy([]);
+
+        $categories = $categoryRepository->findAll();
+
+        // Pagination
+        $dql = "SELECT a FROM App\Entity\Article a WHERE a.active = true ORDER BY a.postedAt ASC";
+        $query = $em->createQuery($dql);
+
+        $articles = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            6 /*limit per page*/
+        );
+
+        // Group articles by author's first name
+        $allArticles = $articleRepository->findBy(['active' => true], []);
+
+        $groupedArticles = [];
+
+        foreach ($allArticles as $article) {
+            $authorFirstName = $article->getAuthor()->getFirstName();
+            if (!isset($groupedArticles[$authorFirstName])) {
+                $groupedArticles[$authorFirstName] = [];
+            }
+            $groupedArticles[$authorFirstName][] = $article;
+        }
+
+        return $this->render('article/index.html.twig', [
+            'settings' => $settings,
+            'articles' => $articles,
+            'categories' => $categories,
+            'groupedArticles' => $groupedArticles
+        ]);
+    }
+
+
+    #[Route('/articles/desc', name: 'app_article_index_desc', methods: ['GET'])]
+    public function indexDesc(
+        ArticleRepository $articleRepository,
+        CategoryRepository $categoryRepository,
+        SettingRepository $settingRepository,
+        Request $request,
+        EntityManagerInterface $em,
+        PaginatorInterface $paginator
+    ): Response {
+        $settings = $settingRepository->findOneBy([]);
+
+        $categories = $categoryRepository->findAll();
+
+        // Pagination
+        $dql = "SELECT a FROM App\Entity\Article a WHERE a.active = true ORDER BY a.postedAt DESC";
+        $query = $em->createQuery($dql);
+
+        $articles = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            6 /*limit per page*/
+        );
+
+        // Group articles by author's first name
+        $allArticles = $articleRepository->findBy(['active' => true], []);
+
+        $groupedArticles = [];
+
+        foreach ($allArticles as $article) {
+            $authorFirstName = $article->getAuthor()->getFirstName();
+            if (!isset($groupedArticles[$authorFirstName])) {
+                $groupedArticles[$authorFirstName] = [];
+            }
+            $groupedArticles[$authorFirstName][] = $article;
+        }
+
+        return $this->render('article/index.html.twig', [
+            'settings' => $settings,
+            'articles' => $articles,
+            'categories' => $categories,
+            'groupedArticles' => $groupedArticles
+        ]);
+    }
+
 
     // #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
     // public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -68,7 +176,7 @@ class ArticleController extends AbstractController
         // Article $article
         ArticleRepository $articleRepository,
         SettingRepository $settingRepository,
-        $slug
+        string $slug
     ): Response
     {
         $settings = $settingRepository->findOneBy([]);

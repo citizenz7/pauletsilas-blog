@@ -5,8 +5,42 @@
 {% block importmap %}{{ importmap(['app', 'articles']) }}{% endblock %}
 
 {% block body %}
+    {# {% for articles in articles.items %}
+    {{ dump(articles.author.firstname) }}
+    {% endfor %} #}
+
     <section class="articles">
         <h1>Tous les articles</h1>
+
+        <div class="tri">
+            {# Par catégories #}
+            <select>
+                <option value="">Trier les articles par catégories</option>
+                {% for category in categories %}
+                    <option value="{{ path('app_category_show', {'slug': category.slug}) }}">{{ category.title }}</option>
+                {% endfor %}
+            </select>
+
+            {# Par date #}
+            <select>
+                <option value="">Trier les articles par date</option>
+                <option value="{{ path('app_article_index_desc') }}">Plus récent</option>
+                <option value="{{ path('app_article_index_asc') }}">Plus ancien</option>
+            </select>
+
+            {# Par auteur #}
+            <select>
+                <option value="">Trier les articles par auteur</option>
+                {% for authorFirstName, articles in groupedArticles %}
+                    <optgroup label="{{ authorFirstName }}">
+                        {% for article in articles %}
+                            <option value="{{ path('app_article_show', {'slug': article.slug}) }}">{{ article.title }}</option>
+                        {% endfor %}
+                    </optgroup>
+                {% endfor %}
+            </select>
+        </div>
+
         <div class="cards">
             {% for article in articles %}
                 <div class="card">
@@ -16,7 +50,7 @@
                     <div class="card-body">
                         <div class="categories">
                             {% for category in article.categories %}
-                                <a class="cat" href="#">{{ category.title }}</a>
+                                <a class="cat" href="{{ path('app_category_show', {'slug': category.slug}) }}">{{ category.title }}</a>
                             {% endfor %}
                         </div>
                         <h2 class="title">

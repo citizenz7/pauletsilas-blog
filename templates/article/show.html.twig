@@ -17,7 +17,7 @@
 
         <div class="categories">
             {% for cat in article.categories %}
-                <a class="cat" href="#">{{ cat.title }}</a>
+                <a class="cat" href="{{ path('app_category_show', {'slug': cat.slug}) }}">{{ cat.title }}</a>
             {% endfor %}
         </div>
 
@@ -36,7 +36,7 @@
         <div class="author-bio">
             <img src="{{ asset('uploads/img/users/' ~ article.author.image) }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
             <div>
-                Posté par <a href="#">{{ article.author }}</a>
+                Posté par {{ article.author }}
                 {{ article.author.authorBio|raw }}
             </div>
         </div>

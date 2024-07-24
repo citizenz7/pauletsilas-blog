@@ -28,6 +28,10 @@ return [
         'path' => './assets/js/articles.js',
         'entrypoint' => true,
     ],
+    'category' => [
+        'path' => './assets/js/category.js',
+        'entrypoint' => true,
+    ],
     'login' => [
         'path' => './assets/js/login.js',
         'entrypoint' => true,

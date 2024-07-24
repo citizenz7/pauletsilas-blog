@@ -24,7 +24,7 @@
                     <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.title }}" class="img">
                     <p class="categories">
                         {% for category in article.categories %}
-                            <a href="">{{ category.title }}</a>
+                            <a href="{{ path('app_category_show', {'slug': category.slug}) }}">{{ category.title }}</a>
                         {% endfor %}
                     </p>
                     {% if article.fichiers is not empty %}
