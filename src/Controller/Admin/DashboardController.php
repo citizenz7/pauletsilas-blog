@@ -2,12 +2,19 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\AproposPage;
 use App\Entity\User;
 use App\Entity\Media;
 use App\Entity\Article;
+use App\Entity\BlogPage;
 use App\Entity\Fichier;
 use App\Entity\Setting;
 use App\Entity\Category;
+use App\Entity\CguPage;
+use App\Entity\ConfidentialitePage;
+use App\Entity\ContactPage;
+use App\Entity\HomePage;
+use App\Entity\SearchPage;
 use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -88,15 +95,43 @@ class DashboardController extends AbstractDashboardController
         // -------------------------------------
         // PAGES
         // -------------------------------------
-        yield MenuItem::section('Pages')->setCssClass('text-warning fw-bold shadow');
-        // yield MenuItem::linkToCrud('Page d\'accueil', 'fas fa-file-alt', Homepage::class)->setAction('detail')->setEntityId(1);
-        // yield MenuItem::linkToCrud('A propos', 'fas fa-info', Homepage::class)->setAction('detail')->setEntityId(1);
-        // yield MenuItem::linkToCrud('Page Contact', 'fas fa-file-alt', Contact::class)->setAction('detail')->setEntityId(1);
+        yield MenuItem::section('Pages')
+            ->setCssClass('text-warning fw-bold shadow')
+            ->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Page d\'accueil', 'fas fa-file-alt', HomePage::class)
+            ->setAction('detail')
+            ->setEntityId(1)
+            ->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Page du blog', 'fas fa-newspaper', BlogPage::class)
+            ->setAction('detail')
+            ->setEntityId(1)
+            ->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('A propos', 'fas fa-info', AproposPage::class)
+            ->setAction('detail')
+            ->setEntityId(1)
+            ->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Page Contact', 'fas fa-file-alt', ContactPage::class)
+            ->setAction('detail')
+            ->setEntityId(1)
+            ->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Page Recherche', 'fas fa-search', SearchPage::class)
+            ->setAction('detail')
+            ->setEntityId(1)
+            ->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Page CGU', 'fas fa-file-alt', CguPage::class)
+            ->setAction('detail')
+            ->setEntityId(1)
+            ->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Page Confidentialité', 'fas fa-file-alt', ConfidentialitePage::class)
+            ->setAction('detail')
+            ->setEntityId(1)
+            ->setPermission('ROLE_ADMIN');
 
         // -------------------------------------
         // SECTIONS
         // -------------------------------------
-        yield MenuItem::section('Sections')->setCssClass('text-warning fw-bold shadow');
+        yield MenuItem::section('Sections')
+            ->setCssClass('text-warning fw-bold shadow');
         yield MenuItem::linkToCrud('Articles', 'fas fa-newspaper', Article::class);
         yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Images', 'fas fa-images', Media::class);
@@ -105,8 +140,10 @@ class DashboardController extends AbstractDashboardController
         // -------------------------------------
         // PARAMETRES
         // -------------------------------------
-        yield MenuItem::section('Paramètres du site')->setCssClass('text-warning fw-bold shadow');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class)->setPermission('ROLE_ADMIN');
+        yield MenuItem::section('Paramètres du site')
+            ->setCssClass('text-warning fw-bold shadow');
+        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class)
+            ->setPermission('ROLE_ADMIN');
 
         if (!$user instanceof User || !$this->security->isGranted('ROLE_ADMIN')) {
             yield MenuItem::linkToCrud('Mon profil', 'fas fa-user', User::class);

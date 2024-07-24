@@ -27,7 +27,7 @@ class FichierCrudController extends AbstractCrudController
             // IdField::new('id'),
             TextField::new('title', 'Titre')
                 ->setColumns(6),
-            ImageField::new('fichierFile', 'Fichiers')
+            ImageField::new('fichierFile', 'Fichier PDF')
                 ->setColumns(6)
                 ->hideOnIndex()
                 ->hideOnDetail()
@@ -46,7 +46,7 @@ class FichierCrudController extends AbstractCrudController
                         'maxSizeMessage' => 'Veuillez choisir un fichier de moins de 1 Mo',
                     ])
                 ),
-            TextField::new('fichierFile', 'Fichiers')
+            TextField::new('fichierFile', 'Fichier PDF')
                 ->setColumns(4)
                 ->hideOnForm()
                 ->setTemplatePath('admin/fields/documents.html.twig'),
