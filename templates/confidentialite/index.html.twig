@@ -6,10 +6,18 @@
 
 {% block body %}
 
-    <section class="confidentialite">
+    <div class="presentation">
+        <img src="{{ asset('uploads/img/confidentialite/' ~ confidentialite.image) }}" alt="{{ confidentialite.imageAlt}}">
         <h1>{{ confidentialite.mainTitle }}</h1>
+    </div>
+
+    <section class="confidentialite">
+        {# <h1>{{ confidentialite.mainTitle }}</h1>
         <div>
             <img src="{{ asset('uploads/img/confidentialite/' ~ confidentialite.image) }}" alt="{{ confidentialite.imageAlt }}" class="image">
+            {{ confidentialite.content|raw }}
+        </div> #}
+        <div>
             {{ confidentialite.content|raw }}
         </div>
     </section>

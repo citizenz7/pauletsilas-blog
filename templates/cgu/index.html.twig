@@ -6,10 +6,18 @@
 
 {% block body %}
 
-    <section class="cgu">
+    <div class="presentation">
+        <img src="{{ asset('uploads/img/cgu/' ~ cgu.image) }}" alt="{{ cgu.imageAlt}}">
         <h1>{{ cgu.mainTitle }}</h1>
+    </div>
+
+    <section class="cgu">
+        {# <h1>{{ cgu.mainTitle }}</h1>
         <div>
             <img src="{{ asset('uploads/img/cgu/' ~ cgu.image) }}" alt="{{ cgu.imageAlt }}" class="image">
+            {{ cgu.content|raw }}
+        </div> #}
+        <div>
             {{ cgu.content|raw }}
         </div>
     </section>

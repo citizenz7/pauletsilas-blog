@@ -6,10 +6,20 @@
 
 {% block body %}
 
-    <section class="contact">
+    <div class="presentation">
+        <img src="{{ asset('uploads/img/contact/' ~ contact.image) }}" alt="{{ contact.imageAlt}}">
         <h1>{{ contact.mainTitle }}</h1>
+        {# <p>{{ home.content|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': '',})|raw }}</p> #}
+    </div>
+
+    <section class="contact">
+        {# <h1>{{ contact.mainTitle }}</h1>
         <div>
             <img src="{{ asset('uploads/img/contact/' ~ contact.image) }}" alt="{{ contact.imageAlt }}" class="image">
+            {{ contact.content|raw }}
+        </div> #}
+
+        <div>
             {{ contact.content|raw }}
         </div>
     </section>

@@ -38,12 +38,6 @@ class Setting
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $siteVille = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $siteSlogan = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $siteSloganImage = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -141,30 +135,6 @@ class Setting
     public function setSiteVille(?string $siteVille): static
     {
         $this->siteVille = $siteVille;
-
-        return $this;
-    }
-
-    public function getSiteSlogan(): ?string
-    {
-        return $this->siteSlogan;
-    }
-
-    public function setSiteSlogan(string $siteSlogan): static
-    {
-        $this->siteSlogan = $siteSlogan;
-
-        return $this;
-    }
-
-    public function getSiteSloganImage(): ?string
-    {
-        return $this->siteSloganImage;
-    }
-
-    public function setSiteSloganImage(string $siteSloganImage): static
-    {
-        $this->siteSloganImage = $siteSloganImage;
 
         return $this;
     }

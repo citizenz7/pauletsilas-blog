@@ -11,9 +11,9 @@
 {% block body %}
 
     <div class="presentation">
-        <img src="{{ asset('uploads/img/' ~ settings.siteSloganImage) }}" alt="{{ settings.siteName }}">
+        <img src="{{ asset('uploads/img/home/' ~ home.image) }}" alt="{{ home.imageAlt}}">
         <h1>{{ settings.siteName }}</h1>
-        <p>{{ settings.siteSlogan|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': '',})|raw }}</p>
+        <p>{{ home.content|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': '',})|raw }}</p>
     </div>
 
     <section class="home">

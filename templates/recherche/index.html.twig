@@ -6,10 +6,18 @@
 
 {% block body %}
 
-    <section class="recherche">
+    <div class="presentation">
+        <img src="{{ asset('uploads/img/recherche/' ~ recherche.image) }}" alt="{{ recherche.imageAlt}}">
         <h1>{{ recherche.mainTitle }}</h1>
+    </div>
+
+    <section class="recherche">
+        {# <h1>{{ recherche.mainTitle }}</h1>
         <div>
             <img src="{{ asset('uploads/img/recherche/' ~ recherche.image) }}" alt="{{ recherche.imageAlt }}" class="image">
+            {{ recherche.content|raw }}
+        </div> #}
+        <div>
             {{ recherche.content|raw }}
         </div>
     </section>

@@ -6,10 +6,18 @@
 
 {% block body %}
 
-    <section class="apropos">
+    <div class="presentation">
+        <img src="{{ asset('uploads/img/apropos/' ~ apropos.image) }}" alt="{{ apropos.imageAlt}}">
         <h1>{{ apropos.mainTitle }}</h1>
+    </div>
+
+    <section class="apropos">
+        {# <h1>{{ apropos.mainTitle }}</h1>
         <div>
             <img src="{{ asset('uploads/img/apropos/' ~ apropos.image) }}" alt="{{ apropos.imageAlt }}" class="image">
+            {{ apropos.content|raw }}
+        </div> #}
+        <div>
             {{ apropos.content|raw }}
         </div>
     </section>

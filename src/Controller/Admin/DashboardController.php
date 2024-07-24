@@ -17,6 +17,9 @@ use App\Entity\HomePage;
 use App\Entity\SearchPage;
 use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
+use App\Repository\FichierRepository;
+use App\Repository\MediaRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,6 +37,9 @@ class DashboardController extends AbstractDashboardController
     public function __construct(
         private UserRepository $userRepository,
         private ArticleRepository $articleRepository,
+        private CategoryRepository $categoryRepository,
+        private FichierRepository $fichierRepository,
+        private MediaRepository $mediaRepository,
         private Security $security
     )
     {
@@ -61,6 +67,9 @@ class DashboardController extends AbstractDashboardController
         return $this->render('admin/dashboard.html.twig', [
             'users' => $this->userRepository->findBy(['active' => true], []),
             'articles' => $this->articleRepository->findBy(['active' => true], []),
+            'categories' => $this->categoryRepository->findAll(),
+            'fichiers' => $this->fichierRepository->findAll(),
+            'medias' => $this->mediaRepository->findAll(),
         ]);
     }
 

@@ -1,11 +1,12 @@
 .presentation {
-    margin: calc(var(--header-height)) auto 15px auto;
+    /* margin: calc(var(--header-height)) auto 15px auto; */
+    margin: 0 auto 15px auto;
     position: relative;
 }
 
 .presentation h1 {
     position: absolute;
-    top: 35%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: clamp(32px, 3vw, 42px);
@@ -34,7 +35,7 @@
     max-width: 100%;
     width: 100%;
     height: auto;
-    max-height: 350px;
+    max-height: 450px;
     object-fit: cover;
     position: relative;
 }
