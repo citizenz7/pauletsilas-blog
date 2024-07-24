@@ -106,7 +106,7 @@ class DashboardController extends AbstractDashboardController
             ->setAction('detail')
             ->setEntityId(1)
             ->setPermission('ROLE_ADMIN');
-        yield MenuItem::linkToCrud('A propos', 'fas fa-info', AproposPage::class)
+        yield MenuItem::linkToCrud('Page A propos', 'fas fa-info', AproposPage::class)
             ->setAction('detail')
             ->setEntityId(1)
             ->setPermission('ROLE_ADMIN');

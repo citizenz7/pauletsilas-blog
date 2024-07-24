@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -25,7 +26,6 @@ class ConfidentialitePageCrudController extends AbstractCrudController
     {
         return [
             FormField::addTab('Infos générales de la page'),
-            FormField::addPanel('Contenu'),
             TextField::new('title', 'Titre de la page')
                 ->setColumns(6),
             SlugField::new('slug')
@@ -35,6 +35,24 @@ class ConfidentialitePageCrudController extends AbstractCrudController
             TextField::new('seoTitle','Balise SEO Titre')
                 ->setColumns(12)
                 ->hideOnIndex(),
+
+            FormField::addTab('Titres & textes'),
+            TextField::new('mainTitle', 'Titre principal')
+                ->setColumns(6)
+                ->hideOnIndex(),
+            TextEditorField::new('content', 'Texte principal')
+                ->setColumns(12)
+                ->hideOnIndex(),
+            ImageField::new('image', 'Image')
+                ->setColumns(6)
+                ->setBasePath('uploads/img/confidentialite')
+                ->setUploadDir('public/uploads/img/confidentialite')
+                ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
+                ->setRequired(false),
+            TextField::new('imageAlt', 'Texte alternatif de l\'image')
+                ->setColumns(6)
+                ->hideOnIndex(),
+
             TextareaField::new('seoDescription','Balise SEO Description')
                 ->setColumns(12)
                 ->hideOnIndex(),

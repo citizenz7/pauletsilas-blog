@@ -7,7 +7,11 @@
 {% block body %}
 
     <section class="confidentialite">
-        <h1>Politique de Confidentialité</h1>
+        <h1>{{ confidentialite.mainTitle }}</h1>
+        <div>
+            <img src="{{ asset('uploads/img/confidentialite/' ~ confidentialite.image) }}" alt="{{ confidentialite.imageAlt }}" class="image">
+            {{ confidentialite.content|raw }}
+        </div>
     </section>
 
 {% endblock %}

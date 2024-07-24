@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CguPageRepository;
 use App\Repository\SettingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,13 +12,17 @@ class CguController extends AbstractController
 {
     #[Route('/cgu', name: 'app_cgu')]
     public function index(
-        SettingRepository $settingRepository
+        SettingRepository $settingRepository,
+        CguPageRepository $cguPageRepository
     ): Response
     {
         $settings = $settingRepository->findOneBy([]);
 
+        $cgu = $cguPageRepository->findOneBy([]);
+
         return $this->render('cgu/index.html.twig', [
-            'settings' => $settings
+            'settings' => $settings,
+            'cgu' => $cgu
         ]);
     }
 }

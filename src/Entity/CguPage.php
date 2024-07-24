@@ -26,6 +26,18 @@ class CguPage
     #[ORM\Column(type: Types::TEXT)]
     private ?string $seoDescription = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $mainTitle = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $imageAlt = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $content = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +87,54 @@ class CguPage
     public function setSeoDescription(string $seoDescription): static
     {
         $this->seoDescription = $seoDescription;
+
+        return $this;
+    }
+
+    public function getMainTitle(): ?string
+    {
+        return $this->mainTitle;
+    }
+
+    public function setMainTitle(string $mainTitle): static
+    {
+        $this->mainTitle = $mainTitle;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getImageAlt(): ?string
+    {
+        return $this->imageAlt;
+    }
+
+    public function setImageAlt(string $imageAlt): static
+    {
+        $this->imageAlt = $imageAlt;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): static
+    {
+        $this->content = $content;
 
         return $this;
     }

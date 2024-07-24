@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\AproposPageRepository;
 use App\Repository\SettingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,13 +12,17 @@ class AproposController extends AbstractController
 {
     #[Route('/apropos', name: 'app_apropos')]
     public function index(
-        SettingRepository $settingRepository
+        SettingRepository $settingRepository,
+        AproposPageRepository $aproposPageRepository
     ): Response
     {
         $settings = $settingRepository->findOneBy([]);
 
+        $apropos = $aproposPageRepository->findOneBy([]);
+
         return $this->render('apropos/index.html.twig', [
-            'settings' => $settings
+            'settings' => $settings,
+            'apropos' => $apropos
         ]);
     }
 }

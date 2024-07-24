@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 
 class AproposPageCrudController extends AbstractCrudController
 {
@@ -25,12 +26,29 @@ class AproposPageCrudController extends AbstractCrudController
     {
         return [
             FormField::addTab('Infos générales de la page'),
-            FormField::addPanel('Contenu'),
             TextField::new('title', 'Titre de la page')
                 ->setColumns(6),
             SlugField::new('slug')
                 ->setTargetFieldName('title')
                 ->setColumns(6),
+
+            FormField::addTab('Titres & textes'),
+            TextField::new('mainTitle', 'Titre principal')
+                ->setColumns(6)
+                ->hideOnIndex(),
+            TextEditorField::new('content', 'Texte principal')
+                ->setColumns(12)
+                ->hideOnIndex(),
+            ImageField::new('image', 'Image')
+                ->setColumns(6)
+                ->setBasePath('uploads/img/apropos')
+                ->setUploadDir('public/uploads/img/apropos')
+                ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
+                ->setRequired(false),
+            TextField::new('imageAlt', 'Texte alternatif de l\'image')
+                ->setColumns(6)
+                ->hideOnIndex(),
+
             FormField::addTab('SEO'),
             TextField::new('seoTitle','Balise SEO Titre')
                 ->setColumns(12)

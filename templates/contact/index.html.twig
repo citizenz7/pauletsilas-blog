@@ -7,7 +7,11 @@
 {% block body %}
 
     <section class="contact">
-        <h1>Formulaire de contact</h1>
+        <h1>{{ contact.mainTitle }}</h1>
+        <div>
+            <img src="{{ asset('uploads/img/contact/' ~ contact.image) }}" alt="{{ contact.imageAlt }}" class="image">
+            {{ contact.content|raw }}
+        </div>
     </section>
 
 {% endblock %}
