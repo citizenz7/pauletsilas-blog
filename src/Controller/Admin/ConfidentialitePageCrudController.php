@@ -31,10 +31,6 @@ class ConfidentialitePageCrudController extends AbstractCrudController
             SlugField::new('slug')
                 ->setTargetFieldName('title')
                 ->setColumns(6),
-            FormField::addTab('SEO'),
-            TextField::new('seoTitle','Balise SEO Titre')
-                ->setColumns(12)
-                ->hideOnIndex(),
 
             FormField::addTab('Titres & textes'),
             TextField::new('mainTitle', 'Titre principal')
@@ -42,7 +38,12 @@ class ConfidentialitePageCrudController extends AbstractCrudController
                 ->hideOnIndex(),
             TextEditorField::new('content', 'Texte principal')
                 ->setColumns(12)
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->hideOnDetail(),
+            TextareaField::new('content', 'Texte principal')
+                ->hideOnForm()
+                ->hideOnIndex()
+                ->setTemplatePath('admin/fields/text.html.twig'),
             ImageField::new('image', 'Image')
                 ->setColumns(6)
                 ->setBasePath('uploads/img/confidentialite')
@@ -53,6 +54,10 @@ class ConfidentialitePageCrudController extends AbstractCrudController
                 ->setColumns(6)
                 ->hideOnIndex(),
 
+            FormField::addTab('SEO'),
+            TextField::new('seoTitle','Balise SEO Titre')
+                ->setColumns(12)
+                ->hideOnIndex(),
             TextareaField::new('seoDescription','Balise SEO Description')
                 ->setColumns(12)
                 ->hideOnIndex(),

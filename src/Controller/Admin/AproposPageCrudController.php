@@ -38,7 +38,12 @@ class AproposPageCrudController extends AbstractCrudController
                 ->hideOnIndex(),
             TextEditorField::new('content', 'Texte principal')
                 ->setColumns(12)
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->hideOnDetail(),
+            TextareaField::new('content', 'Texte principal')
+                ->hideOnForm()
+                ->hideOnIndex()
+                ->setTemplatePath('admin/fields/text.html.twig'),
             ImageField::new('image', 'Image')
                 ->setColumns(6)
                 ->setBasePath('uploads/img/apropos')
