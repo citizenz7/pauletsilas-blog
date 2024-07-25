@@ -14,14 +14,15 @@ use App\Entity\Category;
 use App\Entity\HomePage;
 use App\Entity\SearchPage;
 use App\Entity\AproposPage;
+use App\Entity\ArticlePage;
 use App\Entity\ContactPage;
 use App\Repository\UserRepository;
 use App\Entity\ConfidentialitePage;
 use App\Repository\MediaRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
 use App\Repository\FichierRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\CommentRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -115,7 +116,7 @@ class DashboardController extends AbstractDashboardController
             ->setAction('detail')
             ->setEntityId(1)
             ->setPermission('ROLE_ADMIN');
-        yield MenuItem::linkToCrud('Page du blog', 'fas fa-newspaper', BlogPage::class)
+        yield MenuItem::linkToCrud('Page des Articles', 'fas fa-newspaper', ArticlePage::class)
             ->setAction('detail')
             ->setEntityId(1)
             ->setPermission('ROLE_ADMIN');

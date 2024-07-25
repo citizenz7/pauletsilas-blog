@@ -57,7 +57,11 @@ class ResetPasswordController extends AbstractController
 
         return $this->render('reset_password/request.html.twig', [
             'requestForm' => $form,
-            'settings' => $settings
+            'settings' => $settings,
+            'pageTitle' => 'Mot de passe oublie',
+            'seoTitle' => 'Mot de passe oublie',
+            'seoDescription' => 'Mot de passe oublie',
+            'seoUrl' => 'reset-password'
         ]);
     }
 
@@ -79,7 +83,11 @@ class ResetPasswordController extends AbstractController
 
         return $this->render('reset_password/check_email.html.twig', [
             'resetToken' => $resetToken,
-            'settings' => $settings
+            'settings' => $settings,
+            'pageTitle' => 'Mot de passe oublie',
+            'seoTitle' => 'Mot de passe oublie',
+            'seoDescription' => 'Mot de passe oublie',
+            'seoUrl' => 'reset-password/check-email'
         ]);
     }
 
@@ -148,7 +156,11 @@ class ResetPasswordController extends AbstractController
 
         return $this->render('reset_password/reset.html.twig', [
             'resetForm' => $form,
-            'settings' => $settings
+            'settings' => $settings,
+            'pageTitle' => 'Mot de passe oublie',
+            'seoTitle' => 'Mot de passe oublie',
+            'seoDescription' => 'Mot de passe oublie',
+            'seoUrl' => ''
         ]);
     }
 

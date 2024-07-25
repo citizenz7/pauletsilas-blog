@@ -22,7 +22,11 @@ class AproposController extends AbstractController
 
         return $this->render('apropos/index.html.twig', [
             'settings' => $settings,
-            'apropos' => $apropos
+            'apropos' => $apropos,
+            'seoTitle' => html_entity_decode($apropos->getSeoTitle()),
+            'seoDescription' => html_entity_decode($apropos->getSeoDescription()),
+            'seoUrl' => 'apropos',
+            'pageTitle' => 'apropos'
         ]);
     }
 }

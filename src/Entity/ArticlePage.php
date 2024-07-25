@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\BlogPageRepository;
+use App\Repository\ArticlePageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: BlogPageRepository::class)]
-class BlogPage
+#[ORM\Entity(repositoryClass: ArticlePageRepository::class)]
+class ArticlePage
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,6 +25,9 @@ class BlogPage
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $seoDescription = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $mainTitle = null;
 
     public function getId(): ?int
     {
@@ -75,6 +78,18 @@ class BlogPage
     public function setSeoDescription(string $seoDescription): static
     {
         $this->seoDescription = $seoDescription;
+
+        return $this;
+    }
+
+    public function getMainTitle(): ?string
+    {
+        return $this->mainTitle;
+    }
+
+    public function setMainTitle(string $mainTitle): static
+    {
+        $this->mainTitle = $mainTitle;
 
         return $this;
     }

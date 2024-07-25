@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\BlogPage;
+use App\Entity\ArticlePage;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -14,23 +14,28 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class BlogPageCrudController extends AbstractCrudController
+class ArticlePageCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return BlogPage::class;
+        return ArticlePage::class;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
             FormField::addTab('Infos générales de la page'),
-            FormField::addPanel('Contenu'),
             TextField::new('title', 'Titre de la page')
                 ->setColumns(6),
             SlugField::new('slug')
                 ->setTargetFieldName('title')
                 ->setColumns(6),
+
+            FormField::addTab('Titres & textes'),
+            TextField::new('mainTitle', 'Titre principal')
+                ->setColumns(6)
+                ->hideOnIndex(),
+
             FormField::addTab('SEO'),
             TextField::new('seoTitle','Balise SEO Titre')
                 ->setColumns(12)
@@ -44,9 +49,9 @@ class BlogPageCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'Page Blog')
-            ->setPageTitle('edit', 'Modifier la page Blog')
-            ->setPageTitle('detail', 'Page Blog')
+            ->setPageTitle('index', 'Page Articles')
+            ->setPageTitle('edit', 'Modifier la page Articles')
+            ->setPageTitle('detail', 'Page Articles')
             ->showEntityActionsInlined(true)
             ->setEntityPermission('ROLE_ADMIN');
     }

@@ -60,27 +60,34 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 * Vérifier les mises à jour éventuelles de tous les packages JS installés : `php bin/console importmap:outdated`
 * Vérifier les mises à jour pour un package JS en particulier : `php bin/console importmap:outdated @splidejs/splide`
 
+### A FAIRE / VERIFIER AVANT LA MISE EN PROD
+* ~~page login CSS~~
+* ~~Erreurs personnalisées~~
+* ~~reCaptcha Google ? Greware capactha ?~~
+* ~~test formulaire de contact~~
+* ~~BO : css~~
+* ~~Sitemap~~
+* ~~robots.txt~~
+* div dans les crudcontroller ADMIN
+* Responsive
+* SEO :
+    * titre H1 de chaque page
+    * vérifier les balise HTML de titre sur chaque page : h1 (une seule par page) puis h2, h3, ... (Chrome = Web developer / View document outline)
+    * vérifier les img alt=""
+* Favicon
+* Meta + données structurées schema.org
+* Tarteaucitron
+* Mentions légales
+* flash messages
+
 ### Mise en PROD
+**Installer/compiler les assets**
 1. `php bin/console importmap:install` : re-installer les fichiers JS sur un autre serveur
 2. `php bin/console asset-map:compile` : compiler les assets dans public à chaque fois qu'il y a un changement de fichier CSS
 
+**robots.txt**
+* Ajouter sitemap dans robots.txt : `Sitemap: https://www.monsite.fr/sitemap.xml`
 
-yield CollectionField::new('images')
-   ->setEntryType(ProductImageType::class);
-
-class ProductImageType extends AbstractType
-{
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        $builder->add('imageFile', VichImageType::class, [
-            'label' => 'Image',
-        ]);
-    }
-
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => ProductImage::class,
-        ]);
-    }
-}
+**Analytics (prod)**
+* Google Analytics 4
+* Google Search Console + soumission sitemap

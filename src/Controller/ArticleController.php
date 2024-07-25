@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\ArticleType;
 use App\Form\CommentType;
+use App\Repository\ArticlePageRepository;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use App\Repository\ArticleRepository;
@@ -29,11 +30,14 @@ class ArticleController extends AbstractController
         SettingRepository $settingRepository,
         Request $request,
         EntityManagerInterface $em,
-        PaginatorInterface $paginator
+        PaginatorInterface $paginator,
+        ArticlePageRepository $articlePageRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
         $categories = $categoryRepository->findAll();
+
+        $articlePage = $articlePageRepository->findOneBy([]);
 
         // Pagination
         $dql = "SELECT a FROM App\Entity\Article a WHERE a.active = true ORDER BY a.postedAt DESC";
@@ -62,7 +66,11 @@ class ArticleController extends AbstractController
             'settings' => $settings,
             'articles' => $articles,
             'categories' => $categories,
-            'groupedArticles' => $groupedArticles
+            'groupedArticles' => $groupedArticles,
+            'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
+            'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
+            'seoUrl' => 'articles',
+            'pageTitle' => 'articles'
         ]);
     }
 
@@ -73,11 +81,14 @@ class ArticleController extends AbstractController
         SettingRepository $settingRepository,
         Request $request,
         EntityManagerInterface $em,
-        PaginatorInterface $paginator
+        PaginatorInterface $paginator,
+        ArticlePageRepository $articlePageRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
         $categories = $categoryRepository->findAll();
+
+        $articlePage = $articlePageRepository->findOneBy([]);
 
         // Pagination
         $dql = "SELECT a FROM App\Entity\Article a WHERE a.active = true ORDER BY a.postedAt ASC";
@@ -106,7 +117,11 @@ class ArticleController extends AbstractController
             'settings' => $settings,
             'articles' => $articles,
             'categories' => $categories,
-            'groupedArticles' => $groupedArticles
+            'groupedArticles' => $groupedArticles,
+            'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
+            'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
+            'seoUrl' => 'articles',
+            'pageTitle' => 'articles'
         ]);
     }
 
@@ -118,11 +133,14 @@ class ArticleController extends AbstractController
         SettingRepository $settingRepository,
         Request $request,
         EntityManagerInterface $em,
-        PaginatorInterface $paginator
+        PaginatorInterface $paginator,
+        ArticlePageRepository $articlePageRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
         $categories = $categoryRepository->findAll();
+
+        $articlePage = $articlePageRepository->findOneBy([]);
 
         // Pagination
         $dql = "SELECT a FROM App\Entity\Article a WHERE a.active = true ORDER BY a.postedAt DESC";
@@ -151,7 +169,11 @@ class ArticleController extends AbstractController
             'settings' => $settings,
             'articles' => $articles,
             'categories' => $categories,
-            'groupedArticles' => $groupedArticles
+            'groupedArticles' => $groupedArticles,
+            'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
+            'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
+            'seoUrl' => 'articles',
+            'pageTitle' => 'articles'
         ]);
     }
 
@@ -234,7 +256,11 @@ class ArticleController extends AbstractController
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'settings' => $settings,
-            'form' => $form
+            'form' => $form,
+            'seoTitle' => html_entity_decode($article->getSeoTitle()),
+            'seoDescription' => html_entity_decode($article->getSeoDescription()),
+            'seoUrl' => $article->getSlug(),
+            'pageTitle' => $article->getTitle()
         ]);
     }
 

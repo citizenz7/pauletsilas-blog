@@ -145,6 +145,24 @@ footer .footer .links a:hover {
     color: var(--title-color-hover);
 }
 
+footer .footer .infos {
+    font-size: clamp(12px, 1.5vw, 14px);
+    font-weight: 400;
+    margin-top: 5px;
+    color: var(--footer-font-color);
+}
+
+footer .footer .infos a {
+    text-decoration: none;
+    color: var(--color-white);
+    font-size: clamp(12px, 1.5vw, 14px);
+    font-weight: 400;
+}
+
+footer .footer .infos a:hover {
+    color: var(--title-color-hover);
+}
+
 /* FORMS */
 .form-control {
     width: 100%;

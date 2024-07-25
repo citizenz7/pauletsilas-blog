@@ -27,7 +27,11 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'settings' => $settings,
             'articles' => $articles,
-            'home' => $home
+            'home' => $home,
+            'seoTitle' => html_entity_decode($home->getSeoTitle()),
+            'seoDescription' => html_entity_decode($home->getSeoDescription()),
+            'seoUrl' => '',
+            'pageTitle' => 'home'
         ]);
     }
 }

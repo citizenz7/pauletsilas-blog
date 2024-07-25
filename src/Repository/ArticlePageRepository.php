@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\BlogPage;
+use App\Entity\ArticlePage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<BlogPage>
+ * @extends ServiceEntityRepository<ArticlePage>
  */
-class BlogPageRepository extends ServiceEntityRepository
+class ArticlePageRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, BlogPage::class);
+        parent::__construct($registry, ArticlePage::class);
     }
 
     //    /**
-    //     * @return BlogPage[] Returns an array of BlogPage objects
+    //     * @return ArticlePage[] Returns an array of ArticlePage objects
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('b.id', 'ASC')
+    //            ->orderBy('a.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?BlogPage
+    //    public function findOneBySomeField($value): ?ArticlePage
     //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->getQuery()
     //            ->getOneOrNullResult()
