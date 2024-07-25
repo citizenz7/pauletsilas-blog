@@ -10,3 +10,11 @@
     color: var(--title-color);
     margin-bottom: 4px;
 }
+
+
+
+@media screen and (max-width: 768px) {
+    .category {
+        padding: 0 15px;
+    }
+}

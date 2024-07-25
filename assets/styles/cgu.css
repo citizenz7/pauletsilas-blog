@@ -67,4 +67,8 @@
         top: 60%;
         width: 100%;
     }
+
+    .cgu {
+        padding: 0 15px;
+    }
 }

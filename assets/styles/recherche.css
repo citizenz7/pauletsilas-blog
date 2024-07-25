@@ -65,4 +65,8 @@
         top: 60%;
         width: 100%;
     }
+
+    .recherche {
+        padding: 0 15px;
+    }
 }

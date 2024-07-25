@@ -73,6 +73,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->articles = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->CreatedAt = new \DateTime();
     }
 
     public function getId(): ?int

@@ -67,3 +67,16 @@
 .register form button:hover {
     background-color: var(--bg-button-color-hover);
 }
+
+
+
+@media screen and (max-width: 768px) {
+    .register {
+        max-width: 100%;
+    }
+
+    .register form {
+        max-width: 100%;
+        width: 90%;
+    }
+}

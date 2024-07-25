@@ -23,10 +23,9 @@
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: clamp(15px, 3vw, 21px);
+    font-size: clamp(16px, 3vw, 22px);
     color: var(--color-white);
     font-weight: 600;
-    /* margin-bottom: 5px; */
     text-align: center;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
 }
@@ -42,7 +41,7 @@
 
 .home {
     max-width: 1320px;
-    margin: 0 auto 35px auto;
+    margin: 0 auto 10px auto;
     padding: 15px 0 35px 0;
     position: relative;
 }
@@ -58,6 +57,19 @@
     background-color: var(--title-bg-color);
     padding: 10px;
     border-radius: 5px;
+}
+
+.home .message-success {
+    background-color: var(--color-success);
+    color: var(--color-white);
+    font-size: clamp(15px, 1.5vw, 20px);
+    font-weight: 600;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 0 45px 0;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
+    text-decoration: none;
 }
 
 .home a {
@@ -176,6 +188,26 @@
     font-weight: 300;
     margin-bottom: 5px;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.home .cards .card .meta .comments {
+    padding: 3px 5px;
+    border-radius: 4px;
+    background-color: var(--bg-meta-home);
+    position: relative;
+}
+
+.home .cards .card .meta .comments a {
+    font-size: clamp(11px, 1.5vw, 13px);
+    font-weight: 300;
+    text-decoration: none;
+    color: var(--title-color);
+}
+
+.home .cards .card .meta .comments a:hover {
+    color: var(--title-color-hover);
 }
 
 .home .cards .card .intro {
@@ -212,6 +244,10 @@
         width: 48%;
         padding: 0 15px;
     }
+
+    .home .main-title {
+        margin: 0 15px 25px 15px;
+    }
 }
 
 @media screen and (max-width: 992px) {
@@ -226,15 +262,50 @@
     }
 
     .home .cards .card .joinfile {
-        top: 240px;
+        top: 210px;
         right: 20px;
         z-index: 1;
     }
 }
 
 @media screen and (max-width: 768px) {
+    .presentation img {
+        max-height: 350px;
+        height: 350px;
+    }
+
+    .presentation h1 {
+        top: 45%;
+        width: 100%;
+    }
+
+    .presentation p {
+        top: 68%;
+        font-weight: 500;
+        width: 90%;
+    }
+
     .home .cards .card {
         width: 100%;
         padding: 0 15px;
+    }
+
+    .home .cards .card .joinfile {
+        top: 185px;
+        right: 20px;
+        z-index: 1;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .home .cards .card {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .home .cards .card .joinfile {
+        top: 180px;
+        right: 20px;
+        z-index: 1;
     }
 }

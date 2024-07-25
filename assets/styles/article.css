@@ -6,9 +6,9 @@
 }
 
 .article h1 {
-    font-size: clamp(22px, 6vw, 32px);
+    font-size: clamp(22px, 3vw, 32px);
     color: var(--title-color);
-    margin-bottom: 4px;
+    margin-bottom: 7px;
 }
 
 .article .categories {
@@ -206,9 +206,9 @@
 }
 
 @media screen and (max-width: 768px) {
-    .article a {
+    /* .article a {
         margin: 0 7px;
-    }
+    } */
 
     .article .mediapics img {
         width: 100%;

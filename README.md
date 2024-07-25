@@ -18,6 +18,9 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 * Login : shadrak@protonmail.com
 * Password : 66N9DWFu7N52zfku
 
+* Login : tornzen@protonmail.com
+* Password : Jap2DG8Lwc737T2e
+
 ### BUNDLES
 * easycorp/easyadmin-bundle
 * friendsofsymfony/ckeditor-bundle (Installer les assets : `php bin/console assets:install public`)

@@ -64,4 +64,8 @@
         top: 60%;
         width: 100%;
     }
+
+    .confidentialite {
+        padding: 0 15px;
+    }
 }

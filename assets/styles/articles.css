@@ -89,7 +89,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: clamp(11px, 1.5vw, 13px);
+    font-size: clamp(11px, 0.6vw, 13px);
     background-color: var(--bg-meta);
     padding: 3px 5px;
     border-radius: 4px;
@@ -191,12 +191,20 @@
 
 
 @media screen and (max-width: 1285px) {
+    .articles h1 {
+        padding: 0 15px;
+    }
+
     .articles .cards {
         gap: 5px;
     }
 
     .articles .cards .card {
         width: 33%;
+        padding: 0 15px;
+    }
+
+    .articles .tri {
         padding: 0 15px;
     }
 }
@@ -208,6 +216,10 @@
 
     .articles .cards .card {
         width: 49%;
+        padding: 0 15px;
+    }
+
+    .articles .tri {
         padding: 0 15px;
     }
 }
@@ -224,6 +236,15 @@
 
     .articles h1 {
         text-align: center;
+    }
+
+    .articles .tri {
+        padding: 0 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
     }
 }
 
