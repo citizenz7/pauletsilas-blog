@@ -2,24 +2,26 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\AproposPage;
 use App\Entity\User;
 use App\Entity\Media;
 use App\Entity\Article;
-use App\Entity\BlogPage;
+use App\Entity\CguPage;
+use App\Entity\Comment;
 use App\Entity\Fichier;
 use App\Entity\Setting;
+use App\Entity\BlogPage;
 use App\Entity\Category;
-use App\Entity\CguPage;
-use App\Entity\ConfidentialitePage;
-use App\Entity\ContactPage;
 use App\Entity\HomePage;
 use App\Entity\SearchPage;
+use App\Entity\AproposPage;
+use App\Entity\ContactPage;
 use App\Repository\UserRepository;
-use App\Repository\ArticleRepository;
-use App\Repository\CategoryRepository;
-use App\Repository\FichierRepository;
+use App\Entity\ConfidentialitePage;
 use App\Repository\MediaRepository;
+use App\Repository\ArticleRepository;
+use App\Repository\FichierRepository;
+use App\Repository\CategoryRepository;
+use App\Repository\CommentRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,6 +42,7 @@ class DashboardController extends AbstractDashboardController
         private CategoryRepository $categoryRepository,
         private FichierRepository $fichierRepository,
         private MediaRepository $mediaRepository,
+        private CommentRepository $commentRepository,
         private Security $security
     )
     {
@@ -70,6 +73,7 @@ class DashboardController extends AbstractDashboardController
             'categories' => $this->categoryRepository->findAll(),
             'fichiers' => $this->fichierRepository->findAll(),
             'medias' => $this->mediaRepository->findAll(),
+            'comments' => $this->commentRepository->findBy(['approved' => true], []),
         ]);
     }
 
@@ -142,6 +146,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Sections')
             ->setCssClass('text-warning fw-bold shadow');
         yield MenuItem::linkToCrud('Articles', 'fas fa-newspaper', Article::class);
+        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comments', Comment::class);
         yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Images', 'fas fa-images', Media::class);
         yield MenuItem::linkToCrud('Fichiers PDF', 'fas fa-file', Fichier::class);

@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
-
 {% block body %}
+    {# {{ dump() }} #}
+
     <section class="article">
         <h1>{{ article.title }}</h1>
 
@@ -25,6 +26,17 @@
             Posté le : {{ article.postedAt|date('d-m-Y') }}
             {% if article.updatedAt %}
                 | Mis à jour le : {{ article.updatedAt|date('d-m-Y') }}
+            {% endif %}
+
+            {% set nbc = article.comments|length %}
+            | {% if nbc == 1 %}
+                <a href="#comments">
+                    {{ nbc }} commentaire
+                </a>
+            {% else %}
+                <a href="#comments">
+                    {{ nbc }} commentaires
+                </a>
             {% endif %}
         </div>
 
@@ -61,5 +73,36 @@
                 {% endfor %}
             </div>
         {% endif %}
+
+        {# Flash message #}
+        {% for flash in app.flashes('success') %}
+            <div id="success" class="message-success">
+                {{ flash }}
+            </div>
+        {% endfor %}
+
+        <div id="comments" class="comments">
+            {# On affiche QUE si le user est connecté ! #}
+            {% if app.user %}
+                <h2 class="title">Poster un nouveau commentaire</h2>
+                {{ form_start(form) }}
+                    {{ form_row(form.content) }}
+                    <div style="text-align: right;">
+                        {{ form_row(form.submit) }}
+                    </div>
+                {{ form_end(form) }}
+            {% endif %}
+
+            <h2 class="title">Les commentaires de l'article</h2>
+            {% for com in article.comments %}
+                {% if com.approved == true %}
+                    <div class="comment">
+                        <h3 style="font-size: clamp(11px, 1.5vw, 13px);">#{{ com.id }} Par {{ com.author }}, le {{ com.createdAt|date('d/m/Y H:i') }}</h3>
+                        <div>{{ com.content|raw }}</div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
     </section>
 {% endblock %}

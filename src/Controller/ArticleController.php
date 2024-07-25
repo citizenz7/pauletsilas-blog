@@ -3,16 +3,21 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
 use App\Repository\ArticleRepository;
-use App\Repository\CategoryRepository;
 use App\Repository\SettingRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/articles')]
 class ArticleController extends AbstractController
@@ -171,21 +176,65 @@ class ArticleController extends AbstractController
     //     ]);
     // }
 
-    #[Route('/{slug}', name: 'app_article_show', methods: ['GET'])]
+    #[Route('/{slug}', name: 'app_article_show', methods: ['GET', 'POST'])]
     public function show(
         // Article $article
         ArticleRepository $articleRepository,
         SettingRepository $settingRepository,
+        EntityManagerInterface $em,
+        Request $request,
+        MailerInterface $mailer,
         string $slug
     ): Response
     {
         $settings = $settingRepository->findOneBy([]);
-
         $article = $articleRepository->findOneBy(['slug' => $slug]);
+
+        $form = $this->createForm(CommentType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $contactFormData = $form->getData();
+
+            $user = $this->getUser();
+
+            $comment = new Comment();
+
+            $comment->setContent($contactFormData['content']);
+            $comment->setArticle($article);
+            $comment->setAuthor($user);
+            $comment->setCreatedAt(new \DateTime());
+
+            $em->persist($comment);
+            $em->flush();
+
+            $siteName = $settings->getSiteName();
+            $siteEmail = $settings->getSiteEmail();
+
+            $email = (new Email())
+            ->from($siteEmail)
+            ->to(new Address($siteEmail, $siteName))
+            ->subject('Nouveau commentaire sur ' . $siteName . ' pour l\'article : ' . $article->getTitle())
+            ->html(
+                '<h4 style="color: #00A19A;">Nouveau commentaire sur ' . $siteName . ' pour l\'article : ' . $article->getTitle() . '</h4>' .
+                '<span style="color: #00A19A; font-weight: bold;">De :</span> ' . $user . '<br>' .
+                '<span style="font-weight: bold; color: #00A19A;">E-mail :</span> ' . $user->getUserIdentifier(). '<br>' .
+                '<p><span style="font-weight: bold; color: #00A19A;">Message</span> : <br>' . trim(nl2br($contactFormData['content'])) . '</p>',
+                'text/plain'
+            );
+
+            $mailer->send($email);
+
+            $this->addFlash('success', 'Le message a bien été envoyé. Il sera visible après validation du modérateur.');
+            return $this->redirect(
+                $this->generateUrl('app_article_show', ['slug' => $slug]) . '#success'
+            );
+        }
 
         return $this->render('article/show.html.twig', [
             'article' => $article,
-            'settings' => $settings
+            'settings' => $settings,
+            'form' => $form
         ]);
     }
 
