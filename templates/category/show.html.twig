@@ -5,19 +5,20 @@
 {% block importmap %}{{ importmap(['app', 'category']) }}{% endblock %}
 
 {% block body %}
+    {# {{ dump() }} #}
     <section class="category">
         <h1>Catégorie d'articles : {{ category.title }}</h1>
-        <div style="margin: 0 0 20px 0; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
-            <img src="{{ asset('uploads/img/categories/' ~ category.image) }}" alt="{{ category.title }}" style="max-width: 100%; height: auto; width: 200px; object-fit: cover;">
-            <p>{{ category.description|raw }}</p>
+        <div class="description">
+            <img src="{{ asset('uploads/img/categories/' ~ category.image) }}" alt="{{ category.title }}">
+            <p>{{ category.description|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': ''})|raw }}</p>
         </div>
         {% for article in category.articles %}
-            {% if article %}
-                <h2 style="font-size: clamp(17px, 1.5vw, 22px); margin: 7px 0; color: var(--title-color); font-weight: 400; text-decoration: none;">
+            {% if article is empty %}
+                <h2 class="title">Aucun article</h2>
+            {% else %}
+                <h2 class="title">
                     <a href="{{ path('app_article_show', {'slug': article.slug}) }}">{{ article.title }}</a>
                 </h2>
-            {% else %}
-                <h2>Aucun article</h2>
             {% endif %}
         {% endfor %}
     </section>

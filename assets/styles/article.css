@@ -36,6 +36,8 @@
 .article .meta {
     font-size: clamp(11px, 1.5vw, 12px);
     margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .article .meta a {
@@ -154,6 +156,10 @@
     position: relative;
 }
 
+.article .comments form {
+    margin-bottom: 55px;
+}
+
 .article .comments .title {
     font-size: clamp(17px, 1.5vw, 22px);
     margin-bottom: 15px;
@@ -180,8 +186,8 @@
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: clamp(13px, 1.5vw, 15px);
-    font-weight: 700;
+    font-size: clamp(12px, 1.5vw, 14px);
+    font-weight: 500;
     margin-top: 15px;
     width: 100%;
     max-width: 150px;

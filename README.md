@@ -52,8 +52,8 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 `symfony console security:hash-password`
 
 ### Google reCapctha
-* clé du site : 
-* clé secrète : 
+* clé du site : 6LcCbxgqAAAAAFOBKnP7BbTq1mujOpDysmpQI2do
+* clé secrète : 6LcCbxgqAAAAAOz2c99mxbUpCGdnU5p5nsrCMGhM
 
 ### AssetMapper
 * Installer un package JS (exemple avec SplideJS) : `php bin/console importmap:require @splidejs/splide`

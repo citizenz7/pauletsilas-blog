@@ -8,6 +8,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/css/glightbox.min.css" integrity="sha512-T+KoG3fbDoSnlgEXFQqwcTC9AdkFIxhBlmoaFqYaIjq2ShhNwNao9AKaLUPMfwiBPL0ScxAtc+UYbHAgvd+sjQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
 {% block body %}
@@ -23,21 +24,28 @@
         </div>
 
         <div class="meta">
-            Posté le : {{ article.postedAt|date('d-m-Y') }}
-            {% if article.updatedAt %}
-                | Mis à jour le : {{ article.updatedAt|date('d-m-Y') }}
-            {% endif %}
-
-            {% set nbc = article.comments|length %}
-            | {% if nbc == 1 %}
-                <a href="#comments">
-                    {{ nbc }} commentaire
-                </a>
-            {% else %}
-                <a href="#comments">
-                    {{ nbc }} commentaires
-                </a>
-            {% endif %}
+            <div>
+                Posté le : {{ article.postedAt|date('d-m-Y') }}
+                {% if article.updatedAt %}
+                    | Mis à jour le : {{ article.updatedAt|date('d-m-Y') }}
+                {% endif %}
+            </div>
+            <div>
+                {% set nbc = article.comments|length %}
+                {% if nbc == 1 %}
+                    <a href="#comments">
+                        {{ nbc }} <i class="fa-solid fa-comment"></i>
+                    </a>
+                {% elseif nbc > 1 %}
+                    <a href="#comments">
+                        {{ nbc }} <i class="fa-solid fa-comments"></i>
+                    </a>
+                {% elseif nbc == 0 %}
+                    <a href="#comments"></a>
+                        <i class="fa-solid fa-comment-slash"></i>
+                    </a>
+                {% endif %}
+            </div>
         </div>
 
         <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.mainImageAlt }}" class="img">
@@ -57,7 +65,7 @@
             <h2 id="pics" class="galerie-title">Galerie photos</h2>
             <div class="mediapics">
                 {% for pic in article.mediapic %}
-                    <a href="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" target="_blank">
+                    <a href="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" target="_blank" class="glightbox">
                         <img src="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" alt="{{ pic.imageAlt }}">
                     </a>
                 {% endfor %}
@@ -94,15 +102,27 @@
             {% endif %}
 
             <h2 id="commentsarticle" class="title">Les commentaires de l'article</h2>
-            {% for com in article.comments %}
-                {% if com.approved == true %}
+            {% for comment in article.comments %}
+                {% if comment.approved == true %}
                     <div class="comment">
-                        <h3 style="font-size: clamp(11px, 1.5vw, 13px);">#{{ com.id }} Par {{ com.author }}, le {{ com.createdAt|date('d/m/Y H:i') }}</h3>
-                        <div>{{ com.content|raw }}</div>
+                        <h3 id="comment{{ comment.id }}" style="font-size: clamp(11px, 1.5vw, 13px);">#{{ comment.id }} Par {{ comment.author }}, le {{ comment.createdAt|date('d/m/Y H:i') }}</h3>
+                        <div>{{ comment.content|raw }}</div>
+
+                        {% if app.user and app.user == comment.author %}
+                            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; margin-bottom: 10px; font-size: 20px; color: var(--title-color-hover); cursor: pointer; text-decoration: none; align-items: center;">
+                                <a href="{{ path('app_comment_edit', {'id': comment.id}) }}" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <form method="post" action="{{ path('app_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Etes-vous certain(e) de vouloir supprimer ce commentaire ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                                    <button class="btn"><i class="fa-solid fa-trash-can"></i></button>
+                                </form>
+                            </div>
+                        {% endif %}
                     </div>
                 {% endif %}
             {% endfor %}
         </div>
 
     </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/js/glightbox.min.js" integrity="sha512-RBWI5Qf647bcVhqbEnRoL4KuUT+Liz+oG5jtF+HP05Oa5088M9G0GxG0uoHR9cyq35VbjahcI+Hd1xwY8E1/Kg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {% endblock %}

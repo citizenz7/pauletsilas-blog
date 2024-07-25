@@ -64,6 +64,10 @@ return [
         'path' => './assets/js/confidentialite.js',
         'entrypoint' => true,
     ],
+    'comment' => [
+        'path' => './assets/js/comment.js',
+        'entrypoint' => true,
+    ],
     'admin' => [
         'path' => './assets/js/admin.js',
         'entrypoint' => true,

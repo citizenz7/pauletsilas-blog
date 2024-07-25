@@ -4,6 +4,7 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -31,6 +32,7 @@ class ContactType extends AbstractType
                 'label' => 'Message',
                 'required' => true
             ])
+            ->add('captcha', ReCaptchaType::class)
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer',
             ])

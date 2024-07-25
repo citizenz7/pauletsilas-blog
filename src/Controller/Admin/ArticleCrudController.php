@@ -70,7 +70,10 @@ class ArticleCrudController extends AbstractCrudController
                 }),
             AssociationField::new('author', 'Auteur')
                 ->setColumns(3)
+                ->onlyOnForms()
                 ->onlyWhenUpdating(),
+            AssociationField::new('author', 'Auteur')
+                ->onlyOnIndex(),
             DateField::new('postedAt', 'Publié')
                 ->setColumns(2)
                 ->hideOnForm(),
@@ -122,10 +125,10 @@ class ArticleCrudController extends AbstractCrudController
                 ->useEntryCrudForm(FichierCrudController::class)
                 ->setColumns(6)
                 ->hideOnIndex(),
-            CollectionField::new('fichiers', 'Fichiers')
-                ->setColumns(6)
-                ->hideOnForm()
-                ->setTemplatePath('admin/fields/document-fichier.html.twig'),
+            // CollectionField::new('fichiers', 'Fichiers')
+            //     ->setColumns(6)
+            //     ->hideOnForm()
+            //     ->setTemplatePath('admin/fields/document-fichier.html.twig'),
 
             FormField::addTab('SEO'),
             TextField::new('seoTitle', 'Titre SEO')
