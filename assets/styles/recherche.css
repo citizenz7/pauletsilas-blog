@@ -58,6 +58,93 @@
     z-index: 1;
 }
 
+.recherche .form-group {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 20px;
+}
+
+.recherche .form-group .button-submit {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+    background-color: var(--bg-button-color);
+    transition: all 0.3s linear;
+    font-size: clamp(13px, 2.5vw, 16px);
+    color: var(--color-white);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.recherche .form-group .button-submit:hover {
+    background-color: var(--bg-button-color-hover);
+}
+
+.recherche .result {
+    position: relative;
+    margin-bottom: 20px;
+    font-size: clamp(14px, 1.5vw, 16px);
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.recherche .result h3 {
+    margin: 25px 0 10px 0;
+    font-size: clamp(15px, 1.5vw, 20px);
+    font-weight: 600;
+    font-family: var(--title-font-family);
+}
+
+.recherche .result h4 {
+    font-size: clamp(11px, 1.5vw, 14px);
+    font-weight: 600;
+    font-family: var(--title-font-family);
+}
+
+.recherche .result .cards {
+    display: flex;
+    gap: 35px;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
+}
+
+.recherche .result .cards .card {
+    width: 23%;
+    position: relative;
+}
+
+.recherche .result .cards .card img {
+    max-width: 100%;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.recherche .result .cards .card p {
+    font-size: clamp(11px, 1.5vw, 13px);
+    color: var(--title-color);
+    font-weight: 300;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.recherche .result .cards .card a {
+    text-decoration: none;
+    color: var(--title-color);
+    font-size: clamp(14px, 1.5vw, 16px);
+    font-weight: 600;
+    font-family: var(--title-font-family);
+    position: relative;
+}
+
+.recherche .result .cards .card a:hover {
+    color: var(--title-color-hover);
+}
 
 
 @media screen and (max-width: 768px) {
@@ -67,6 +154,25 @@
     }
 
     .recherche {
+        padding: 0 15px;
+    }
+
+    .recherche .result .cards .card {
+        width: 47%;
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .recherche .result .cards .card {
+        width: 100%;
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .recherche .result .cards .card {
+        width: 100%;
         padding: 0 15px;
     }
 }

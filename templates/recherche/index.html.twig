@@ -12,14 +12,42 @@
     </div>
 
     <section class="recherche">
-        {# <h1>{{ recherche.mainTitle }}</h1>
-        <div>
-            <img src="{{ asset('uploads/img/recherche/' ~ recherche.image) }}" alt="{{ recherche.imageAlt }}" class="image">
-            {{ recherche.content|raw }}
-        </div> #}
-        <div>
-            {{ recherche.content|raw }}
+        <div style="margin-bottom: 20px;">{{ recherche.content|raw }}</div>
+
+        {# <h1>Recherche d'articles</h1> #}
+        <div class="form-group">
+            {{ form_start(searchForm) }}
+                {{ form_row(searchForm.title, {'label': 'La recherche s\'effectue sur le titre de l\'article.', 'id': 'search-titre',
+                    'attr': {'placeholder': 'Entrez un mot clé', 'class': 'form-control'}})
+                }}
+                <button class="button-submit" type="submit">Rechercher</button>
+            {{ form_end(searchForm) }}
         </div>
+
+        {% if app.request.method == 'POST' %}
+            <div class="result">
+                {% if articles|length == 0 %}
+                    <h4>Aucun résulat pour votre recherche.</h4>
+                {% else %}
+                    <h3>Résulats de votre recherche :</h3>
+                    <div class="cards">
+                        {% for article in articles|reverse %}
+                            <div class="card">
+                                <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.mainImageAlt }}" class="img">
+                                <h4>
+                                    <a href="{{ path('app_article_show', {'slug': article.slug}) }}">
+                                        {{ article.title }}
+                                    </a>
+                                </h4>
+                                <p>Publié le {{ article.postedAt | date('d/m/Y') }}, par {{ article.author }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
     </section>
+
+
 
 {% endblock %}
