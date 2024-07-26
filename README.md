@@ -72,18 +72,16 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 * ~~Favicon~~
 * ~~Meta + données structurées schema.org~~
 * ~~Tarteaucitron~~
+* ~~permissions BO : utilisateurs, commentaires, articles, images, fichiers~~
 * ~~div dans les crudcontroller ADMIN~~
 * SEO :
-    * ~titre H1 de chaque page~
-    * ~vérifier les balise HTML de titre sur chaque page : h1 (une seule par page) puis h2, h3, ...~
-    * vérifier les img alt=""
+    * ~~titre H1 de chaque page~~
+    * ~~vérifier les balise HTML de titre sur chaque page : h1 (une seule par page) puis h2, h3, ...~~
+    * ~~vérifier les img alt=""~~
 
 * CGU
 * Confidentialite
 * Responsive
-
-* permissions BO : utilisateurs, commentaires, articles, images, fichiers
-
 
 ### Mise en PROD
 **Installer/compiler les assets**
@@ -96,3 +94,60 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 **Analytics (prod)**
 * Google Analytics 4
 * Google Search Console + soumission sitemap
+
+
+
+### COMMENT CA MARCHE ?
+Il existe des comptes Admin (tous les droits de création, d'édition et de suppression) et des comptes Users avec certains droits limités.
+
+**Inscription**
+Tout le monde peut s'inscrire via le formulaire d'inscription.
+A l'inscription, l'utilisateur recevra un mail de confirmation d'adresse e-mail. Un lien dans ce mail lui permettra d'effectuer la validation de son compte.
+
+**Connexion**
+Un formulaire de connexion est disponible pour s'authentifier sur le site et acquérir les droits d'utilisation, notamment dans la partie **Tableau de bord (admin)**.
+
+**Mot de passe**
+Un utilisateur pourra re-initialiser son mot de passe depuis le lien **Mot de passe oublié ?** présent sur la page de connexion.
+
+**Tableau de bord**
+Depuis le "Tableau de bord", un utilisateur pourra :
+* Modifier les informations de son profil
+* Créer/Modifier/Supprimer un article
+* Voir la liste des commentaires des articles
+* Voir les catégories d'articles
+* Voir éventuellement, selon ses droits, les images des articles
+* Voir éventuellement, selon ses droits, les fichiers des articles
+
+1. **Modifier les informations de son profil**
+Dans le Tableau de bord Paramètres / **Mon profil**, un utilisateur pourra cliquer sur la petite icône jaune d'édition. Il pourra :
+    * **Onglet Informations**
+        * modifier son nom
+        * modifier son prénom
+        * modifier son adresse e-mail
+    * **Onglet Image de profil**
+        * modifier son image de profil
+            1. cliquer sur la corbeille
+            2. choisir une nouvelle image
+    * **Onglet Bio**
+        * modifier sa biographie (quelques lignes de texte qui seront affichées sous le texte des articles publiés par l'utilisateur). **Obligatoire**.
+
+2. **Créer un article**
+Dans le Tableau de bord / Sections / Articles, un utilisateur pourra cliquer sur **Ajouter un Article**. Il devra :
+    * **Onglet infos générales**
+        * entrer un titre (le champ Slug qui correspond à l'adresse finale de l'article est automatiquement rempli)
+        * sélectionner au moins une catégorie. Plusieurs choix possibles.
+    * **Onglet Textes**
+        * entrer une courte **Intro** (2 ou 3 phrases courtes d'introduction qui seront affichées en haut de l'article et sur l'a page d'accueil)
+        * entrer le Contenu de l'article (texte long). Un éditeur de texte lui permet de mettre en forme tout ou partie de ce contenu texte. Il peut glisser/déposer des images d'illustration de l'article à l'endroit souhaité dans le Contenu **MAIS** il devra veiller à ce que les images soient libres de droits d'utilisation et que la taille de ces images soit inférieure à 300 Ko.
+    * **Onglet Images**
+        * sélectionner une image principale **obligatoire** et ajouter sa description courte. Attention aux droits d'utilisation de l'image ainsi qu'a sa taille (300 Ko maximum si possible...).
+        sélectionner une ou plusieurs images pour la **galerie d'images facultative**. Attention aux droits d'utilisation des images ainsi qu'a sa taille (300 Ko maximum si possible...).
+    * **Onglet Documents**
+        * sélectionner un ou plusieurs **fichiers PDF facultatifs**. Attention au poids des fichiers (1 Mo maximum si possible...).
+    * **Onglet SEO**
+        Il s'agit de l apartie qui va permettre un référencement de l'article sur le smoteurs de recherche. Les deux champs de cet onglet sont **obligatoires** :
+        * Titre SEO : Le titre affiché dans les moteurs de recherche. Idéal : 55 caractères maxi. Vous pouvez reprendre le titre de l'article et l'adapter si besoin.
+        * Description SEO : La description affichée dans les moteurs de recherche. 105 caractères maxi. Il s'agit d'une description en 1 phrase ou 2 qui va mettre en valeur au moins un mot-clé important de l'article.
+
+    Concernant le point SEO, l'administrateur du site vérifiera régulièrement cette section et pourra remplacer, compléter et/ou améliorer les iformations entrées.

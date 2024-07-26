@@ -43,6 +43,14 @@
                             </a>
                         </p>
                     {% endif %}
+                    {% if article.mediapic is not empty %}
+                        <p class="joinpic">
+                            <a href="{{ path('app_article_show', {'slug': article.slug}) }}#pics">
+                                <i class="fa-regular fa-images"></i>
+                                {{ article.mediapic|length }}
+                            </a>
+                        </p>
+                    {% endif %}
                     <div class="meta">
                         <div>
                             <span class="date">Posté le {{ article.postedAt|date('d/m/Y') }}</span>,

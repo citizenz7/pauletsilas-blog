@@ -50,15 +50,17 @@
 
         <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.mainImageAlt }}" class="img">
 
-        <div class="intro">{{ article.intro|raw }}</div>
-        <div class="content">{{ article.content|raw }}</div>
+        <div class="intro">{{ article.intro|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': '',})|raw }}</div>
+        <div class="content">{{ article.content|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': '',})|raw }}</div>
 
         <div class="author-bio">
-            <img src="{{ asset('uploads/img/users/' ~ article.author.image) }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
-            <div>
-                Posté par {{ article.author }}
-                {{ article.author.authorBio|raw }}
-            </div>
+            {% if article.author.image %}
+                <img src="{{ asset('uploads/img/users/' ~ article.author.image) }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
+            {% else %}
+                <img src="{{ asset('uploads/img/users/no-image.png') }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
+            {% endif %}
+            <div class="bio-name">Posté par {{ article.author }}</div>
+            <div class="bio-text">{{ article.author.authorBio|raw }}</div>
         </div>
 
         {% if article.mediapic is not empty %}
@@ -73,7 +75,7 @@
         {% endif %}
 
         {% if article.fichiers is not empty %}
-            <h2 id="fichiers" class="galerie-title">Documents PDF</h2>
+            <h2 id="fichiers" class="fichiers-title">Documents PDF</h2>
             <div class="fichiers">
                 {% for file in article.fichiers %}
                     <a href="{{ asset('uploads/files/articles/' ~ file.fichierFile) }}">
@@ -89,11 +91,12 @@
             </div>
         {% endfor %}
 
+        {# Commentaires de l'article #}
         <div id="comments" class="comments">
             {# On affiche QUE si le user est connecté ! #}
             {% if app.user %}
                 <h2 class="title">Poster un nouveau commentaire</h2>
-                {{ form_start(form) }}
+                {{ form_start(form, {'attr': {'class': 'new'}}) }}
                     {{ form_row(form.content) }}
                     <div style="text-align: right;">
                         {{ form_row(form.submit) }}
@@ -105,11 +108,11 @@
             {% for comment in article.comments %}
                 {% if comment.approved == true %}
                     <div class="comment">
-                        <h3 id="comment{{ comment.id }}" style="font-size: clamp(11px, 1.5vw, 13px);">#{{ comment.id }} Par {{ comment.author }}, le {{ comment.createdAt|date('d/m/Y H:i') }}</h3>
+                        <h3 id="comment{{ comment.id }}">#{{ comment.id }} Par {{ comment.author }}, le {{ comment.createdAt|date('d/m/Y H:i') }}</h3>
                         <div>{{ comment.content|raw }}</div>
 
                         {% if app.user and app.user == comment.author %}
-                            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; margin-bottom: 10px; font-size: 20px; color: var(--title-color-hover); cursor: pointer; text-decoration: none; align-items: center;">
+                            <div class="actions">
                                 <a href="{{ path('app_comment_edit', {'id': comment.id}) }}" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <form method="post" action="{{ path('app_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Etes-vous certain(e) de vouloir supprimer ce commentaire ?');">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">

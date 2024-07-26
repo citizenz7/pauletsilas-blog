@@ -56,8 +56,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('lastname', 'Nom')
                 ->setColumns(3),
             EmailField::new('email', 'Adresse e-mail')
-                ->setColumns(3)
-                ->setRequired(false),
+                ->setColumns(3),
             ChoiceField::new('roles', 'Rôle')
                 ->setColumns(3)
                 ->setChoices([
@@ -82,8 +81,7 @@ class UserCrudController extends AbstractCrudController
             FormField::addTab('Bio'),
             TextareaField::new('authorBio', 'Biographie courte')
                 ->setColumns(12)
-                ->hideOnIndex()
-                ->hideOnDetail(),
+                ->hideOnIndex(),
 
             BooleanField::new('active', 'Actif ?')
                 ->setpermission('ROLE_ADMIN')

@@ -98,6 +98,7 @@ class CommentController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+        // return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirect($this->generateUrl('app_article_show', ['slug' => $comment->getArticle()->getSlug()], Response::HTTP_SEE_OTHER) . '#commentsarticle' . $comment->getId());
     }
 }

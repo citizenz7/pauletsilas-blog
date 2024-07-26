@@ -160,7 +160,7 @@ class DashboardController extends AbstractDashboardController
         // -------------------------------------
         // PARAMETRES
         // -------------------------------------
-        yield MenuItem::section('Paramètres du site')
+        yield MenuItem::section('Paramètres')
             ->setCssClass('text-warning fw-bold shadow');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class)
             ->setPermission('ROLE_ADMIN');

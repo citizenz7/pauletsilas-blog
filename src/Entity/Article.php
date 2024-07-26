@@ -22,7 +22,7 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $intro = null;
 
     #[ORM\Column(type: Types::TEXT)]

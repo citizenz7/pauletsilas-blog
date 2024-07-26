@@ -121,6 +121,31 @@
     z-index: 999;
 }
 
+.home .cards .card .joinpic {
+    position: absolute;
+    top: 240px;
+    left: 10px;
+    z-index: 999;
+    display: flex;
+    gap: 5px;
+    color: var(--color-white);
+    font-size: clamp(12px, 1.5vw, 14px);
+    font-weight: 400;
+    text-decoration: none;
+    padding: 3px 5px;
+    border-radius: 5px;
+    background-color: var(--color-black);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.home .cards .card .joinpic a {
+    color: var(--color-white);
+}
+
+.home .cards .card .joinpic a:hover {
+    color: var(--title-color-hover);
+}
+
 .home .cards .card .joinfile {
     position: absolute;
     top: 240px;
@@ -190,6 +215,7 @@
     position: relative;
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
 }
 
 .home .cards .card .meta .comments {

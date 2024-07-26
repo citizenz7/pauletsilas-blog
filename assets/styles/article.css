@@ -34,7 +34,7 @@
 }
 
 .article .meta {
-    font-size: clamp(11px, 1.5vw, 12px);
+    font-size: clamp(11px, 1.5vw, 14px);
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
@@ -72,6 +72,13 @@
     margin-bottom: 35px;
 }
 
+.article .content ul {
+    list-style: inside;
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
 .article .author-bio {
     font-size: clamp(13px, 1.5vw, 15px);
     background-color: var(--bg-author-bio);
@@ -79,9 +86,21 @@
     border-radius: 10px;
     position: relative;
     margin: 50px auto;
-    width: 100%;
+    width: 75%;
     text-align: center;
 }
+
+.article .author-bio .bio-name {
+    font-size: clamp(12px, 3vw, 14px);
+    font-weight: 500;
+    font-family: var(--title-font-family);
+}
+
+.article .author-bio .bio-text {
+    font-size: clamp(11px, 1.5vw, 13.5px);
+    font-weight: 300;
+}
+
 
 .article .author-bio p {
     margin: 0;
@@ -100,10 +119,11 @@
     position: relative;
 }
 
-.article .galerie-title {
+.article .galerie-title, .article .fichiers-title {
     font-size: clamp(17px, 1.5vw, 22px);
     margin-bottom: 15px;
     font-weight: 700;
+    font-family: var(--title-font-family);
     color: var(--title-color);
     text-align: center;
     border-bottom: 1px solid var(--border-pics-title);
@@ -156,7 +176,39 @@
     position: relative;
 }
 
-.article .comments form {
+.article .comments .comment .actions {
+    display: flex;
+    margin-top: 7px;
+}
+
+.article .comments .comment .actions .edit {
+    background-color: var(--bg-button-color);
+    border: 1px solid var(--border-button-color);
+    color: var(--color-white);
+    padding: 3px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: clamp(11px, 1.5vw, 13px);
+    cursor: pointer;
+    margin-right: 7px;
+}
+
+.article .comments .comment .actions .btn {
+    background-color: var(--color-danger);
+    border: 1px solid var(--border-button-color);
+    color: var(--color-white);
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: clamp(11px, 1.5vw, 13px);
+    cursor: pointer;
+}
+
+.article .comments .comment h3 {
+    font-size: clamp(11px, 1.5vw, 13px);
+}
+
+.article .comments .new {
     margin-bottom: 55px;
 }
 
