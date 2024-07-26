@@ -50,12 +50,18 @@ class MediaCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Medias')
             ->setEntityLabelInSingular('Media')
             ->showEntityActionsInlined(true)
-            ->setPaginatorPageSize(12);
+            ->setPaginatorPageSize(12)
+            ->setEntityPermission('ROLE_ADMIN');
     }
 
     public function configureActions(Actions $actions): Actions
     {
         return $actions
+            ->setPermission(Action::DELETE, 'ROLE_ADMIN')
+            ->setPermission(Action::EDIT, 'ROLE_ADMIN')
+            ->setPermission(Action::NEW, 'ROLE_ADMIN')
+            ->setPermission(Action::DETAIL, 'ROLE_ADMIN')
+
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->update(Crud::PAGE_INDEX, Action::NEW, function(Action $action){
                 return $action->setIcon('fas fa-plus text-success')->setLabel('Ajouter un Media');

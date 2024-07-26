@@ -65,21 +65,25 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 * ~~Erreurs personnalisées~~
 * ~~reCaptcha Google~~
 * ~~test formulaire de contact~~
+* ~~flash messages~~
 * ~~BO css~~
 * ~~Sitemap~~
 * ~~robots.txt~~
 * ~~Favicon~~
 * ~~Meta + données structurées schema.org~~
 * ~~Tarteaucitron~~
-* div dans les crudcontroller ADMIN
-
-* Responsive
+* ~~div dans les crudcontroller ADMIN~~
 * SEO :
-    * titre H1 de chaque page
-    * vérifier les balise HTML de titre sur chaque page : h1 (une seule par page) puis h2, h3, ... (Chrome = Web developer / View document outline)
+    * ~titre H1 de chaque page~
+    * ~vérifier les balise HTML de titre sur chaque page : h1 (une seule par page) puis h2, h3, ...~
     * vérifier les img alt=""
-* Mentions légales
-* flash messages
+
+* CGU
+* Confidentialite
+* Responsive
+
+* permissions BO : utilisateurs, commentaires, articles, images, fichiers
+
 
 ### Mise en PROD
 **Installer/compiler les assets**

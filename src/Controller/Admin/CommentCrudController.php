@@ -3,16 +3,15 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Comment;
-use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class CommentCrudController extends AbstractCrudController
 {
@@ -40,14 +39,15 @@ class CommentCrudController extends AbstractCrudController
                 }),
             DateTimeField::new('createdAt', 'Posté le')
                 ->setColumns(3),
-            BooleanField::new('approved', 'Validé'),
+            BooleanField::new('approved', 'Validé')
+                ->setPermission('ROLE_ADMIN'),
         ];
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'Liste des Commentaires')
+            ->setPageTitle('index', 'Liste des Commentaires')->setHelp('index', 'Vous pouvez modifier ou supprimer vos propres commentaires directement depuis la page de l\'article.')
             ->setPageTitle('edit', 'Modifier un Commentaire')
             ->setPageTitle('new', 'Ajouter un Commentaire')
             ->setPageTitle('detail', 'Voir un Commentaire')
@@ -55,13 +55,16 @@ class CommentCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Commentaires')
             ->setEntityLabelInSingular('Commentaire')
             ->showEntityActionsInlined(true)
-            ->setPaginatorPageSize(12)
-            ->setEntityPermission('ROLE_ADMIN');
+            ->setPaginatorPageSize(12);
     }
 
     public function configureActions(Actions $actions): Actions
     {
         return $actions
+            ->setPermission(Action::DELETE, 'ROLE_ADMIN')
+            ->setPermission(Action::EDIT, 'ROLE_ADMIN')
+            ->setPermission(Action::NEW, 'ROLE_ADMIN')
+
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->update(Crud::PAGE_INDEX, Action::NEW, function(Action $action){
                 return $action->setIcon('fas fa-plus text-success')->setLabel('Ajouter un Commentaire');

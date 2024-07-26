@@ -130,13 +130,16 @@ class ArticleCrudController extends AbstractCrudController
             //     ->hideOnForm()
             //     ->setTemplatePath('admin/fields/document-fichier.html.twig'),
 
-            FormField::addTab('SEO'),
+            FormField::addTab('SEO')
+                ->setHelp('Informations pour les moteurs de recherche. Les deux champs suivants sont obligatoires.'),
             TextField::new('seoTitle', 'Titre SEO')
                 ->setColumns(12)
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->setHelp('Le titre affiché dans les moteurs de recherche. Idéal : 55 caractères maxi. Vous pouvez reprendre le titre de l\'article et l\'adapter si besoin.'),
             TextareaField::new('seoDescription', 'Description SEO')
                 ->setColumns(12)
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->setHelp('La description affichée dans les moteurs de recherche. 105 caractères maxi. Il s\'agit d\'une description en 1 phrase ou 2 qui va mettre en valeur au moins un mot-clé important de l\'article.'),
         ];
     }
 
