@@ -181,6 +181,20 @@
     margin-top: 7px;
 }
 
+.article .comments .comment .author-image {
+    max-width: 100%;
+    height: auto;
+    width: 50px;
+    max-height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    float: left;
+}
+
 .article .comments .comment .actions .edit {
     background-color: var(--bg-button-color);
     border: 1px solid var(--border-button-color);
@@ -269,6 +283,10 @@
     } */
 
     .article .mediapics img {
+        width: 100%;
+    }
+
+    .article .author-bio {
         width: 100%;
     }
 }

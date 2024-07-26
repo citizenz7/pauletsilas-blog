@@ -12,14 +12,20 @@
             <img src="{{ asset('uploads/img/categories/' ~ category.image) }}" alt="{{ category.title }}">
             <p>{{ category.description|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': ''})|raw }}</p>
         </div>
-        {% for article in category.articles|reverse %}
-            {% if article is empty %}
-                <h2 class="title">Aucun article</h2>
-            {% else %}
-                <h2 class="title">
-                    <a href="{{ path('app_article_show', {'slug': article.slug}) }}">{{ article.title }}</a>
-                </h2>
-            {% endif %}
-        {% endfor %}
+
+        <div class="cards">
+            {% for article in category.articles|reverse %}
+                {% if article is empty %}
+                    <h2 class="title">Aucun article</h2>
+                {% else %}
+                    <div class="card">
+                        <a href="{{ path('app_article_show', {'slug': article.slug}) }}">
+                            <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.title }}" class="image">
+                            <h2>{{ article.title }}</h2>
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
     </section>
 {% endblock %}

@@ -101,11 +101,16 @@
     transform: scale(1.02);
 }
 
+.card-image {
+    position: relative;
+    height: clamp(195px,62vw,275px);
+    width: 100%;
+}
+
 .home .cards .card .img {
     max-width: 100%;
-    max-height: 275px;
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -114,17 +119,18 @@
 
 .home .cards .card .categories {
     position: absolute;
-    top: 10px;
-    left: 10px;
     display: flex;
     gap: 5px;
     z-index: 999;
+    left: calc(10px + 0.4vw);
+    top: calc(10px + 0.4vw);
 }
 
 .home .cards .card .joinpic {
     position: absolute;
-    top: 240px;
-    left: 10px;
+    top: unset;
+    bottom: calc(10px + 0.4vw);
+    left: calc(10px + 0.4vw);
     z-index: 999;
     display: flex;
     gap: 5px;
@@ -148,8 +154,6 @@
 
 .home .cards .card .joinfile {
     position: absolute;
-    top: 240px;
-    right: 10px;
     z-index: 999;
     display: flex;
     gap: 5px;
@@ -161,6 +165,8 @@
     border-radius: 5px;
     background-color: var(--color-black);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    bottom: calc(10px + 0.4vw);
+    right: calc(10px + 0.4vw);
 }
 
 .home .cards .card .joinfile a {
@@ -253,16 +259,6 @@
         width: 48%;
         padding: 0 15px;
     }
-
-    .home .cards .card .categories {
-        top: 10px;
-        left: 25px;
-    }
-
-    .home .cards .card .joinfile {
-        top: 240px;
-        right: 25px;
-    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -280,17 +276,6 @@
     .home .cards .card {
         width: 48%;
         padding: 0 15px;
-    }
-
-    .home .cards .card .categories {
-        left: 20px;
-        z-index: 1;
-    }
-
-    .home .cards .card .joinfile {
-        top: 210px;
-        right: 20px;
-        z-index: 1;
     }
 }
 
@@ -315,23 +300,11 @@
         width: 100%;
         padding: 0 15px;
     }
-
-    .home .cards .card .joinfile {
-        top: 185px;
-        right: 20px;
-        z-index: 1;
-    }
 }
 
 @media screen and (max-width: 576px) {
     .home .cards .card {
         width: 100%;
         padding: 0 15px;
-    }
-
-    .home .cards .card .joinfile {
-        top: 180px;
-        right: 20px;
-        z-index: 1;
     }
 }

@@ -106,21 +106,26 @@
 
             <h2 id="commentsarticle" class="title">Les commentaires de l'article</h2>
             {% for comment in article.comments %}
-                {% if comment.approved == true %}
-                    <div class="comment">
-                        <h3 id="comment{{ comment.id }}">#{{ comment.id }} Par {{ comment.author }}, le {{ comment.createdAt|date('d/m/Y H:i') }}</h3>
-                        <div>{{ comment.content|raw }}</div>
+                {% if comment %}
+                    {% if comment.approved == true %}
+                        <div class="comment">
+                            <img src="{{ asset('uploads/img/users/' ~ comment.author.image) }}" alt="{{ comment.author.firstName }} {{ comment.author.lastName }}" class="author-image">
+                            <h3 id="comment{{ comment.id }}">#{{ comment.id }} Par {{ comment.author }}, le {{ comment.createdAt|date('d/m/Y H:i') }}</h3>
+                            <div>{{ comment.content|raw }}</div>
 
-                        {% if app.user and app.user == comment.author %}
-                            <div class="actions">
-                                <a href="{{ path('app_comment_edit', {'id': comment.id}) }}" class="edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <form method="post" action="{{ path('app_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Etes-vous certain(e) de vouloir supprimer ce commentaire ?');">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
-                                    <button class="btn"><i class="fa-solid fa-trash-can"></i></button>
-                                </form>
-                            </div>
-                        {% endif %}
-                    </div>
+                            {% if app.user and app.user == comment.author %}
+                                <div class="actions">
+                                    <a href="{{ path('app_comment_edit', {'id': comment.id}) }}" class="edit" title="Modifier votre commentaire"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <form method="post" action="{{ path('app_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Etes-vous certain(e) de vouloir supprimer ce commentaire ?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                                        <button title="Supprimer votre commentaire" class="btn"><i class="fa-solid fa-trash-can"></i></button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <p>Il n'y a pas de commentaire pour cet article.</p>
                 {% endif %}
             {% endfor %}
         </div>

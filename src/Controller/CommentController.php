@@ -84,7 +84,7 @@ class CommentController extends AbstractController
             'form' => $form,
             'settings' => $settings,
             'pageTitle' => $comment->getArticle()->getTitle(),
-            'seoTitle' => html_entity_decode($comment->getArticle()->getSeoTitle()),
+            'seoTitle' => html_entity_decode($comment->getArticle()->getSeoTitle() . ' - Commentaire'),
             'seoDescription' => html_entity_decode($comment->getArticle()->getSeoDescription()),
             'seoUrl' => $comment->getArticle()->getSlug()
         ]);

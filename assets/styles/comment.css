@@ -11,6 +11,31 @@
     margin-bottom: 4px;
 }
 
+.button-send {
+    background-color: var(--bg-button-color);
+    border: 1px solid var(--border-button-color);
+    color: var(--color-white);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: clamp(12px, 1.5vw, 14px);
+    font-weight: 500;
+    margin-top: 15px;
+    width: 100%;
+    max-width: 150px;
+    text-align: center;
+}
+
+.button-send:hover {
+    background-color: var(--bg-button-color-hover);
+}
+
+.comment .message-success {
+    color: var(--color-success);
+    font-size: clamp(15px, 3vw, 18px);
+    margin-top: 10px;
+    text-align: center;
+}
 
 @media screen and (max-width: 768px) {
     .comment {
