@@ -113,12 +113,28 @@
 		<meta name="msapplication-TileImage" content="{{ asset('uploads/img/favicon/ms-icon-144x144.png') }}">
 		<meta name="theme-color" content="#ffffff">
 
-        {% block stylesheets %}
-        {% endblock %}
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "Organization",
+            "name": "{{ settings.siteName }}",
+            "url": "{{ settings.siteUrlfull }}",
+            "logo": "{{ settings.siteUrlfull }}{{ asset('uploads/img/' ~ settings.siteLogo) }}",
+            "description": "{{ settings.siteDescription }}",
+            "email": "{{ settings.siteEmail }}",
+            "image": "{{ settings.siteUrlfull }}{{ asset('uploads/img/' ~ settings.siteLogo) }}",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "{{ settings.siteAdresse }}",
+                "addressLocality": "{{ settings.siteVille }}",
+                "postalCode": "{{ settings.siteCp }}"
+            }
+        }
+        </script>
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+        {% block stylesheets %}{% endblock %}
+
+        {% block javascripts %}{% block importmap %}{{ importmap('app') }}{% endblock %}{% endblock %}
     </head>
     <body>
         {% include '_includes/_header.html.twig' %}

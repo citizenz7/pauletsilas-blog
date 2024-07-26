@@ -63,20 +63,21 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 ### A FAIRE / VERIFIER AVANT LA MISE EN PROD
 * ~~page login CSS~~
 * ~~Erreurs personnalisées~~
-* ~~reCaptcha Google ? Greware capactha ?~~
+* ~~reCaptcha Google~~
 * ~~test formulaire de contact~~
-* ~~BO : css~~
+* ~~BO css~~
 * ~~Sitemap~~
 * ~~robots.txt~~
+* ~~Favicon~~
+* ~~Meta + données structurées schema.org~~
+* ~~Tarteaucitron~~
 * div dans les crudcontroller ADMIN
+
 * Responsive
 * SEO :
     * titre H1 de chaque page
     * vérifier les balise HTML de titre sur chaque page : h1 (une seule par page) puis h2, h3, ... (Chrome = Web developer / View document outline)
     * vérifier les img alt=""
-* Favicon
-* Meta + données structurées schema.org
-* Tarteaucitron
 * Mentions légales
 * flash messages
 

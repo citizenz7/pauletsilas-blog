@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
 class SettingCrudController extends AbstractCrudController
 {
@@ -38,6 +39,10 @@ class SettingCrudController extends AbstractCrudController
                 ->setBasePath('uploads/img')
                 ->setUploadDir('public/uploads/img')
                 ->setUploadedFileNamePattern('[name]-[uuid].[extension]'),
+
+            FormField::addTab('Description'),
+            TextareaField::new('siteDescription', 'Description du site')
+                ->setColumns(12),
 
             FormField::addTab('Url')
                 ->setIcon('fas fa-link')

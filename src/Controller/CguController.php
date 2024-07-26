@@ -18,11 +18,15 @@ class CguController extends AbstractController
     {
         $settings = $settingRepository->findOneBy([]);
 
-        $cgu = $cguPageRepository->findOneBy([]);
+        $cguPage = $cguPageRepository->findOneBy([]);
 
         return $this->render('cgu/index.html.twig', [
             'settings' => $settings,
-            'cgu' => $cgu
+            'cguPage' => $cguPage,
+            'seoTitle' => html_entity_decode($cguPage->getSeoTitle()),
+            'seoDescription' => html_entity_decode($cguPage->getSeoDescription()),
+            'seoUrl' => $cguPage->getSlug(),
+            'pageTitle' => $cguPage->getTitle()
         ]);
     }
 }

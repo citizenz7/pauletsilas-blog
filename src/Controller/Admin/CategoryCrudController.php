@@ -38,7 +38,12 @@ class CategoryCrudController extends AbstractCrudController
                 ->setUploadedFileNamePattern('[name]-[uuid].[extension]'),
             TextEditorField::new('description', 'Description')
                 ->setColumns(12)
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->hideOnDetail(),
+            TextareaField::new('description', 'Description')
+                ->hideOnForm()
+                ->hideOnIndex()
+                ->setTemplatePath('admin/fields/text.html.twig'),
             TextField::new('seoTitle', 'Titre SEO')
                 ->setColumns(12)
                 ->hideOnIndex(),

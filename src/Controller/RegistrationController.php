@@ -70,7 +70,11 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
-            'settings' => $settings
+            'settings' => $settings,
+            'seoTitle' => 'Inscription',
+            'seoDescription' => 'Inscription',
+            'seoUrl' => 'register',
+            'pageTitle' => 'Inscription'
         ]);
     }
 

@@ -18,11 +18,15 @@ class ConfidentialiteController extends AbstractController
     {
         $settings = $settingRepository->findOneBy([]);
 
-        $confidentialite = $confidentialitePageRepository->findOneBy([]);
+        $confidentialitePage = $confidentialitePageRepository->findOneBy([]);
 
         return $this->render('confidentialite/index.html.twig', [
             'settings' => $settings,
-            'confidentialite' => $confidentialite
+            'confidentialitePage' => $confidentialitePage,
+            'seoTitle' => html_entity_decode($confidentialitePage->getSeoTitle()),
+            'seoDescription' => html_entity_decode($confidentialitePage->getSeoDescription()),
+            'seoUrl' => $confidentialitePage->getSlug(),
+            'pageTitle' => $confidentialitePage->getTitle()
         ]);
     }
 }

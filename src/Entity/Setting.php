@@ -38,6 +38,9 @@ class Setting
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $siteVille = null;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $siteDescription = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +138,18 @@ class Setting
     public function setSiteVille(?string $siteVille): static
     {
         $this->siteVille = $siteVille;
+
+        return $this;
+    }
+
+    public function getSiteDescription(): ?string
+    {
+        return $this->siteDescription;
+    }
+
+    public function setSiteDescription(string $siteDescription): static
+    {
+        $this->siteDescription = $siteDescription;
 
         return $this;
     }

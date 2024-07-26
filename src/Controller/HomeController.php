@@ -22,16 +22,16 @@ class HomeController extends AbstractController
 
         $articles = $articleRepository->findBy(['active' => true], ['postedAt' => 'DESC'], 6);
 
-        $home = $homePageRepository->findOneBy([]);
+        $homePage = $homePageRepository->findOneBy([]);
 
         return $this->render('home/index.html.twig', [
             'settings' => $settings,
             'articles' => $articles,
-            'home' => $home,
-            'seoTitle' => html_entity_decode($home->getSeoTitle()),
-            'seoDescription' => html_entity_decode($home->getSeoDescription()),
-            'seoUrl' => '',
-            'pageTitle' => 'home'
+            'homePage' => $homePage,
+            'seoTitle' => html_entity_decode($homePage->getSeoTitle()),
+            'seoDescription' => html_entity_decode($homePage->getSeoDescription()),
+            'seoUrl' => $homePage->getSlug(),
+            'pageTitle' => $homePage->getTitle()
         ]);
     }
 }

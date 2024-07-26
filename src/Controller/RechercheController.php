@@ -22,7 +22,11 @@ class RechercheController extends AbstractController
 
         return $this->render('recherche/index.html.twig', [
             'settings' => $settings,
-            'recherche' => $recherche
+            'recherche' => $recherche,
+            'seoTitle' => html_entity_decode($recherche->getSeoTitle()),
+            'seoDescription' => html_entity_decode($recherche->getSeoDescription()),
+            'seoUrl' => $recherche->getSlug(),
+            'pageTitle' => $recherche->getTitle()
         ]);
     }
 }

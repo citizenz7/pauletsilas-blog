@@ -18,15 +18,15 @@ class AproposController extends AbstractController
     {
         $settings = $settingRepository->findOneBy([]);
 
-        $apropos = $aproposPageRepository->findOneBy([]);
+        $aproposPage = $aproposPageRepository->findOneBy([]);
 
         return $this->render('apropos/index.html.twig', [
             'settings' => $settings,
-            'apropos' => $apropos,
-            'seoTitle' => html_entity_decode($apropos->getSeoTitle()),
-            'seoDescription' => html_entity_decode($apropos->getSeoDescription()),
-            'seoUrl' => 'apropos',
-            'pageTitle' => 'apropos'
+            'apropos' => $aproposPage,
+            'seoTitle' => html_entity_decode($aproposPage->getSeoTitle()),
+            'seoDescription' => html_entity_decode($aproposPage->getSeoDescription()),
+            'seoUrl' => $aproposPage->getSlug(),
+            'pageTitle' => $aproposPage->getTitle()
         ]);
     }
 }

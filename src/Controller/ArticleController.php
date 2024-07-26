@@ -69,8 +69,8 @@ class ArticleController extends AbstractController
             'groupedArticles' => $groupedArticles,
             'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
             'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
-            'seoUrl' => 'articles',
-            'pageTitle' => 'articles'
+            'seoUrl' => $articlePage->getSlug(),
+            'pageTitle' => $articlePage->getTitle()
         ]);
     }
 
@@ -120,8 +120,8 @@ class ArticleController extends AbstractController
             'groupedArticles' => $groupedArticles,
             'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
             'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
-            'seoUrl' => 'articles',
-            'pageTitle' => 'articles'
+            'seoUrl' => $articlePage->getSlug(),
+            'pageTitle' => $articlePage->getTitle()
         ]);
     }
 
@@ -172,8 +172,8 @@ class ArticleController extends AbstractController
             'groupedArticles' => $groupedArticles,
             'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
             'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
-            'seoUrl' => 'articles',
-            'pageTitle' => 'articles'
+            'seoUrl' => $articlePage->getSlug(),
+            'pageTitle' => $articlePage->getTitle()
         ]);
     }
 

@@ -15,13 +15,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/commentaires')]
 class CommentController extends AbstractController
 {
-    #[Route('/', name: 'app_comment_index', methods: ['GET'])]
-    public function index(CommentRepository $commentRepository): Response
-    {
-        return $this->render('comment/index.html.twig', [
-            'comments' => $commentRepository->findAll(),
-        ]);
-    }
+    // #[Route('/', name: 'app_comment_index', methods: ['GET'])]
+    // public function index(CommentRepository $commentRepository): Response
+    // {
+    //     return $this->render('comment/index.html.twig', [
+    //         'comments' => $commentRepository->findAll(),
+    //     ]);
+    // }
 
     // #[Route('/new', name: 'app_comment_new', methods: ['GET', 'POST'])]
     // public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -52,7 +52,11 @@ class CommentController extends AbstractController
 
         return $this->render('comment/show.html.twig', [
             'comment' => $comment,
-            'settings' => $settings
+            'settings' => $settings,
+            'seoTitle' => html_entity_decode($comment->getArticle()->getSeoTitle()),
+            'seoDescription' => html_entity_decode($comment->getArticle()->getSeoDescription()),
+            'seoUrl' => $comment->getArticle()->getSlug(),
+            'pageTitle' => $comment->getArticle()->getTitle()
         ]);
     }
 
@@ -78,7 +82,11 @@ class CommentController extends AbstractController
         return $this->render('comment/edit.html.twig', [
             'comment' => $comment,
             'form' => $form,
-            'settings' => $settings
+            'settings' => $settings,
+            'pageTitle' => $comment->getArticle()->getTitle(),
+            'seoTitle' => html_entity_decode($comment->getArticle()->getSeoTitle()),
+            'seoDescription' => html_entity_decode($comment->getArticle()->getSeoDescription()),
+            'seoUrl' => $comment->getArticle()->getSlug()
         ]);
     }
 

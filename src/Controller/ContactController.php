@@ -24,6 +24,7 @@ class ContactController extends AbstractController
     ): Response
     {
         $settings = $settingRepository->findOneBy([]);
+
         $contact = $contactPageRepository->findOneBy([]);
 
         $form = $this->createForm(ContactType::class);
@@ -61,7 +62,8 @@ class ContactController extends AbstractController
             'form' => $form,
             'seoTitle' => html_entity_decode($contact->getSeoTitle()),
             'seoDescription' => html_entity_decode($contact->getSeoDescription()),
-            'seoUrl' => $contact->getSlug()
+            'seoUrl' => $contact->getSlug(),
+            'pageTitle' => $contact->getTitle()
         ]);
     }
 }

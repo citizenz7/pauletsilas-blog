@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryPageRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\SettingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,15 +15,23 @@ class CategoryController extends AbstractController
     #[Route('/', name: 'app_category_index', methods: ['GET'])]
     public function index(
         CategoryRepository $categoryRepository,
-        SettingRepository $settingRepository
+        SettingRepository $settingRepository,
+        CategoryPageRepository $categoryPageRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
         $categories = $categoryRepository->findAll();
 
+        $categoryPage = $categoryPageRepository->findOneBy([]);
+
         return $this->render('category/index.html.twig', [
             'categories' => $categories,
-            'settings' => $settings
+            'settings' => $settings,
+            'categoryPage' => $categoryPage,
+            'seoTitle' => html_entity_decode($categoryPage->getSeoTitle()),
+            'seoDescription' => html_entity_decode($categoryPage->getSeoDescription()),
+            'seoUrl' => $categoryPage->getSlug(),
+            'pageTitle' => $categoryPage->getTitle()
         ]);
     }
 
@@ -59,7 +68,11 @@ class CategoryController extends AbstractController
 
         return $this->render('category/show.html.twig', [
             'category' => $category,
-            'settings' => $settings
+            'settings' => $settings,
+            'seoTitle' => html_entity_decode($category->getSeoTitle()),
+            'seoDescription' => html_entity_decode($category->getSeoDescription()),
+            'seoUrl' => $category->getSlug(),
+            'pageTitle' => $category->getTitle()
         ]);
     }
 

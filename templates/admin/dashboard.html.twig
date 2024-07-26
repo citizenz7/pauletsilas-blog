@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-5 g-4 mt-5 justify-content-between">
+    <div class="row row-cols-1 row-cols-md-4 g-4 mt-5 justify-content-center">
         <div class="col">
             <div class="card h-100">
                 <div class="card-body text-center">
@@ -38,6 +38,15 @@
                 <div class="card-body text-center">
                     <h2 class="card-title h5">Catégories</h2>
                     <h3 class="card-text">{{ categories|length }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h2 class="card-title h5">Commentaires</h2>
+                    <h3 class="card-text">{{ comments|length }}</h3>
                 </div>
             </div>
         </div>

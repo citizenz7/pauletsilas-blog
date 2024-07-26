@@ -17,6 +17,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
@@ -81,7 +82,12 @@ class UserCrudController extends AbstractCrudController
             TextEditorField::new('authorBio', 'Biographie courte')
                 ->setColumns(12)
                 ->hideOnIndex()
+                ->hideOnDetail()
                 ->setFormType(CKEditorType::class),
+            TextareaField::new('authorBio', 'Biographie courte')
+                ->hideOnForm()
+                ->hideOnIndex()
+                ->setTemplatePath('admin/fields/text.html.twig'),
 
             BooleanField::new('active', 'Actif ?')
                 ->setpermission('ROLE_ADMIN')
@@ -94,6 +100,7 @@ class UserCrudController extends AbstractCrudController
         return $crud
             ->setPageTitle('index', 'Liste des utilisateurs')->setEntityPermission('ROLE_ADMIN')
             ->setPageTitle('edit', 'Modifier un utilisateur')->setEntityPermission('ROLE_ADMIN')
+            ->setPageTitle('detail', 'Profil')->setEntityPermission('ROLE_USER')
 
             ->setPageTitle('index', 'Mon profil')->setEntityPermission('ROLE_USER')
             ->setPageTitle('edit', 'Modifier mon profil')->setEntityPermission('ROLE_USER')
