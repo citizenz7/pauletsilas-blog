@@ -43,6 +43,17 @@
     z-index: 2;
 }
 
+.apropos .logo {
+    max-width: 100%;
+    width: 250px;
+    height: auto;
+    position: relative;
+    display: block;
+    margin: 0 auto 20px auto;
+    border-radius: 10px;
+    position: relative;
+}
+
 .apropos .image {
     max-width: 100%;
     width: 100%;

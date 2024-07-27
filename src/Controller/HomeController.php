@@ -22,11 +22,14 @@ class HomeController extends AbstractController
 
         $articles = $articleRepository->findBy(['active' => true], ['postedAt' => 'DESC'], 6);
 
+        $lastArticles = $articleRepository->findBy(['active' => true], ['postedAt' => 'DESC'], 3);
+
         $homePage = $homePageRepository->findOneBy([]);
 
         return $this->render('home/index.html.twig', [
             'settings' => $settings,
             'articles' => $articles,
+            'lastArticles' => $lastArticles,
             'homePage' => $homePage,
             'seoTitle' => html_entity_decode($homePage->getSeoTitle()),
             'seoDescription' => html_entity_decode($homePage->getSeoDescription()),

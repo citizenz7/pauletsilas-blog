@@ -6,6 +6,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/css/glightbox.min.css" integrity="sha512-T+KoG3fbDoSnlgEXFQqwcTC9AdkFIxhBlmoaFqYaIjq2ShhNwNao9AKaLUPMfwiBPL0ScxAtc+UYbHAgvd+sjQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
 {% block body %}
@@ -17,7 +18,7 @@
     </div>
 
     <section class="home">
-        <div class="main-title">Derniers articles</div>
+        <h2 class="main-title">Derniers articles</h2>
 
         {# Flash message #}
         {% for flash in app.flashes('success') %}
@@ -33,12 +34,12 @@
                         <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.title }}" class="img">
                         <p class="categories">
                             {% for category in article.categories %}
-                                <a href="{{ path('app_category_show', {'slug': category.slug}) }}">{{ category.title }}</a>
+                                <a href="{{ path('app_category_show', {'slug': category.slug}) }}" title="Catégorie {{ category.title }}">{{ category.title }}</a>
                             {% endfor %}
                         </p>
                         {% if article.fichiers is not empty %}
                             <p class="joinfile">
-                                <a href="{{ path('app_article_show', {'slug': article.slug}) }}#fichiers">
+                                <a href="{{ path('app_article_show', {'slug': article.slug}) }}#fichiers" title="Fichiers PDF">
                                     <i class="fa-regular fa-file-pdf"></i>
                                     {{ article.fichiers|length }}
                                 </a>
@@ -46,7 +47,7 @@
                         {% endif %}
                         {% if article.mediapic is not empty %}
                             <p class="joinpic">
-                                <a href="{{ path('app_article_show', {'slug': article.slug}) }}#pics">
+                                <a href="{{ path('app_article_show', {'slug': article.slug}) }}#pics" title="Photos & images">
                                     <i class="fa-regular fa-images"></i>
                                     {{ article.mediapic|length }}
                                 </a>
@@ -82,6 +83,41 @@
                 </div>
             {% endfor %}
         </div>
+
+        {# 10 derniers fichiers pdf #}
+        <div class="fichiers-pdf">
+            <h2>Derniers fichiers PDF</h2>
+            <div class="fichiers">
+                {% for article in lastArticles %}
+                    {% for file in article.fichiers|slice(0, 5) %}
+                        <div class="links">
+                            <a href="{{ asset('uploads/files/articles/' ~ file.fichierFile) }}" title="Article : {{ article.title }}">
+                                <i class="fa-solid fa-file-pdf fa-3x"></i>
+                                <br>
+                                {{ file.title }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+        {# 10 dernières images #}
+        <div class="pics">
+            <h2>Dernières images</h2>
+            <div class="images">
+                {% for article in lastArticles %}
+                    {% for pic in article.mediapic|slice(0, 5) %}
+                        <div class="links">
+                            <a href="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" class="glightbox">
+                                <img src="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" alt="{{ pic.imageAlt }}" class="img">
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
     </section>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/js/glightbox.min.js" integrity="sha512-RBWI5Qf647bcVhqbEnRoL4KuUT+Liz+oG5jtF+HP05Oa5088M9G0GxG0uoHR9cyq35VbjahcI+Hd1xwY8E1/Kg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {% endblock %}
