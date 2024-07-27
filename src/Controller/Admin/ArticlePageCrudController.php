@@ -32,7 +32,21 @@ class ArticlePageCrudController extends AbstractCrudController
                 ->setColumns(6),
 
             FormField::addTab('Titres & textes'),
+            FormField::addPanel('Article'),
             TextField::new('mainTitle', 'Titre principal')
+                ->setColumns(6)
+                ->hideOnIndex(),
+            TextField::new('galerieTitle', 'Titre galerie images')
+                ->setColumns(6)
+                ->hideOnIndex(),
+            TextField::new('documentsTitle', 'Titre documents')
+                ->setColumns(6)
+                ->hideOnIndex(),
+            FormField::addPanel('commentaires'),
+            TextField::new('commentsNewTitle', 'Titre Poster un nouveau commentaire')
+                ->setColumns(6)
+                ->hideOnIndex(),
+            TextField::new('commentsArticleTitle', 'Titre Les commentaires de l\'article')
                 ->setColumns(6)
                 ->hideOnIndex(),
 

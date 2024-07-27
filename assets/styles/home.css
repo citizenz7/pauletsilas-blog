@@ -51,12 +51,21 @@
     font-weight: 800;
     font-family: var(--title-font-family);
     color: var(--title-color);
-    position: relative;
     margin-bottom: 35px;
     text-align: center;
-    background-color: var(--title-bg-color);
-    padding: 10px;
-    border-radius: 5px;
+    position: relative;
+}
+
+.home .main-title:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-top: 7px;
+    transform: translate(-50%, -50%);
+    width: 55px;
+    height: 1px;
+    background: var(--color-black);
 }
 
 .home .message-success {
@@ -121,7 +130,7 @@
     position: absolute;
     display: flex;
     gap: 5px;
-    z-index: 999;
+    z-index: 2;
     left: calc(10px + 0.4vw);
     top: calc(10px + 0.4vw);
 }
@@ -131,7 +140,7 @@
     top: unset;
     bottom: calc(10px + 0.4vw);
     left: calc(10px + 0.4vw);
-    z-index: 999;
+    z-index: 2;
     display: flex;
     gap: 5px;
     color: var(--color-white);
@@ -154,7 +163,7 @@
 
 .home .cards .card .joinfile {
     position: absolute;
-    z-index: 999;
+    z-index: 2;
     display: flex;
     gap: 5px;
     color: var(--color-white);
@@ -256,18 +265,27 @@
     position: relative;
 }
 
-.home .fichiers-pdf h2 {
+.home .fichiers-pdf h2, .home .pics h2 {
     font-size: clamp(20px, 1.5vw, 30px);
     font-weight: 800;
     font-family: var(--title-font-family);
     color: var(--title-color);
     margin-bottom: 35px;
     text-align: center;
-    background-color: var(--title-bg-color);
-    padding: 10px;
-    border-radius: 5px;
     position: relative;
 }
+.home .fichiers-pdf h2:after, .home .pics h2:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-top: 7px;
+    transform: translate(-50%, -50%);
+    width: 55px;
+    height: 1px;
+    background: var(--color-black);
+}
+
 
 .home .fichiers-pdf .fichiers {
     display: flex;
@@ -295,19 +313,6 @@
 .home .pics {
     margin: 75px auto 35px auto;
     position: relative;
-}
-
-.home .pics h2 {
-    font-size: clamp(20px, 1.5vw, 30px);
-    font-weight: 800;
-    font-family: var(--title-font-family);
-    color: var(--title-color);
-    position: relative;
-    margin-bottom: 35px;
-    text-align: center;
-    background-color: var(--title-bg-color);
-    padding: 10px;
-    border-radius: 5px;
 }
 
 .home .pics .images {

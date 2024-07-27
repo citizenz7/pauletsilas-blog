@@ -5,12 +5,8 @@
 {% block importmap %}{{ importmap(['app', 'articles']) }}{% endblock %}
 
 {% block body %}
-    {# {% for articles in articles.items %}
-    {{ dump(articles.author.firstname) }}
-    {% endfor %} #}
-
     <section class="articles">
-        <h1>Tous les articles</h1>
+        <h1>{{ articlePage.mainTitle }}</h1>
 
         <div class="tri">
             {# Par catégories #}
@@ -62,7 +58,6 @@
                             Publié le {{ article.postedAt|date('d/m/Y') }}, par {{ article.author }}, {% if article.updatedAt is not empty %} mis à jour le {{ article.updatedAt|date('d/m/Y') }}{% endif %}
                         </div>
                         <div class="text">{{ article.intro|raw }}</div>
-                        {# <a href="{{ path('app_article_show', {'slug': article.slug}) }}" class="btn-show">Voir</a> #}
                     </div>
                 </div>
             {% endfor %}

@@ -18,7 +18,7 @@
     </div>
 
     <section class="home">
-        <h2 class="main-title">Derniers articles</h2>
+        <h2 class="main-title">{{ homePage.lastArticlesTitle }}</h2>
 
         {# Flash message #}
         {% for flash in app.flashes('success') %}
@@ -84,9 +84,8 @@
             {% endfor %}
         </div>
 
-        {# 10 derniers fichiers pdf #}
         <div class="fichiers-pdf">
-            <h2>Derniers fichiers PDF</h2>
+            <h2>{{ homePage.lastFilesTitle }}</h2>
             <div class="fichiers">
                 {% for article in lastArticles %}
                     {% for file in article.fichiers|slice(0, 5) %}
@@ -102,9 +101,8 @@
             </div>
         </div>
 
-        {# 10 dernières images #}
         <div class="pics">
-            <h2>Dernières images</h2>
+            <h2>{{ homePage.lastPicsTitle }}</h2>
             <div class="images">
                 {% for article in lastArticles %}
                     {% for pic in article.mediapic|slice(0, 5) %}

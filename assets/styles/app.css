@@ -84,7 +84,7 @@ header nav .menu .logo {
 header nav .menu li a {
     color: var(--header-font-color);
     font-size: clamp(14px, 5vw, 16px);
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
 }
 
@@ -131,14 +131,14 @@ footer .footer .links {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin: 5px 0;
+    margin: 5px 0 15px 0;
 }
 
 footer .footer .links a {
     text-decoration: none;
     color: var(--color-white);
-    font-size: clamp(12px, 1.5vw, 14px);
-    font-weight: 400;
+    font-size: clamp(14px, 5vw, 16px);
+    font-weight: 700;
 }
 
 footer .footer .links a:hover {
@@ -162,6 +162,25 @@ footer .footer .infos a {
 footer .footer .infos a:hover {
     color: var(--title-color-hover);
 }
+
+#go-to-top {
+    display: block;
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    padding: 10px 10px 7px 10px;
+    background-color: var(--bg-meta-home);
+    text-decoration: none;
+    color: #333;
+    border-radius: 5px;
+    font-size: clamp(12px, 1.5vw, 14px);
+    z-index: 999;
+    transition: background-color 0.3s ease;
+  }
+
+  #go-to-top:hover {
+    background-color: #e1e1e1;
+  }
 
 /* FORMS */
 .form-control {

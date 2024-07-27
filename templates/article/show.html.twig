@@ -64,7 +64,7 @@
         </div>
 
         {% if article.mediapic is not empty %}
-            <h2 id="pics" class="galerie-title">Galerie photos</h2>
+            <h2 id="pics" class="galerie-title">{{ articlePage.galerieTitle }}</h2>
             <div class="mediapics">
                 {% for pic in article.mediapic %}
                     <a href="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" target="_blank" class="glightbox">
@@ -75,7 +75,7 @@
         {% endif %}
 
         {% if article.fichiers is not empty %}
-            <h2 id="fichiers" class="fichiers-title">Documents PDF</h2>
+            <h2 id="fichiers" class="fichiers-title">{{ articlePage.documentsTitle }}</h2>
             <div class="fichiers">
                 {% for file in article.fichiers %}
                     <a href="{{ asset('uploads/files/articles/' ~ file.fichierFile) }}">
@@ -95,7 +95,7 @@
         <div id="comments" class="comments">
             {# On affiche QUE si le user est connecté ! #}
             {% if app.user %}
-                <h2 class="title">Poster un nouveau commentaire</h2>
+                <h2 class="title">{{ articlePage.commentsNewTitle }}</h2>
                 {{ form_start(form, {'attr': {'class': 'new'}}) }}
                     {{ form_row(form.content) }}
                     <div style="text-align: right;">
@@ -104,7 +104,7 @@
                 {{ form_end(form) }}
             {% endif %}
 
-            <h2 id="commentsarticle" class="title">Les commentaires de l'article</h2>
+            <h2 id="commentsarticle" class="title">{{ articlePage.commentsArticleTitle }}</h2>
             {% for comment in article.comments %}
                 {% if comment %}
                     {% if comment.approved == true %}

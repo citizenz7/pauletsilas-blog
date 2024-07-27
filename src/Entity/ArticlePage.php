@@ -29,6 +29,18 @@ class ArticlePage
     #[ORM\Column(length: 255)]
     private ?string $mainTitle = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $galerieTitle = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $documentsTitle = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $commentsNewTitle = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $commentsArticleTitle = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +102,54 @@ class ArticlePage
     public function setMainTitle(string $mainTitle): static
     {
         $this->mainTitle = $mainTitle;
+
+        return $this;
+    }
+
+    public function getGalerieTitle(): ?string
+    {
+        return $this->galerieTitle;
+    }
+
+    public function setGalerieTitle(?string $galerieTitle): static
+    {
+        $this->galerieTitle = $galerieTitle;
+
+        return $this;
+    }
+
+    public function getDocumentsTitle(): ?string
+    {
+        return $this->documentsTitle;
+    }
+
+    public function setDocumentsTitle(?string $documentsTitle): static
+    {
+        $this->documentsTitle = $documentsTitle;
+
+        return $this;
+    }
+
+    public function getCommentsNewTitle(): ?string
+    {
+        return $this->commentsNewTitle;
+    }
+
+    public function setCommentsNewTitle(?string $commentsNewTitle): static
+    {
+        $this->commentsNewTitle = $commentsNewTitle;
+
+        return $this;
+    }
+
+    public function getCommentsArticleTitle(): ?string
+    {
+        return $this->commentsArticleTitle;
+    }
+
+    public function setCommentsArticleTitle(?string $commentsArticleTitle): static
+    {
+        $this->commentsArticleTitle = $commentsArticleTitle;
 
         return $this;
     }

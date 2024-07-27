@@ -53,6 +53,15 @@ class HomePageCrudController extends AbstractCrudController
             TextField::new('imageAlt', 'Texte alternatif de l\'image')
                 ->setColumns(6)
                 ->hideOnIndex(),
+            TextField::new('lastArticlesTitle', 'Titre des derniers articles')
+                ->setColumns(6)
+                ->hideOnIndex(),
+            TextField::new('lastFilesTitle', 'Titre des derniers fichiers')
+                ->setColumns(6)
+                ->hideOnIndex(),
+            TextField::new('lastPicsTitle', 'Titre des derniers images')
+                ->setColumns(6)
+                ->hideOnIndex(),
 
             FormField::addTab('SEO'),
             TextField::new('seoTitle','Balise SEO Titre')

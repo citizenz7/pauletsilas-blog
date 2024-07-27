@@ -66,6 +66,7 @@ class ArticleController extends AbstractController
             'settings' => $settings,
             'articles' => $articles,
             'categories' => $categories,
+            'articlePage' => $articlePage,
             'groupedArticles' => $groupedArticles,
             'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
             'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
@@ -117,6 +118,7 @@ class ArticleController extends AbstractController
             'settings' => $settings,
             'articles' => $articles,
             'categories' => $categories,
+            'articlePage' => $articlePage,
             'groupedArticles' => $groupedArticles,
             'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
             'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
@@ -169,6 +171,7 @@ class ArticleController extends AbstractController
             'settings' => $settings,
             'articles' => $articles,
             'categories' => $categories,
+            'articlePage' => $articlePage,
             'groupedArticles' => $groupedArticles,
             'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
             'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
@@ -203,6 +206,7 @@ class ArticleController extends AbstractController
         // Article $article
         ArticleRepository $articleRepository,
         SettingRepository $settingRepository,
+        ArticlePageRepository $articlePageRepository,
         EntityManagerInterface $em,
         Request $request,
         MailerInterface $mailer,
@@ -211,6 +215,8 @@ class ArticleController extends AbstractController
     {
         $settings = $settingRepository->findOneBy([]);
         $article = $articleRepository->findOneBy(['slug' => $slug]);
+
+        $articlePage = $articlePageRepository->findOneBy([]);
 
         $form = $this->createForm(CommentType::class);
         $form->handleRequest($request);
@@ -256,6 +262,7 @@ class ArticleController extends AbstractController
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'settings' => $settings,
+            'articlePage' => $articlePage,
             'form' => $form,
             'seoTitle' => html_entity_decode($article->getSeoTitle()),
             'seoDescription' => html_entity_decode($article->getSeoDescription()),

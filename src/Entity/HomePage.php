@@ -38,6 +38,15 @@ class HomePage
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lastArticlesTitle = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lastFilesTitle = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lastPicsTitle = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +144,42 @@ class HomePage
     public function setContent(string $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getLastArticlesTitle(): ?string
+    {
+        return $this->lastArticlesTitle;
+    }
+
+    public function setLastArticlesTitle(?string $lastArticlesTitle): static
+    {
+        $this->lastArticlesTitle = $lastArticlesTitle;
+
+        return $this;
+    }
+
+    public function getLastFilesTitle(): ?string
+    {
+        return $this->lastFilesTitle;
+    }
+
+    public function setLastFilesTitle(?string $lastFilesTitle): static
+    {
+        $this->lastFilesTitle = $lastFilesTitle;
+
+        return $this;
+    }
+
+    public function getLastPicsTitle(): ?string
+    {
+        return $this->lastPicsTitle;
+    }
+
+    public function setLastPicsTitle(?string $lastPicsTitle): static
+    {
+        $this->lastPicsTitle = $lastPicsTitle;
 
         return $this;
     }
