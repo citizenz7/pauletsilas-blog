@@ -259,10 +259,15 @@ class ArticleController extends AbstractController
             );
         }
 
+        $previousArticle = $articleRepository->previousArticle($article);
+        $nextArticle = $articleRepository->nextArticle($article);
+
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'settings' => $settings,
             'articlePage' => $articlePage,
+            'previousArticle' => $previousArticle,
+            'nextArticle' => $nextArticle,
             'form' => $form,
             'seoTitle' => html_entity_decode($article->getSeoTitle()),
             'seoDescription' => html_entity_decode($article->getSeoDescription()),

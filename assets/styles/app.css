@@ -10,6 +10,7 @@ body {
     line-height: 1.5;
     color: var(--body-font-color);
     background-color: var(--body-bg-color);
+    position: relative;
 }
 
 h1,

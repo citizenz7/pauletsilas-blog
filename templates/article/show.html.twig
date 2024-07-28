@@ -53,14 +53,39 @@
         <div class="intro">{{ article.intro|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': '',})|raw }}</div>
         <div class="content">{{ article.content|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': '',})|raw }}</div>
 
+
+        {# Article précédent et suivant #}
+        {# {% dump(previousArticle) %}
+        {% dump(nextArticle) %} #}
+        <div class="prevnext">
+            {% if previousArticle %}
+                <a href="{{ path('app_article_show', {'slug': previousArticle.slug}) }}" class="prev">
+                    <i class="fa-solid fa-angle-left"></i>
+                    Article précédent
+                </a>
+            {% endif %}
+            {% if nextArticle %}
+                <a href="{{ path('app_article_show', {'slug': nextArticle.slug}) }}" class="next">
+                    Article suivant
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
+            {% endif %}
+        </div>
+
         <div class="author-bio">
             {% if article.author.image %}
-                <img src="{{ asset('uploads/img/users/' ~ article.author.image) }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
+                <div class="col1">
+                    <img src="{{ asset('uploads/img/users/' ~ article.author.image) }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
+                </div>
             {% else %}
-                <img src="{{ asset('uploads/img/users/no-image.png') }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
+                <div class="col1">
+                    <img src="{{ asset('uploads/img/users/no-image.png') }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
+                </div>
             {% endif %}
-            <div class="bio-name">Posté par {{ article.author }}</div>
-            <div class="bio-text">{{ article.author.authorBio|raw }}</div>
+            <div class="col2">
+                <div class="bio-name">{{ article.author }}</div>
+                <div class="bio-text">{{ article.author.authorBio|raw }}</div>
+            </div>
         </div>
 
         {% if article.mediapic is not empty %}
@@ -93,7 +118,7 @@
 
         {# Commentaires de l'article #}
         <div id="comments" class="comments">
-            {# On affiche QUE si le user est connecté ! #}
+            {# On affiche le formulaire de nouveau commentaire SI le user est connecté #}
             {% if app.user %}
                 <h2 class="title">{{ articlePage.commentsNewTitle }}</h2>
                 {{ form_start(form, {'attr': {'class': 'new'}}) }}
@@ -102,15 +127,24 @@
                         {{ form_row(form.submit) }}
                     </div>
                 {{ form_end(form) }}
+            {% else %}
+                <p class="showcomment">
+                    <i class="fa-solid fa-circle-exclamation"></i> Veuillez vous connecter pour ajouter un commentaire.
+                    <a href="{{ path('app_login') }}">Se connecter</a>
+                    </p>
             {% endif %}
 
+            {# On affiche les commentaires de l'article #}
             <h2 id="commentsarticle" class="title">{{ articlePage.commentsArticleTitle }}</h2>
-            {% for comment in article.comments %}
-                {% if comment %}
+
+            {% if article.comments|length >= 1 %}
+                {% for comment in article.comments %}
                     {% if comment.approved == true %}
                         <div class="comment">
                             <img src="{{ asset('uploads/img/users/' ~ comment.author.image) }}" alt="{{ comment.author.firstName }} {{ comment.author.lastName }}" class="author-image">
-                            <h3 id="comment{{ comment.id }}">#{{ comment.id }} Par {{ comment.author }}, le {{ comment.createdAt|date('d/m/Y H:i') }}</h3>
+                            <h3 id="comment{{ comment.id }}">
+                                #{{ loop.index }} Par {{ comment.author }}, le {{ comment.createdAt|date('d/m/Y H:i') }}
+                            </h3>
                             <div>{{ comment.content|raw }}</div>
 
                             {% if app.user and app.user == comment.author %}
@@ -124,10 +158,10 @@
                             {% endif %}
                         </div>
                     {% endif %}
-                {% else %}
-                    <p>Il n'y a pas de commentaire pour cet article.</p>
-                {% endif %}
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+                <p class="nocomment">Aucun commentaire</p>
+            {% endif %}
         </div>
 
     </section>

@@ -56,4 +56,27 @@ class ArticleRepository extends ServiceEntityRepository
         //$qb->where('p.status=1');
         return $qb->getQuery(); // WITHOUT ->getResult(); !!
     }
+
+    // Previous post
+    public function previousArticle(Article $currentArticle)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id < :id')
+            ->setParameter('id', $currentArticle->getId())
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+    
+    public function nextArticle(Article $currentArticle)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id > :id')
+            ->setParameter('id', $currentArticle->getId())
+            ->orderBy('a.id', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
