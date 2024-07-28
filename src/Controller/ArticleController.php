@@ -12,6 +12,7 @@ use Symfony\Component\Mime\Address;
 use App\Repository\ArticleRepository;
 use App\Repository\SettingRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\SocialRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,13 +32,16 @@ class ArticleController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         PaginatorInterface $paginator,
-        ArticlePageRepository $articlePageRepository
+        ArticlePageRepository $articlePageRepository,
+        SocialRepository $socialRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
-        $categories = $categoryRepository->findAll();
+        $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
 
         $articlePage = $articlePageRepository->findOneBy([]);
+
+        $socials = $socialRepository->findBy(['active' => true], []);
 
         // Pagination
         $dql = "SELECT a FROM App\Entity\Article a WHERE a.active = true ORDER BY a.postedAt DESC";
@@ -68,6 +72,7 @@ class ArticleController extends AbstractController
             'categories' => $categories,
             'articlePage' => $articlePage,
             'groupedArticles' => $groupedArticles,
+            'socials' => $socials,
             'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
             'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
             'seoUrl' => $articlePage->getSlug(),
@@ -83,13 +88,16 @@ class ArticleController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         PaginatorInterface $paginator,
-        ArticlePageRepository $articlePageRepository
+        ArticlePageRepository $articlePageRepository,
+        SocialRepository $socialRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
-        $categories = $categoryRepository->findAll();
+        $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
 
         $articlePage = $articlePageRepository->findOneBy([]);
+
+        $socials = $socialRepository->findBy(['active' => true], []);
 
         // Pagination
         $dql = "SELECT a FROM App\Entity\Article a WHERE a.active = true ORDER BY a.postedAt ASC";
@@ -120,6 +128,7 @@ class ArticleController extends AbstractController
             'categories' => $categories,
             'articlePage' => $articlePage,
             'groupedArticles' => $groupedArticles,
+            'socials' => $socials,
             'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
             'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
             'seoUrl' => $articlePage->getSlug(),
@@ -136,13 +145,16 @@ class ArticleController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         PaginatorInterface $paginator,
-        ArticlePageRepository $articlePageRepository
+        ArticlePageRepository $articlePageRepository,
+        SocialRepository $socialRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
-        $categories = $categoryRepository->findAll();
+        $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
 
         $articlePage = $articlePageRepository->findOneBy([]);
+
+        $socials = $socialRepository->findBy(['active' => true], []);
 
         // Pagination
         $dql = "SELECT a FROM App\Entity\Article a WHERE a.active = true ORDER BY a.postedAt DESC";
@@ -173,6 +185,7 @@ class ArticleController extends AbstractController
             'categories' => $categories,
             'articlePage' => $articlePage,
             'groupedArticles' => $groupedArticles,
+            'socials' => $socials,
             'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
             'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
             'seoUrl' => $articlePage->getSlug(),
@@ -207,6 +220,8 @@ class ArticleController extends AbstractController
         ArticleRepository $articleRepository,
         SettingRepository $settingRepository,
         ArticlePageRepository $articlePageRepository,
+        CategoryRepository $categoryRepository,
+        SocialRepository $socialRepository,
         EntityManagerInterface $em,
         Request $request,
         MailerInterface $mailer,
@@ -214,9 +229,14 @@ class ArticleController extends AbstractController
     ): Response
     {
         $settings = $settingRepository->findOneBy([]);
+
         $article = $articleRepository->findOneBy(['slug' => $slug]);
 
+        $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
+
         $articlePage = $articlePageRepository->findOneBy([]);
+
+        $socials = $socialRepository->findBy(['active' => true], []);
 
         $form = $this->createForm(CommentType::class);
         $form->handleRequest($request);
@@ -264,11 +284,13 @@ class ArticleController extends AbstractController
 
         return $this->render('article/show.html.twig', [
             'article' => $article,
+            'categories' => $categories,
             'settings' => $settings,
             'articlePage' => $articlePage,
             'previousArticle' => $previousArticle,
             'nextArticle' => $nextArticle,
             'form' => $form,
+            'socials' => $socials,
             'seoTitle' => html_entity_decode($article->getSeoTitle()),
             'seoDescription' => html_entity_decode($article->getSeoDescription()),
             'seoUrl' => $article->getSlug(),

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\CategoryPageRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\SettingRepository;
+use App\Repository\SocialRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -16,18 +17,22 @@ class CategoryController extends AbstractController
     public function index(
         CategoryRepository $categoryRepository,
         SettingRepository $settingRepository,
-        CategoryPageRepository $categoryPageRepository
+        CategoryPageRepository $categoryPageRepository,
+        SocialRepository $socialRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
-        $categories = $categoryRepository->findAll();
+        $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
 
         $categoryPage = $categoryPageRepository->findOneBy([]);
+
+        $socials = $socialRepository->findBy(['active' => true], []);
 
         return $this->render('category/index.html.twig', [
             'categories' => $categories,
             'settings' => $settings,
             'categoryPage' => $categoryPage,
+            'socials' => $socials,
             'seoTitle' => html_entity_decode($categoryPage->getSeoTitle()),
             'seoDescription' => html_entity_decode($categoryPage->getSeoDescription()),
             'seoUrl' => $categoryPage->getSlug(),
@@ -60,15 +65,22 @@ class CategoryController extends AbstractController
         // Category $category,
         CategoryRepository $categoryRepository,
         SettingRepository $settingRepository,
+        SocialRepository $socialRepository,
         string $slug
     ): Response{
         $settings = $settingRepository->findOneBy([]);
 
         $category = $categoryRepository->findOneBy(['slug' => $slug]);
 
+        $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
+
+        $socials = $socialRepository->findBy(['active' => true], []);
+
         return $this->render('category/show.html.twig', [
             'category' => $category,
+            'categories' => $categories,
             'settings' => $settings,
+            'socials' => $socials,
             'seoTitle' => html_entity_decode($category->getSeoTitle()),
             'seoDescription' => html_entity_decode($category->getSeoDescription()),
             'seoUrl' => $category->getSlug(),

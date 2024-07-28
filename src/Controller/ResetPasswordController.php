@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\ChangePasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
+use App\Repository\CategoryRepository;
 use App\Repository\SettingRepository;
+use App\Repository\SocialRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,7 +42,9 @@ class ResetPasswordController extends AbstractController
         Request $request,
         MailerInterface $mailer,
         TranslatorInterface $translator,
-        SettingRepository $settingRepository
+        SettingRepository $settingRepository,
+        CategoryRepository $categoryRepository,
+        SocialRepository $socialRepository
     ): Response{
         $form = $this->createForm(ResetPasswordRequestFormType::class);
         $form->handleRequest($request);
@@ -49,15 +53,22 @@ class ResetPasswordController extends AbstractController
             return $this->processSendingPasswordResetEmail(
                 $form->get('email')->getData(),
                 $mailer,
-                $translator
+                $translator,
+                $settingRepository
             );
         }
 
         $settings = $settingRepository->findOneBy([]);
 
+        $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
+
+        $socials = $socialRepository->findBy(['active' => true], []);
+
         return $this->render('reset_password/request.html.twig', [
             'requestForm' => $form,
             'settings' => $settings,
+            'categories' => $categories,
+            'socials' => $socials,
             'pageTitle' => 'Mot de passe oublie',
             'seoTitle' => 'Mot de passe oublie',
             'seoDescription' => 'Mot de passe oublie',
@@ -70,7 +81,9 @@ class ResetPasswordController extends AbstractController
      */
     #[Route('/check-email', name: 'app_check_email')]
     public function checkEmail(
-        SettingRepository $settingRepository
+        SettingRepository $settingRepository,
+        CategoryRepository $categoryRepository,
+        SocialRepository $socialRepository
     ): Response
     {
         // Generate a fake token if the user does not exist or someone hit this page directly.
@@ -81,9 +94,15 @@ class ResetPasswordController extends AbstractController
 
         $settings = $settingRepository->findOneBy([]);
 
+        $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
+
+        $socials = $socialRepository->findBy(['active' => true], []);
+
         return $this->render('reset_password/check_email.html.twig', [
             'resetToken' => $resetToken,
             'settings' => $settings,
+            'categories' => $categories,
+            'socials' => $socials,
             'pageTitle' => 'Mot de passe oublie',
             'seoTitle' => 'Mot de passe oublie',
             'seoDescription' => 'Mot de passe oublie',
@@ -100,6 +119,8 @@ class ResetPasswordController extends AbstractController
         UserPasswordHasherInterface $passwordHasher,
         TranslatorInterface $translator,
         SettingRepository $settingRepository,
+        CategoryRepository $categoryRepository,
+        SocialRepository $socialRepository,
         ?string $token = null
     ): Response {
         if ($token) {
@@ -154,9 +175,15 @@ class ResetPasswordController extends AbstractController
 
         $settings = $settingRepository->findOneBy([]);
 
+        $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
+
+        $socials = $socialRepository->findBy(['active' => true], []);
+
         return $this->render('reset_password/reset.html.twig', [
             'resetForm' => $form,
             'settings' => $settings,
+            'categories' => $categories,
+            'socials' => $socials,
             'pageTitle' => 'Mot de passe oublie',
             'seoTitle' => 'Mot de passe oublie',
             'seoDescription' => 'Mot de passe oublie',
@@ -164,8 +191,12 @@ class ResetPasswordController extends AbstractController
         ]);
     }
 
-    private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer, TranslatorInterface $translator): RedirectResponse
-    {
+    private function processSendingPasswordResetEmail(
+        string $emailFormData,
+        MailerInterface $mailer,
+        TranslatorInterface $translator,
+        SettingRepository $settingRepository
+    ): RedirectResponse {
         $user = $this->entityManager->getRepository(User::class)->findOneBy([
             'email' => $emailFormData,
         ]);
@@ -191,8 +222,14 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('app_check_email');
         }
 
+        $settings = $settingRepository->findOneBy([]);
+
+        // On recherche l'email et le nom du site dans Setting pour injecter dans le mail
+        $siteEmail = $settings->getSiteEmail();
+         $siteName = $settings->getSiteName();
+
         $email = (new TemplatedEmail())
-            ->from(new Address('pauletsilas@s2ii.xyz', 'Paul et Silas'))
+            ->from(new Address($siteEmail, $siteName))
             ->to($user->getEmail())
             ->subject('Reinitialisation du mot de passe')
             ->htmlTemplate('reset_password/email.html.twig')

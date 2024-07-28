@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Form\CommentType;
+use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
 use App\Repository\SettingRepository;
+use App\Repository\SocialRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,13 +48,21 @@ class CommentController extends AbstractController
     #[Route('/{id}', name: 'app_comment_show', methods: ['GET'])]
     public function show(
         Comment $comment,
-        SettingRepository $settingRepository
+        SettingRepository $settingRepository,
+        CategoryRepository $categoryRepository,
+        SocialRepository $socialRepository
     ): Response{
         $settings = $settingRepository->findOneBy([]);
+
+        $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
+
+        $socials = $socialRepository->findBy(['active' => true], []);
 
         return $this->render('comment/show.html.twig', [
             'comment' => $comment,
             'settings' => $settings,
+            'categories' => $categories,
+            'socials' => $socials,
             'seoTitle' => html_entity_decode($comment->getArticle()->getSeoTitle()),
             'seoDescription' => html_entity_decode($comment->getArticle()->getSeoDescription()),
             'seoUrl' => $comment->getArticle()->getSlug(),
@@ -65,9 +75,15 @@ class CommentController extends AbstractController
         Request $request,
         Comment $comment,
         EntityManagerInterface $entityManager,
-        SettingRepository $settingRepository
+        SettingRepository $settingRepository,
+        CategoryRepository $categoryRepository,
+        SocialRepository $socialRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
+
+        $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
+
+        $socials = $socialRepository->findBy(['active' => true], []);
 
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
@@ -83,6 +99,8 @@ class CommentController extends AbstractController
             'comment' => $comment,
             'form' => $form,
             'settings' => $settings,
+            'categories' => $categories,
+            'socials' => $socials,
             'pageTitle' => $comment->getArticle()->getTitle(),
             'seoTitle' => html_entity_decode($comment->getArticle()->getSeoTitle() . ' - Commentaire'),
             'seoDescription' => html_entity_decode($comment->getArticle()->getSeoDescription()),

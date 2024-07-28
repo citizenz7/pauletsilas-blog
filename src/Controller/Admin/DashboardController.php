@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Media;
+use App\Entity\Social;
 use App\Entity\Article;
 use App\Entity\CguPage;
 use App\Entity\Comment;
@@ -168,6 +169,8 @@ class DashboardController extends AbstractDashboardController
         if (!$user instanceof User || !$this->security->isGranted('ROLE_ADMIN')) {
             yield MenuItem::linkToCrud('Mon profil', 'fas fa-user', User::class);
         }
+        yield MenuItem::linkToCrud('Réseaus sociaux', 'fas fa-share-alt', Social::class)
+            ->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Configuration du site', 'fa fa-cogs', Setting::class)->setPermission('ROLE_ADMIN');
     }
 

@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Form\ContactType;
+use App\Repository\CategoryRepository;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use App\Repository\SettingRepository;
 use App\Repository\ContactPageRepository;
+use App\Repository\SocialRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,12 +22,18 @@ class ContactController extends AbstractController
         SettingRepository $settingRepository,
         ContactPageRepository $contactPageRepository,
         Request $request,
-        MailerInterface $mailer
+        MailerInterface $mailer,
+        CategoryRepository $categoryRepository,
+        SocialRepository $socialRepository
     ): Response
     {
         $settings = $settingRepository->findOneBy([]);
 
         $contact = $contactPageRepository->findOneBy([]);
+
+        $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
+
+        $socials = $socialRepository->findBy(['active' => true], []);
 
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
@@ -59,7 +67,9 @@ class ContactController extends AbstractController
         return $this->render('contact/index.html.twig', [
             'settings' => $settings,
             'contact' => $contact,
+            'categories' => $categories,
             'form' => $form,
+            'socials' => $socials,
             'seoTitle' => html_entity_decode($contact->getSeoTitle()),
             'seoDescription' => html_entity_decode($contact->getSeoDescription()),
             'seoUrl' => $contact->getSlug(),

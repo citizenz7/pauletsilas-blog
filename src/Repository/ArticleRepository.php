@@ -68,7 +68,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-    
+
     public function nextArticle(Article $currentArticle)
     {
         return $this->createQueryBuilder('a')

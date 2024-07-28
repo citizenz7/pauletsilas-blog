@@ -1,16 +1,42 @@
 <footer>
+    <img src="{{ asset('uploads/img/home/sunset-3726030_1280-e893dd91-632f-465c-b4fa-ad111cb7f12e.jpg') }}" alt="{{ settings.siteName }}" class="footer-bg-img">
     <div class="footer">
-        <p class="links">
-            <a href="{{ path('app_home') }}">Accueil</a>
-            <a href="{{ path('app_article_index') }}">Blog</a>
-            <a href="{{ path('app_contact') }}">Contact</a>
+        <div class="pres">
+            <div class="sitelogo">
+                <img src="{{ asset('uploads/img/' ~ settings.siteLogo) }}" alt="{{ settings.siteName }}" class="footer-logo">
+                <span class="sitename">{{ settings.siteName }}</span>
+            </div>
+            <p class="description">
+                {{ settings.siteDescription}}
+            </p>
+            <p class="social">
+                {% if socials %}
+                    {% for social in socials %}
+                        <a href="{{ social.link }}" target="_blank">
+                            <img src="{{ asset('uploads/img/social/' ~ social.image) }}" alt="{{ social.imageAlt }}" title="{{ social.title }}">
+                        </a>
+                    {% endfor %}
+                {% endif %}
+            </p>
+        </div>
+        <div class="col">
+            <span class="title">Menu</span>
+            <a href="{{ path('app_article_index') }}">Tous les articles</a>
             <a href="{{ path('app_apropos') }}">A propos</a>
             <a href="{{ path('app_cgu') }}">C.G.U.</a>
+            <a href="{{ path('app_contact') }}">Contact</a>
             <a href="{{ path('app_confidentialite') }}">Politique de confidentialité</a>
-        </p>
-        <p class="infos">
-            &copy; {{ 'now'|date('Y') }} - {{ settings.siteName }} - Logo par <a href="https://www.vecteezy.com/" target="_blank">vecteezy.com</a> | Icone cookie par <a href="https://www.flaticon.com">Flaticon</a> | Images par <a href="https://pixabay.com/">Pixabay</a>
-        </p>
+        </div>
+        <div class="col">
+            <span class="title">Catégories</span>
+            {% for category in categories %}
+                <a href="{{ path('app_category_show', {'slug': category.slug}) }}">{{ category.title }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="copyright">
+        &copy; {{ 'now'|date('Y') }}&nbsp;<a href="{{ path('app_home') }}">{{ settings.siteName }}</a> Logo par <a href="https://www.vecteezy.com/" target="_blank">vecteezy.com</a> Icone cookie par <a href="https://www.flaticon.com" target="_blank">Flaticon</a> Images par <a href="https://pixabay.com/" target="_blank">Pixabay</a>
         <a href="#" id="go-to-top"><i class="fa-solid fa-chevron-up"></i></a>
     </div>
 </footer>

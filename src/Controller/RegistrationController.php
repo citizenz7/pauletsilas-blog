@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Security\EmailVerifier;
 use App\Form\RegistrationFormType;
+use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Mime\Address;
 use App\Repository\SettingRepository;
+use App\Repository\SocialRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,9 +31,15 @@ class RegistrationController extends AbstractController
         Request $request,
         UserPasswordHasherInterface $userPasswordHasher,
         EntityManagerInterface $entityManager,
-        SettingRepository $settingRepository
+        SettingRepository $settingRepository,
+        CategoryRepository $categoryRepository,
+        SocialRepository $socialRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
+
+        $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
+
+        $socials = $socialRepository->findBy(['active' => true], []);
 
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -71,6 +79,8 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
             'settings' => $settings,
+            'categories' => $categories,
+            'socials' => $socials,
             'seoTitle' => 'Inscription',
             'seoDescription' => 'Inscription',
             'seoUrl' => 'register',

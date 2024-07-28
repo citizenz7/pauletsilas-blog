@@ -47,6 +47,8 @@
     /* FOOTER */
     --footer-bg-color: #000000de;
     --footer-font-color: #fff;
+    --footer-col-color: #afb0b0;
+    --footer-col-color-hover: #ff9900;
     --footer-height: 110px;
 
     /* HOME */
