@@ -41,8 +41,8 @@
 
 .home {
     max-width: 1320px;
-    margin: 0 auto 10px auto;
-    padding: 15px 0 35px 0;
+    margin: 0 auto;
+    padding: 15px 0;
     position: relative;
 }
 
@@ -260,12 +260,21 @@
     position: relative;
 }
 
-.home .fichiers-pdf {
-    margin: 25px auto;
+.container-files {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
     position: relative;
+    padding: 20px;
 }
 
-.home .fichiers-pdf h2, .home .pics h2 {
+.container-files .fichiers-pdf {
+    margin:  0 auto;
+    position: relative;
+    padding: 35px;
+}
+
+.container-files .fichiers-pdf h2 {
     font-size: clamp(20px, 1.5vw, 30px);
     font-weight: 800;
     font-family: var(--title-font-family);
@@ -274,7 +283,8 @@
     text-align: center;
     position: relative;
 }
-.home .fichiers-pdf h2:after, .home .pics h2:after {
+
+.container-files .fichiers-pdf h2:after, .container-files .pics h2:after {
     content: "";
     position: absolute;
     top: 100%;
@@ -286,8 +296,7 @@
     background: var(--color-black);
 }
 
-
-.home .fichiers-pdf .fichiers {
+.container-files .fichiers-pdf .fichiers {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -295,23 +304,33 @@
     justify-content: center;
 }
 
-.home .fichiers-pdf .fichiers .links {
+.container-files .fichiers-pdf .fichiers .links {
     width: 15%;
     text-align: center;
     position: relative;
 }
 
-.home .fichiers-pdf .fichiers .links a {
+.container-files .fichiers-pdf .fichiers .links a {
     text-decoration: none;
     color: var(--link-color);
 }
 
-.home .fichiers-pdf .fichiers .links a:hover {
+.container-files .fichiers-pdf .fichiers .links a:hover {
     color: var(--link-hover-color);
 }
 
 .home .pics {
-    margin: 75px auto 35px auto;
+    margin: 35px auto;
+    position: relative;
+}
+
+.home .pics h2 {
+    font-size: clamp(20px, 1.5vw, 30px);
+    font-weight: 800;
+    font-family: var(--title-font-family);
+    color: var(--title-color);
+    margin-bottom: 35px;
+    text-align: center;
     position: relative;
 }
 
@@ -382,7 +401,7 @@
         padding: 0 15px;
     }
 
-    .home .fichiers-pdf .fichiers .links {
+    .container-files .fichiers-pdf .fichiers .links {
         width: 31%;
         padding: 0 15px;
     }
@@ -415,7 +434,7 @@
         padding: 0 15px;
     }
 
-    .home .fichiers-pdf .fichiers .links {
+    .container-files .fichiers-pdf .fichiers .links {
         width: 47%;
         padding: 0 15px;
     }
@@ -432,7 +451,7 @@
         padding: 0 15px;
     }
 
-    .home .fichiers-pdf .fichiers .links {
+    .container-files .fichiers-pdf .fichiers .links {
         width: 100%;
         padding: 0 15px;
     }

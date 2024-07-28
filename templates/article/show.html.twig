@@ -55,19 +55,25 @@
 
 
         {# Article précédent et suivant #}
-        {# {% dump(previousArticle) %}
-        {% dump(nextArticle) %} #}
         <div class="prevnext">
             {% if previousArticle %}
                 <a href="{{ path('app_article_show', {'slug': previousArticle.slug}) }}" class="prev">
                     <i class="fa-solid fa-angle-left"></i>
-                    Article précédent
+                    Article précédent<br>
+                    <div class="col-article">
+                        <img src="{{ asset('uploads/img/articles/' ~ previousArticle.mainImage) }}" alt="{{ previousArticle.mainImageAlt }}">
+                        {{ previousArticle.title }}
+                    </div>
                 </a>
             {% endif %}
             {% if nextArticle %}
                 <a href="{{ path('app_article_show', {'slug': nextArticle.slug}) }}" class="next">
                     Article suivant
-                    <i class="fa-solid fa-angle-right"></i>
+                    <i class="fa-solid fa-angle-right"></i><br>
+                    <div class="col-article">
+                        {{ nextArticle.title }}
+                        <img src="{{ asset('uploads/img/articles/' ~ previousArticle.mainImage) }}" alt="{{ previousArticle.mainImageAlt }}">
+                    </div>
                 </a>
             {% endif %}
         </div>

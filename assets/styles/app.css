@@ -167,8 +167,8 @@ footer .footer .infos a:hover {
 #go-to-top {
     display: block;
     position: fixed;
-    bottom: 90px;
-    right: 20px;
+    bottom: 5%;
+    right: 1%;
     padding: 10px 10px 7px 10px;
     background-color: var(--bg-meta-home);
     text-decoration: none;

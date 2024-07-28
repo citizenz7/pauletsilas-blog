@@ -92,7 +92,17 @@
 .article .prevnext {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
     margin-bottom: 35px;
+}
+
+.article .prevnext .prev {
+    text-align: left;
+}
+
+.article .prevnext .next {
+    text-align: right;
 }
 
 .article .prevnext a {
@@ -105,6 +115,21 @@
 
 .article .prevnext a:hover {
     color: var(--title-color-hover);
+}
+
+.article .prevnext .col-article {
+    display: flex;
+    align-items: center;
+}
+
+.article .prevnext .col-article img {
+    max-width: 100%;
+    height: auto;
+    width: 90px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    margin: 10px;
+    float: left;
 }
 
 .article .author-bio {
