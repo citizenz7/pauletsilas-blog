@@ -124,7 +124,7 @@
 
 .article .prevnext .col-article img {
     max-width: 100%;
-    height: auto;
+    height: 70px;
     width: 90px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
@@ -382,5 +382,10 @@
 
     .article .author-bio {
         width: 100%;
+    }
+
+    .article .prevnext {
+        width: 100%;
+        justify-content: center;
     }
 }

@@ -38,6 +38,9 @@ class AproposPage
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $verset = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +138,18 @@ class AproposPage
     public function setContent(string $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getVerset(): ?string
+    {
+        return $this->verset;
+    }
+
+    public function setVerset(string $verset): static
+    {
+        $this->verset = $verset;
 
         return $this;
     }

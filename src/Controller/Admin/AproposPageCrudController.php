@@ -33,7 +33,7 @@ class AproposPageCrudController extends AbstractCrudController
                 ->setTargetFieldName('title')
                 ->setColumns(6),
 
-            FormField::addTab('Titres & textes'),
+            FormField::addTab('Titres, textes, verset'),
             TextField::new('mainTitle', 'Titre principal')
                 ->setColumns(6)
                 ->hideOnIndex(),
@@ -64,6 +64,14 @@ class AproposPageCrudController extends AbstractCrudController
             TextField::new('imageAlt', 'Texte alternatif de l\'image')
                 ->setColumns(6)
                 ->hideOnIndex(),
+            TextEditorField::new('verset', 'Verset sur la page A propos')
+                ->setColumns(12)
+                ->hideOnIndex()
+                ->hideOnDetail(),
+            TextareaField::new('verset', 'Verset sur la page A propos')
+                ->hideOnForm()
+                ->hideOnIndex()
+                ->setTemplatePath('admin/fields/text.html.twig'),
 
             FormField::addTab('SEO'),
             TextField::new('seoTitle','Balise SEO Titre')

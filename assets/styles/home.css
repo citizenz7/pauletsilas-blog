@@ -312,6 +312,7 @@
     gap: 20px;
     position: relative;
     justify-content: center;
+    padding: 15px 0;
 }
 
 .container-files .fichiers-pdf .fichiers .links {

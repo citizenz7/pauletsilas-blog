@@ -12,10 +12,11 @@
     </div>
 
     <section class="apropos">
-        <div>
-            <img src="{{ asset('uploads/img/' ~ settings.siteLogo) }}" alt="{{ settings.siteName }}" class="logo">
-            {{ apropos.content|raw }}
-        </div>
+        <img src="{{ asset('uploads/img/' ~ settings.siteLogo) }}" alt="{{ settings.siteName }}" class="logo">
+        <h2>{{ settings.siteName }}</h2>
+        <div class="content">{{ apropos.content|raw }}</div>
+        <img src="{{ asset('uploads/img/apropos/' ~ apropos.image) }}" alt="{{ apropos.imageAlt}}" class="image">
+        <h3 class="verset">{{ apropos.verset|raw }}</h3>
     </section>
 
 {% endblock %}

@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/css/glightbox.min.css" integrity="sha512-T+KoG3fbDoSnlgEXFQqwcTC9AdkFIxhBlmoaFqYaIjq2ShhNwNao9AKaLUPMfwiBPL0ScxAtc+UYbHAgvd+sjQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
@@ -72,7 +71,7 @@
                     <i class="fa-solid fa-angle-right"></i><br>
                     <div class="col-article">
                         {{ nextArticle.title }}
-                        <img src="{{ asset('uploads/img/articles/' ~ previousArticle.mainImage) }}" alt="{{ previousArticle.mainImageAlt }}">
+                        <img src="{{ asset('uploads/img/articles/' ~ nextArticle.mainImage) }}" alt="{{ nextArticle.mainImageAlt }}">
                     </div>
                 </a>
             {% endif %}

@@ -28,7 +28,7 @@
 
 .apropos {
     max-width: 1320px;
-    margin: 35px auto;
+    margin: 35px auto 15px auto;
     padding: 15px 0 35px 0;
     position: relative;
 }
@@ -43,6 +43,11 @@
     z-index: 2;
 }
 
+.apropos h2 {
+    font-size: clamp(20px, 1.5vw, 30px);
+    font-weight: 800;
+}
+
 .apropos .logo {
     max-width: 100%;
     width: 250px;
@@ -51,6 +56,11 @@
     display: block;
     margin: 0 auto 20px auto;
     border-radius: 10px;
+    position: relative;
+}
+
+.apropos .content {
+    margin-bottom: 30px;
     position: relative;
 }
 
@@ -67,8 +77,23 @@
     border-radius: 10px;
     position: relative;
     z-index: 1;
+    filter: brightness(0.75);
 }
 
+.apropos .verset {
+    position: absolute;
+    top: 73%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: var(--color-white);
+    font-size: clamp(18px, 1.5vw, 26px);
+    font-weight: 600;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
+    padding: 10px;
+    width: 70%;
+}
 
 @media screen and (max-width: 768px) {
     .presentation h1 {
@@ -78,5 +103,10 @@
 
     .apropos {
         padding: 0 15px;
+    }
+
+    .apropos .verset {
+        top: 83%;
+        width: 90%;
     }
 }
