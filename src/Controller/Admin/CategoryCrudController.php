@@ -6,6 +6,7 @@ use App\Entity\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use Symfony\Component\Validator\Constraints\Image;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -35,7 +36,17 @@ class CategoryCrudController extends AbstractCrudController
                 ->setColumns(6)
                 ->setBasePath('uploads/img/categories')
                 ->setUploadDir('public/uploads/img/categories')
-                ->setUploadedFileNamePattern('[name]-[uuid].[extension]'),
+                ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
+                ->setFileConstraints(new Image(
+                    maxWidth: 1920,
+                    maxWidthMessage: 'L\'image est trop large. La largeur max est 1920 px.',
+                    maxHeight: 1080,
+                    maxHeightMessage: 'L\'image est trop grande. La hauteur max est 1080 px.',
+                    maxSize: '500k',
+                    maxSizeMessage: 'L\'image est trop volumineuse. Le poids max est 500 Ko.',
+                    mimeTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
+                    mimeTypesMessage: 'Seuls les formats jpeg, jpg, png, webp sont acceptés.'
+                )),
             TextEditorField::new('description', 'Description')
                 ->setColumns(12)
                 ->hideOnIndex()

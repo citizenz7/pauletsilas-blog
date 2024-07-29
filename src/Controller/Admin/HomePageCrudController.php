@@ -6,6 +6,7 @@ use App\Entity\HomePage;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use Symfony\Component\Validator\Constraints\Image;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
@@ -32,7 +33,7 @@ class HomePageCrudController extends AbstractCrudController
                 ->setTargetFieldName('title')
                 ->setColumns(6),
 
-            FormField::addTab('Titres & textes'),
+            FormField::addTab('Titre & texte'),
             TextField::new('mainTitle', 'Titre principal')
                 ->setColumns(6)
                 ->hideOnIndex(),
@@ -44,23 +45,37 @@ class HomePageCrudController extends AbstractCrudController
                 ->hideOnForm()
                 ->hideOnIndex()
                 ->setTemplatePath('admin/fields/text.html.twig'),
+            TextField::new('lastArticlesTitle', 'Titre des derniers articles')
+                ->setColumns(4)
+                ->hideOnIndex(),
+            TextField::new('lastFilesTitle', 'Titre des derniers fichiers')
+                ->setColumns(4)
+                ->hideOnIndex(),
+            TextField::new('lastPicsTitle', 'Titre des dernières images')
+                ->setColumns(4)
+                ->hideOnIndex(),
+
+            FormField::addTab('Images'),
             ImageField::new('image', 'Image')
                 ->setColumns(6)
+                ->setHelp('Image de la page. Taille max 1920 x 1080. Poids max. 500 Ko. Formats acceptés: jpeg, jpg, png, webp.')
                 ->setBasePath('uploads/img/home')
                 ->setUploadDir('public/uploads/img/home')
                 ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
-                ->setRequired(false),
+                ->setRequired(false)
+                ->setFileConstraints(new Image(
+                    maxWidth: 1920,
+                    maxWidthMessage: 'L\'image est trop large. La largeur max est 1920 px.',
+                    maxHeight: 1080,
+                    maxHeightMessage: 'L\'image est trop grande. La hauteur max est 1080 px.',
+                    maxSize: '500k',
+                    maxSizeMessage: 'L\'image est trop volumineuse. Le poids max est 500 Ko.',
+                    mimeTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
+                    mimeTypesMessage: 'Seuls les formats jpeg, jpg, png, webp sont acceptés.'
+                )),
             TextField::new('imageAlt', 'Texte alternatif de l\'image')
                 ->setColumns(6)
-                ->hideOnIndex(),
-            TextField::new('lastArticlesTitle', 'Titre des derniers articles')
-                ->setColumns(6)
-                ->hideOnIndex(),
-            TextField::new('lastFilesTitle', 'Titre des derniers fichiers')
-                ->setColumns(6)
-                ->hideOnIndex(),
-            TextField::new('lastPicsTitle', 'Titre des derniers images')
-                ->setColumns(6)
+                ->setHelp('Texte décrivant l\'image. Texte court et précis.')
                 ->hideOnIndex(),
 
             FormField::addTab('SEO'),

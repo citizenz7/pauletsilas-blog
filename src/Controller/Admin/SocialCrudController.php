@@ -6,6 +6,7 @@ use App\Entity\Social;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use Symfony\Component\Validator\Constraints\Image;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -32,7 +33,17 @@ class SocialCrudController extends AbstractCrudController
                 ->setColumns(6)
                 ->setUploadDir('public/uploads/img/social')
                 ->setBasePath('uploads/img/social')
-                ->setUploadedFileNamePattern('[name]-[uuid].[extension]'),
+                ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
+                ->setFileConstraints(new Image(
+                    maxWidth: 250,
+                    maxWidthMessage: 'L\'image est trop large. La largeur max est 250 px.',
+                    maxHeight: 250,
+                    maxHeightMessage: 'L\'image est trop grande. La hauteur max est 250 px.',
+                    maxSize: '50k',
+                    maxSizeMessage: 'L\'image est trop volumineuse. Le poids max est 50 Ko.',
+                    mimeTypes: ['image/png'],
+                    mimeTypesMessage: 'Seul le format png est accepté.'
+                )),
             TextField::new('imageAlt', 'Texte alternatif de l\'image')
                 ->setColumns(6),
             BooleanField::new('active', 'Active')

@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
+use Symfony\Component\Validator\Constraints\Image;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -76,7 +77,17 @@ class UserCrudController extends AbstractCrudController
                 ->setBasePath('uploads/img/users')
                 ->setUploadDir('public/uploads/img/users')
                 ->setRequired(false)
-                ->setUploadedFileNamePattern('[name]-[uuid].[extension]'),
+                ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
+                ->setFileConstraints(new Image(
+                    maxWidth: 300,
+                    maxWidthMessage: 'L\'image est trop large. La largeur max est 300 px.',
+                    maxHeight: 300,
+                    maxHeightMessage: 'L\'image est trop grande. La hauteur max est 300 px.',
+                    maxSize: '50k',
+                    maxSizeMessage: 'L\'image est trop volumineuse. Le poids max est 50 Ko.',
+                    mimeTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
+                    mimeTypesMessage: 'Seuls les formats jpeg, jpg, png, webp sont acceptés.'
+                )),
 
             FormField::addTab('Bio'),
             TextareaField::new('authorBio', 'Biographie courte')

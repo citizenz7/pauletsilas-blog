@@ -6,6 +6,7 @@ use App\Entity\Media;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use Symfony\Component\Validator\Constraints\Image;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -25,13 +26,26 @@ class MediaCrudController extends AbstractCrudController
         return [
             // IdField::new('id'),/
             TextField::new('title', 'Titre')
+                ->setHelp('Titre de l\'image.')
                 ->setColumns(6),
             ImageField::new('image', 'Image')
+                ->setHelp('Image de l\'article. Taille max 1920 x 1080. Poids max. 500 Ko. Formats acceptés: jpeg, jpg, png, webp.')
                 ->setColumns(6)
                 ->setBasePath('uploads/img/articles/pics')
                 ->setUploadDir('public/uploads/img/articles/pics')
-                ->setUploadedFileNamePattern('[name]-[uuid].[extension]'),
+                ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
+                ->setFileConstraints(new Image(
+                    maxWidth: 1920,
+                    maxWidthMessage: 'L\'image est trop large. La largeur max est 1920 px.',
+                    maxHeight: 1080,
+                    maxHeightMessage: 'L\'image est trop grande. La hauteur max est 1080 px.',
+                    maxSize: '500k',
+                    maxSizeMessage: 'L\'image est trop volumineuse. Le poids max est 500 Ko.',
+                    mimeTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
+                    mimeTypesMessage: 'Seuls les formats jpeg, jpg, png, webp sont acceptés.'
+                )),
             TextField::new('imageAlt', 'Description de l\'image')
+                ->setHelp('Texte alternatif de l\'image. texte court et précis.')
                 ->setColumns(6)
                 ->hideOnIndex(),
             AssociationField::new('article', 'Article')

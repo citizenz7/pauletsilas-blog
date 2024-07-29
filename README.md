@@ -74,6 +74,7 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 * ~~Tarteaucitron~~
 * ~~permissions BO : utilisateurs, commentaires, articles, images, fichiers~~
 * ~~div dans les crudcontroller ADMIN~~
+* ~~Responsive~~
 * SEO :
     * ~~titre H1 de chaque page~~
     * ~~vérifier les balise HTML de titre sur chaque page : h1 (une seule par page) puis h2, h3, ...~~
@@ -81,7 +82,7 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 
 * CGU
 * Confidentialite
-* Responsive
+* constraints dans crud controller sur images et fichiers
 
 ### Mise en PROD
 **Installer/compiler les assets**

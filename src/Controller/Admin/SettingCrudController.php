@@ -6,14 +6,15 @@ use App\Entity\Setting;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use Symfony\Component\Validator\Constraints\Image;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
 class SettingCrudController extends AbstractCrudController
 {
@@ -38,7 +39,17 @@ class SettingCrudController extends AbstractCrudController
                 ->setRequired(false)
                 ->setBasePath('uploads/img')
                 ->setUploadDir('public/uploads/img')
-                ->setUploadedFileNamePattern('[name]-[uuid].[extension]'),
+                ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
+                ->setFileConstraints(new Image(
+                    maxWidth: 1920,
+                    maxWidthMessage: 'L\'image est trop large. La largeur max est 1920 px.',
+                    maxHeight: 1080,
+                    maxHeightMessage: 'L\'image est trop grande. La hauteur max est 1080 px.',
+                    maxSize: '500k',
+                    maxSizeMessage: 'L\'image est trop volumineuse. Le poids max est 500 Ko.',
+                    mimeTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
+                    mimeTypesMessage: 'Seuls les formats jpeg, jpg, png, webp sont acceptés.'
+                )),
 
             FormField::addTab('Description'),
             TextareaField::new('siteDescription', 'Description du site')
@@ -68,6 +79,27 @@ class SettingCrudController extends AbstractCrudController
             TextField::new('siteVille', 'Ville')
                 ->setColumns(3)
                 ->hideOnIndex(),
+
+            FormField::addTab('Footer')
+                ->setIcon('fas fa-file-alt')
+                ->setHelp('Titres, textes, images du footer'),
+            ImageField::new('siteFooterImgBg', 'Image de fond du footer')
+                ->setColumns(6)
+                ->hideOnIndex()
+                ->setRequired(false)
+                ->setBasePath('uploads/img')
+                ->setUploadDir('public/uploads/img')
+                ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
+                ->setFileConstraints(new Image(
+                    maxWidth: 1920,
+                    maxWidthMessage: 'L\'image est trop large. La largeur max est 1920 px.',
+                    maxHeight: 1080,
+                    maxHeightMessage: 'L\'image est trop grande. La hauteur max est 1080 px.',
+                    maxSize: '500k',
+                    maxSizeMessage: 'L\'image est trop volumineuse. Le poids max est 500 Ko.',
+                    mimeTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
+                    mimeTypesMessage: 'Seuls les formats jpeg, jpg, png, webp sont acceptés.'
+                )),
         ];
     }
 

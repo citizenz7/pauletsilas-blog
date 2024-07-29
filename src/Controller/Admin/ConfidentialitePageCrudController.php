@@ -6,6 +6,7 @@ use App\Entity\ConfidentialitePage;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use Symfony\Component\Validator\Constraints\Image;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
@@ -49,7 +50,17 @@ class ConfidentialitePageCrudController extends AbstractCrudController
                 ->setBasePath('uploads/img/confidentialite')
                 ->setUploadDir('public/uploads/img/confidentialite')
                 ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
-                ->setRequired(false),
+                ->setRequired(false)
+                ->setFileConstraints(new Image(
+                    maxWidth: 1920,
+                    maxWidthMessage: 'L\'image est trop large. La largeur max est 1920 px.',
+                    maxHeight: 1080,
+                    maxHeightMessage: 'L\'image est trop grande. La hauteur max est 1080 px.',
+                    maxSize: '500k',
+                    maxSizeMessage: 'L\'image est trop volumineuse. Le poids max est 500 Ko.',
+                    mimeTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
+                    mimeTypesMessage: 'Seuls les formats jpeg, jpg, png, webp sont acceptés.'
+                )),
             TextField::new('imageAlt', 'Texte alternatif de l\'image')
                 ->setColumns(6)
                 ->hideOnIndex(),
