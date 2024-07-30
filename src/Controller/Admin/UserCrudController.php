@@ -130,13 +130,13 @@ class UserCrudController extends AbstractCrudController
             ->setPermission(Action::DELETE, 'ROLE_ADMIN')
 
             ->update(Crud::PAGE_INDEX, Action::DETAIL, function(Action $action){
-                return $action->setIcon('fas fa-eye text-info')->setLabel('')->addCssClass('text-dark');
+                return $action->setIcon('fas fa-eye text-info')->setLabel('');
             })
             ->update(Crud::PAGE_INDEX,Action::EDIT, function(Action $action){
-                return $action->setIcon('fas fa-edit text-warning')->setLabel('')->addCssClass('text-dark');
+                return $action->setIcon('fas fa-edit text-warning')->setLabel('');
             })
             ->update(Crud::PAGE_INDEX,Action::DELETE, function(Action $action){
-                return $action->setIcon('fas fa-trash text-danger')->setLabel('')->addCssClass('text-dark');
+                return $action->setIcon('fas fa-trash text-danger')->setLabel('');
             });
     }
 }

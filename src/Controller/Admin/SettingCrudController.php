@@ -118,7 +118,7 @@ class SettingCrudController extends AbstractCrudController
         return $actions
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->update(Crud::PAGE_INDEX, Action::DETAIL, function(Action $action){
-                return $action->setIcon('fas fa-eye text-info')->setLabel('')->addCssClass('text-dark');
+                return $action->setIcon('fas fa-eye text-info')->setLabel('');
             })
             // On DESACTIVE le bouton DELETE et le bouton NEW
             ->disable(Action::DELETE, Action::NEW)

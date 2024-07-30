@@ -88,14 +88,14 @@ class CategoryCrudController extends AbstractCrudController
                 return $action->setIcon('fas fa-tags pe-1')->setLabel('Ajouter une catégorie');
             })
             ->update(Crud::PAGE_INDEX,Action::EDIT,function(Action $action){
-                return $action->setIcon('fas fa-edit text-warning')->setLabel('')->addCssClass('text-dark');
+                return $action->setIcon('fas fa-edit text-warning')->setLabel('');
             })
             ->add(Crud::PAGE_INDEX,Action::DETAIL)
             ->update(Crud::PAGE_INDEX,Action::DETAIL,function(Action $action){
-                return $action->setIcon('fas fa-eye text-primary')->setLabel('')->addCssClass('text-dark');
+                return $action->setIcon('fas fa-eye text-info')->setLabel('');
             })
             ->update(Crud::PAGE_INDEX,Action::DELETE,function(Action $action){
-                return $action->setIcon('fas fa-trash text-danger')->setLabel('')->addCssClass('text-dark');
+                return $action->setIcon('fas fa-trash text-danger')->setLabel('');
             });
     }
 }
