@@ -1,0 +1,71 @@
+.presentation {
+    margin: 0 auto 15px auto;
+    position: relative;
+}
+
+.presentation h1 {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(30px, 2.5vw, 45px);
+    font-weight: 900;
+    font-family: var(--title-font-family);
+    color: var(--color-white);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
+    text-align: center;
+    padding: 10px;
+}
+
+.presentation img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: cover;
+    position: relative;
+}
+
+.mentions {
+    max-width: 1320px;
+    margin: 35px auto;
+    padding: 15px 0 35px 0;
+    position: relative;
+}
+
+.mentions h1 {
+    font-size: clamp(34px, 2.5vw, 46px);
+    color: var(--color-white);
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.mentions .image {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    object-fit: cover;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: block;
+    margin: 0 auto 20px auto;
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+
+@media screen and (max-width: 768px) {
+    .presentation h1 {
+        top: 60%;
+        width: 100%;
+    }
+
+    .mentions {
+        padding: 0 15px;
+    }
+}

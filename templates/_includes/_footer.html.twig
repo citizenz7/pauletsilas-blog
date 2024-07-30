@@ -23,9 +23,10 @@
             <span class="title">Menu</span>
             <a href="{{ path('app_article_index') }}">Tous les articles</a>
             <a href="{{ path('app_apropos') }}">A propos</a>
-            <a href="{{ path('app_cgu') }}">C.G.U.</a>
             <a href="{{ path('app_contact') }}">Contact</a>
+            <a href="{{ path('app_cgu') }}">C.G.U.</a>
             <a href="{{ path('app_confidentialite') }}">Politique de confidentialité</a>
+            <a href="{{ path('app_mentions_legales') }}">Mentions legales</a>
         </div>
         <div class="col">
             <span class="title">Catégories</span>
@@ -36,7 +37,7 @@
     </div>
 
     <div class="copyright">
-        &copy; {{ 'now'|date('Y') }}&nbsp;<a href="{{ path('app_home') }}">{{ settings.siteName }}</a> Logo par <a href="https://www.vecteezy.com/" target="_blank">vecteezy.com</a> Icone cookie par <a href="https://www.flaticon.com" target="_blank">Flaticon</a> Images par <a href="https://pixabay.com/" target="_blank">Pixabay</a>
+        &copy; {{ 'now'|date('Y') }}<a href="{{ path('app_home') }}">{{ settings.siteName }}</a> Logo par <a href="https://www.vecteezy.com/" target="_blank">vecteezy.com</a> Icone cookie par <a href="https://www.flaticon.com" target="_blank">Flaticon</a> Images par <a href="https://pixabay.com/" target="_blank">Pixabay</a>
         <a href="#" id="go-to-top"><i class="fa-solid fa-chevron-up"></i></a>
     </div>
 </footer>

@@ -18,6 +18,7 @@ use App\Entity\AproposPage;
 use App\Entity\ArticlePage;
 use App\Entity\ContactPage;
 use App\Entity\CategoryPage;
+use App\Entity\MentionsPage;
 use App\Repository\UserRepository;
 use App\Entity\ConfidentialitePage;
 use App\Repository\MediaRepository;
@@ -143,6 +144,10 @@ class DashboardController extends AbstractDashboardController
             ->setEntityId(1)
             ->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Page Confidentialité', 'fas fa-file-alt', ConfidentialitePage::class)
+            ->setAction('detail')
+            ->setEntityId(1)
+            ->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Page Mentions Légales', 'fas fa-file-alt', MentionsPage::class)
             ->setAction('detail')
             ->setEntityId(1)
             ->setPermission('ROLE_ADMIN');

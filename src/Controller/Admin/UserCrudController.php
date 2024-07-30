@@ -52,6 +52,9 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             FormField::addTab('Informations'),
+            BooleanField::new('active', 'Actif ?')
+                ->setColumns(12)
+                ->setpermission('ROLE_ADMIN'),
             TextField::new('firstname', 'Prénom')
                 ->setColumns(3),
             TextField::new('lastname', 'Nom')
@@ -93,10 +96,6 @@ class UserCrudController extends AbstractCrudController
             TextareaField::new('authorBio', 'Biographie courte')
                 ->setColumns(12)
                 ->hideOnIndex(),
-
-            BooleanField::new('active', 'Actif ?')
-                ->setpermission('ROLE_ADMIN')
-                ->hideOnForm(),
         ];
     }
 

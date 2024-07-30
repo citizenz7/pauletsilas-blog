@@ -260,7 +260,7 @@ footer .copyright {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 5px;
     font-size: clamp(12px, 1.5vw, 14px);
     position: relative;
     z-index: 999;

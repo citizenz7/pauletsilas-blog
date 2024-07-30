@@ -7,9 +7,13 @@
 
 .login .alert-danger {
     color: var(--color-danger);
-    font-size: clamp(15px, 3vw, 18px);
+    font-size: clamp(14px, 1.5vw, 17px);
     margin-top: 10px;
     text-align: center;
+    border: solid 1px var(--color-danger);
+    padding: 7px;
+    border-radius: 4px;
+    margin-bottom: 12px;
 }
 
 .login form {

@@ -208,6 +208,7 @@
     font-family: var(--title-font-family);
     color: var(--title-color);
     position: relative;
+    text-align: justify;
 }
 
 .home .cards .card .title:hover {
@@ -265,13 +266,14 @@
     height: 100%;
     margin: 0 auto;
     position: relative;
-    padding: 20px;
 }
 
 .container-files .fichiers-pdf {
     margin: 0 auto;
     position: relative;
     padding: 35px;
+    border-top: 1px solid var(--border-color-files);
+    border-bottom: 1px solid var(--border-color-files);
 }
 
 .container-files .fichiers-pdf .image-bg {

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{# {% block title %}Hello MentionsLegalesController!{% endblock %} #}
+
+{% block importmap %}{{ importmap(['app', 'mentions']) }}{% endblock %}
+
+{% block body %}
+
+    <div class="presentation">
+        <img src="{{ asset('uploads/img/mentions/' ~ mentions.image) }}" alt="{{ mentions.imageAlt}}">
+        <h1>{{ mentions.mainTitle }}</h1>
+    </div>
+
+    <section class="mentions">
+        <div>
+            {{ mentions.content|raw }}
+        </div>
+    </section>
+
+{% endblock %}

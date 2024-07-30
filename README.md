@@ -80,9 +80,10 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
     * ~~vérifier les balise HTML de titre sur chaque page : h1 (une seule par page) puis h2, h3, ...~~
     * ~~vérifier les img alt=""~~
 
-* CGU
-* Confidentialite
-* constraints dans crud controller sur images et fichiers
+* ~~CGU~~
+* ~~Confidentialite~~
+* ~~constraints dans crud controller sur images et fichiers~~
+* Mentions légales
 
 ### Mise en PROD
 **Installer/compiler les assets**

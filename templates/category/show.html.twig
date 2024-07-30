@@ -8,8 +8,12 @@
     <section class="category">
         <h1>Catégorie d'articles : {{ category.title }}</h1>
         <div class="description">
-            <img src="{{ asset('uploads/img/categories/' ~ category.image) }}" alt="{{ category.title }}">
-            <p>{{ category.description|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': ''})|raw }}</p>
+            <div class="col1">
+                <img src="{{ asset('uploads/img/categories/' ~ category.image) }}" alt="{{ category.title }}">
+            </div>
+            <div class="col2">
+                {{ category.description|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': ''})|raw }}
+            </div>
         </div>
         <div class="cards">
             {% for article in category.articles|reverse %}
