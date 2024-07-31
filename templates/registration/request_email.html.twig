@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{# {% block title %}Request a new confirmation link{% endblock %} #}
+
+{% block importmap %}{{ importmap(['app', 'register']) }}{% endblock %}
+
+{% block body %}
+    <section class="register">
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}
+
+        <h1>Demander un nouveau lien de validation de votre e-mail</h1>
+
+        {{ form_errors(form) }}
+
+        {{ form_start(form) }}
+            {{ form_row(form.email) }}
+
+            <button type="submit" class="btn">Demander</button>
+        {{ form_end(form) }}
+    </section>
+{% endblock %}

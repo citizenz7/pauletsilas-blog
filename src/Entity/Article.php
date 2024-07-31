@@ -41,7 +41,7 @@ class Article
     private ?\DateTimeInterface $updatedAt = null;
 
     #[ORM\Column]
-    private ?bool $active = true;
+    private ?bool $active = false;
 
     /**
      * @var Collection<int, Category>

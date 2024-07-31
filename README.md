@@ -85,6 +85,8 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 * ~~constraints dans crud controller sur images et fichiers~~
 * Mentions légales
 
+* Un utlisateur qui n'aura pas validé son adresse e-mail ne pourra pas proposer d'article.
+
 ### Mise en PROD
 **Installer/compiler les assets**
 1. `php bin/console importmap:install` : re-installer les fichiers JS sur un autre serveur
@@ -100,6 +102,9 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 
 
 ### COMMENT CA MARCHE ?
+
+##### Fonctionnalités générales
+**Utilisateurs**
 Il existe des comptes Admin (tous les droits de création, d'édition et de suppression) et des comptes Users avec certains droits limités.
 
 **Inscription**
@@ -112,9 +117,24 @@ Un formulaire de connexion est disponible pour s'authentifier sur le site et acq
 **Mot de passe**
 Un utilisateur pourra re-initialiser son mot de passe depuis le lien **Mot de passe oublié ?** présent sur la page de connexion.
 
-**Tableau de bord**
+**Articles**
+Un utilisateur connecté pourra ajouter un article depuis son Tableau de bord. Il pourra aussi modifier et supprimer ses propres articles.
+Lors de la création de l'article, celui-ci n'est pas automatiquement publié sur le site. Il devra être "vérifé" par un administrateur qui choisira de le publier... ou non.
+
+**Commentaires**
+Un utilisateur connecté pourra ajouter un commentaire directement depuis la page de l'article, grâce au formulaire Commentaire situé en bas d'article.
+Le commentaire ne sera pas automatiquement publié sur le site. Il devra être "vérifé" par un administrateur qui choisira de le publier... ou non.
+
+**Formulaire de contact**
+Tout le monde peut utiliser le formulaire de contact depuis la page /contact. Le message sera envoyé à l'adresse e-mail du site et sera "vérifé" par un administrateur qui choisira d'y apporter une réponse... ou non.
+
+**Recherche**
+Une page /recherche permet de rechercher des articles par mot-clé. Tout le monde pourra utiliser cette fonctionnalité.
+
+##### Tableau de bord
+Le tableau de bord est accessible uniquement par un utilisateur connecté depuis le lien **Tableau de bord** qui apparaitra dans le menu général.
 Depuis le "Tableau de bord", un utilisateur pourra :
-* Modifier les informations de son profil
+* Modifier/compléter les informations de son profil
 * Créer/Modifier/Supprimer un article
 * Voir la liste des commentaires des articles
 * Voir les catégories d'articles
@@ -122,7 +142,7 @@ Depuis le "Tableau de bord", un utilisateur pourra :
 * Voir éventuellement, selon ses droits, les fichiers des articles
 
 1. **Modifier les informations de son profil**
-Dans le Tableau de bord Paramètres / **Mon profil**, un utilisateur pourra cliquer sur la petite icône jaune d'édition. Il pourra :
+Dans le Tableau de bord / Paramètres / **Mon profil**, un utilisateur pourra cliquer sur la petite icône jaune d'édition. Il pourra :
     * **Onglet Informations**
         * modifier son nom
         * modifier son prénom
@@ -135,21 +155,20 @@ Dans le Tableau de bord Paramètres / **Mon profil**, un utilisateur pourra cliq
         * modifier sa biographie (quelques lignes de texte qui seront affichées sous le texte des articles publiés par l'utilisateur). **Obligatoire**.
 
 2. **Créer un article**
-Dans le Tableau de bord / Sections / Articles, un utilisateur pourra cliquer sur **Ajouter un Article**. Il devra :
+Dans le Tableau de bord / Sections / **Articles**, un utilisateur pourra cliquer sur **Ajouter un Article**. Il devra :
     * **Onglet infos générales**
-        * entrer un titre (le champ Slug qui correspond à l'adresse finale de l'article est automatiquement rempli)
+        * entrer un titre (le champ Slug qui correspond à l'adresse finale de l'article est automatiquement remplie)
         * sélectionner au moins une catégorie. Plusieurs choix possibles.
     * **Onglet Textes**
-        * entrer une courte **Intro** (2 ou 3 phrases courtes d'introduction qui seront affichées en haut de l'article et sur l'a page d'accueil)
-        * entrer le Contenu de l'article (texte long). Un éditeur de texte lui permet de mettre en forme tout ou partie de ce contenu texte. Il peut glisser/déposer des images d'illustration de l'article à l'endroit souhaité dans le Contenu **MAIS** il devra veiller à ce que les images soient libres de droits d'utilisation et que la taille de ces images soit inférieure à 300 Ko.
+        * entrer une courte **Intro** (2 ou 3 phrases courtes d'introduction qui seront affichées en haut de l'article et sur la page d'accueil)
+        * entrer le **Contenu** de l'article (texte long). Un éditeur de texte lui permet de mettre en forme tout ou partie de ce contenu texte. Il peut glisser/déposer des images d'illustration de l'article à l'endroit souhaité dans le Contenu **MAIS** il devra veiller à ce que les images soient libres de droits d'utilisation et que la taille de ces images soit inférieure à 300 Ko.
     * **Onglet Images**
         * sélectionner une image principale **obligatoire** et ajouter sa description courte. Attention aux droits d'utilisation de l'image ainsi qu'a sa taille (300 Ko maximum si possible...).
-        sélectionner une ou plusieurs images pour la **galerie d'images facultative**. Attention aux droits d'utilisation des images ainsi qu'a sa taille (300 Ko maximum si possible...).
+        * sélectionner une ou plusieurs images pour la **galerie d'images facultative**. Attention aux droits d'utilisation des images ainsi qu'a sa taille (300 Ko maximum si possible...).
     * **Onglet Documents**
         * sélectionner un ou plusieurs **fichiers PDF facultatifs**. Attention au poids des fichiers (1 Mo maximum si possible...).
     * **Onglet SEO**
-        Il s'agit de l apartie qui va permettre un référencement de l'article sur le smoteurs de recherche. Les deux champs de cet onglet sont **obligatoires** :
+        Il s'agit de la partie qui va permettre un référencement de l'article sur les moteurs de recherche. Les deux champs de cet onglet sont **obligatoires** :
         * Titre SEO : Le titre affiché dans les moteurs de recherche. Idéal : 55 caractères maxi. Vous pouvez reprendre le titre de l'article et l'adapter si besoin.
-        * Description SEO : La description affichée dans les moteurs de recherche. 105 caractères maxi. Il s'agit d'une description en 1 phrase ou 2 qui va mettre en valeur au moins un mot-clé important de l'article.
-
-    Concernant le point SEO, l'administrateur du site vérifiera régulièrement cette section et pourra remplacer, compléter et/ou améliorer les iformations entrées.
+        * Description SEO : La description affichée dans les moteurs de recherche. 105 caractères maxi. Il s'agit d'une description en 2 ou 3 phrases qui va mettre en valeur l'idée centrale de l'article. Il est important d'utiliser ici un ou plusieurs mot-clés significatifs de cet article (musique, tablature, guitare, débutant, louange, etc.)
+        * concernant le SEO, l'administrateur du site vérifiera régulièrement cette section dans les articles et pourra remplacer, compléter et/ou améliorer les informations entrées.

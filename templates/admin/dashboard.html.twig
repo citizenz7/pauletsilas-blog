@@ -2,7 +2,7 @@
 
 {% block main %}
 
-{# {{ dump() }} #}
+{# {{ dump(app.user) }} #}
 
 <div class="container-fluid">
     <div class="row">
@@ -13,6 +13,16 @@
             </p>
         </div>
     </div>
+
+    {% if app.user.isVerified == false %}
+    <div class="row mt-4">
+        <div class="col">
+            <p class="bg-danger text-white p-3 text-center rounded fs-6">Votre adresse e-mail n'est pas confirmée. Vous ne pourrez pas ajouter d'article.<br>
+            Vous pouvez redemander un lien de confirmation d'adresse e-mail <b>en vous déconnectant</b> et en cliquant sur le lien de la page Connexion.
+            </p>
+        </div>
+    </div>
+    {% endif %}
 
     <div class="row row-cols-1 row-cols-md-4 g-4 mt-5 justify-content-center">
         <div class="col">

@@ -11,7 +11,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use Symfony\Component\Validator\Constraints\Image;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
@@ -170,6 +169,7 @@ class ArticleCrudController extends AbstractCrudController
             ->setPageTitle('edit', 'Modifier un article')
             ->setPageTitle('new', 'Ajouter un article')
             ->setPageTitle('detail', 'Voir un article')
+            ->setHelp('index', 'Vous devez avoir confirmé votre adresse e-mail pour pouvoir ajouter un article.')
             ->setDefaultSort(['id' => 'DESC'])
             ->setEntityLabelInPlural('Articles')
             ->setEntityLabelInSingular('Article')
@@ -179,9 +179,19 @@ class ArticleCrudController extends AbstractCrudController
     }
 
     public function configureActions(Actions $actions): Actions{
+        $user = $this->getUser();
+
         return $actions
-            ->update(Crud::PAGE_INDEX,Action::NEW,function(Action $action){
-                return $action->setIcon('fas fa-tags pe-1')->setLabel('Ajouter un article');
+            // ->update(Crud::PAGE_INDEX,Action::NEW,function(Action $action){
+            //     return $action->setIcon('fas fa-tags pe-1')->setLabel('Ajouter un article');
+            // })
+            // on n'affiche pas le bouton "Ajouter un article" si l'adresse e-mail n'est pas confirmée
+            ->update(Crud::PAGE_INDEX,Action::NEW,function(Action $action) use ($user){
+                if ($user && !$user->isVerified()) {
+                    return $action->displayIf(fn () => false);
+                } else {
+                    return $action->setIcon('fas fa-tags pe-1')->setLabel('Ajouter un article');
+                }
             })
             ->update(Crud::PAGE_INDEX,Action::EDIT,function(Action $action){
                 return $action->setIcon('fas fa-edit text-warning')->setLabel('');
