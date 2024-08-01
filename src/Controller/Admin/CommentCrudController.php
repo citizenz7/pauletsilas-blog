@@ -63,20 +63,20 @@ class CommentCrudController extends AbstractCrudController
         return $actions
             ->setPermission(Action::DELETE, 'ROLE_ADMIN')
             ->setPermission(Action::EDIT, 'ROLE_ADMIN')
-            ->setPermission(Action::NEW, 'ROLE_ADMIN')
+            // ->setPermission(Action::NEW, 'ROLE_ADMIN')
 
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
-            ->update(Crud::PAGE_INDEX, Action::NEW, function(Action $action){
-                return $action->setIcon('fas fa-plus text-success')->setLabel('Ajouter un Commentaire');
-            })
+            // ->update(Crud::PAGE_INDEX, Action::NEW, function(Action $action){
+            //     return $action->setIcon('fas fa-plus text-success')->setLabel('Ajouter un Commentaire');
+            // })
             ->update(Crud::PAGE_INDEX, ACtion::DELETE, function(Action $action){
                 return $action->setIcon('fas fa-trash text-danger')->setLabel('');
             })
             ->update(Crud::PAGE_INDEX, Action::DETAIL, function(Action $action){
                 return $action->setIcon('fas fa-eye text-info')->setLabel('');
             })
-            // On DESACTIVE le bouton DELETE et le bouton NEW
-            // ->disable(Action::DELETE, Action::NEW, Action::EDIT)
+            // On DESACTIVE le bouton NEW
+            ->disable(Action::NEW)
             ->update(Crud::PAGE_INDEX,Action::EDIT,function(Action $action){
                 return $action->setIcon('fas fa-edit text-warning')->setLabel('');
             })
