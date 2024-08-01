@@ -83,7 +83,7 @@ class CategoryController extends AbstractController
             'socials' => $socials,
             'seoTitle' => html_entity_decode($category->getSeoTitle()),
             'seoDescription' => html_entity_decode($category->getSeoDescription()),
-            'seoUrl' => $category->getSlug(),
+            'seoUrl' => 'categories/' . $category->getSlug(),
             'pageTitle' => $category->getTitle()
         ]);
     }

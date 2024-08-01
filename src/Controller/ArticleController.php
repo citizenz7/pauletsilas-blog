@@ -293,7 +293,7 @@ class ArticleController extends AbstractController
             'socials' => $socials,
             'seoTitle' => html_entity_decode($article->getSeoTitle()),
             'seoDescription' => html_entity_decode($article->getSeoDescription()),
-            'seoUrl' => $article->getSlug(),
+            'seoUrl' => 'articles/' . $article->getSlug(),
             'pageTitle' => $article->getTitle()
         ]);
     }
