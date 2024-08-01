@@ -14,9 +14,16 @@
 
 .register h1 {
     text-align: center;
-    margin-bottom: 35px;
+    margin-bottom: 15px;
     font-size: clamp(20px, 5vw, 30px);
     color: var(--title-color);
+}
+
+.register .intro {
+    position: relative;
+    text-align: center;
+    font-size: clamp(12px, 3vw, 15px);
+    color: var(--color-success);
 }
 
 .register form {
@@ -24,7 +31,7 @@
     flex-direction: column;
     gap: 10px;
     max-width: clamp(300px, 50vw, 500px);
-    margin: 35px auto 0 auto;
+    margin: 25px auto 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 7px;

@@ -3,7 +3,7 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 
 ### ENVIRONNEMENT
 * Symfony 7
-* PHP 8.3
+* PHP 8.2+
 * Composer 2
 * AssetMapper
 
