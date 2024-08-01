@@ -44,6 +44,9 @@ class Setting
     #[ORM\Column(length: 255)]
     private ?string $siteFooterImgBg = null;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $siteDocumentation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -165,6 +168,18 @@ class Setting
     public function setSiteFooterImgBg(string $siteFooterImgBg): static
     {
         $this->siteFooterImgBg = $siteFooterImgBg;
+
+        return $this;
+    }
+
+    public function getSiteDocumentation(): ?string
+    {
+        return $this->siteDocumentation;
+    }
+
+    public function setSiteDocumentation(string $siteDocumentation): static
+    {
+        $this->siteDocumentation = $siteDocumentation;
 
         return $this;
     }

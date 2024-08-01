@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Setting;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -51,7 +52,9 @@ class SettingCrudController extends AbstractCrudController
                     mimeTypesMessage: 'Seuls les formats jpeg, jpg, png, webp sont acceptés.'
                 )),
 
-            FormField::addTab('Description'),
+            FormField::addTab('Description')
+                ->setIcon('fas fa-file-medical-alt')
+                ->setHelp('Description du site'),
             TextareaField::new('siteDescription', 'Description du site')
                 ->setColumns(12),
 
@@ -81,7 +84,7 @@ class SettingCrudController extends AbstractCrudController
                 ->hideOnIndex(),
 
             FormField::addTab('Footer')
-                ->setIcon('fas fa-file-alt')
+                ->setIcon('fas fa-shoe-prints')
                 ->setHelp('Titres, textes, images du footer'),
             ImageField::new('siteFooterImgBg', 'Image de fond du footer')
                 ->setColumns(6)
@@ -100,6 +103,19 @@ class SettingCrudController extends AbstractCrudController
                     mimeTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
                     mimeTypesMessage: 'Seuls les formats jpeg, jpg, png, webp sont acceptés.'
                 )),
+
+            FormField::addTab('Documentation')
+            ->setIcon('fas fa-book')
+            ->setHelp('Documentation sur la page d\'accueil du Dashboard'),
+            TextEditorField::new('siteDocumentation', 'Documentation')
+                ->setColumns(12)
+                ->hideOnIndex()
+                ->hideOnDetail()
+                ->setFormType(CKEditorType::class),
+            TextareaField::new('siteDocumentation', 'Documentation')
+                ->hideOnForm()
+                ->hideOnIndex()
+                ->setTemplatePath('admin/fields/text.html.twig'),
         ];
     }
 
@@ -110,6 +126,7 @@ class SettingCrudController extends AbstractCrudController
             ->setPageTitle('detail', 'Paramètres du site')
             ->showEntityActionsInlined(true)
             ->setPageTitle('edit', 'Modifier les paramètres')
+            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
             ;
     }
 

@@ -173,7 +173,7 @@ footer .footer .pres .sitename {
 }
 
 footer .footer .pres .description {
-    font-size: clamp(12px, 2vw, 14px);
+    font-size: clamp(12px, 3vw, 14px);
     position: relative;
 }
 
@@ -261,7 +261,7 @@ footer .copyright {
     align-items: center;
     flex-wrap: wrap;
     gap: 5px;
-    font-size: clamp(12px, 1.5vw, 14px);
+    font-size: clamp(12px, 3vw, 14px);
     position: relative;
     z-index: 999;
 }
@@ -378,6 +378,7 @@ footer .copyright a:hover {
 
     footer .footer {
         gap: 25px;
+        padding: 0 15px;
     }
 
     footer .footer .pres {
@@ -398,7 +399,7 @@ footer .copyright a:hover {
         width: 100%;
         align-items: center;
         justify-content: center;
-        margin-top: 45px;
+        margin-top: 40px;
         padding: 0 15px;
     }
 }

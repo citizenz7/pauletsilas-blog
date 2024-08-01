@@ -26,6 +26,7 @@ use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 use App\Repository\FichierRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\SettingRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,6 +48,7 @@ class DashboardController extends AbstractDashboardController
         private FichierRepository $fichierRepository,
         private MediaRepository $mediaRepository,
         private CommentRepository $commentRepository,
+        private SettingRepository $settingRepository,
         private Security $security
     )
     {
@@ -78,6 +80,7 @@ class DashboardController extends AbstractDashboardController
             'fichiers' => $this->fichierRepository->findAll(),
             'medias' => $this->mediaRepository->findAll(),
             'comments' => $this->commentRepository->findBy(['approved' => true], []),
+            'settings' => $this->settingRepository->findOneBy([]),
         ]);
     }
 
