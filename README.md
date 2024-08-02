@@ -55,6 +55,9 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 * clé du site : 6LeYW4cpAAAAAB9iLAuhwSlg73CzzsYIvgU94Bwh
 * clé secrète : 6LeYW4cpAAAAACC4oIkReiAgW5Ads3S_FE6aq52G
 
+### Google Analytics
+* G-B8FER475XX
+
 ### AssetMapper
 * Installer un package JS (exemple avec SplideJS) : `php bin/console importmap:require @splidejs/splide`
 * Vérifier les mises à jour éventuelles de tous les packages JS installés : `php bin/console importmap:outdated`
