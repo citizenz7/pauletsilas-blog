@@ -96,7 +96,7 @@ class ArticleCrudController extends AbstractCrudController
                 ->hideOnIndex()
                 ->setTemplatePath('admin/fields/text.html.twig'),
             TextEditorField::new('content', 'Contenu')
-                ->setHelp('Texte prnincipal de l\'article.')
+                ->setHelp('Texte principal de l\'article.')
                 ->setColumns(12)
                 ->setFormType(CKEditorType::class)
                 ->hideOnIndex()
@@ -153,12 +153,12 @@ class ArticleCrudController extends AbstractCrudController
                 ->setHelp('Informations pour les moteurs de recherche. Les deux champs suivants sont obligatoires.'),
             TextField::new('seoTitle', 'Titre SEO')
                 ->setColumns(12)
-                ->hideOnIndex()
-                ->setHelp('Le titre affiché dans les moteurs de recherche. Idéal : 55 caractères maxi. Vous pouvez reprendre le titre de l\'article et l\'adapter si besoin.'),
+                ->onlyOnForms()
+                ->setHelp('Le titre affiché dans les moteurs de recherche. Idéal : 70 caractères maxi. Vous pouvez reprendre le titre de l\'article et l\'adapter si besoin.'),
             TextareaField::new('seoDescription', 'Description SEO')
                 ->setColumns(12)
-                ->hideOnIndex()
-                ->setHelp('La description affichée dans les moteurs de recherche. 105 caractères maxi. Il s\'agit d\'une description en 1 phrase ou 2 qui va mettre en valeur au moins un mot-clé important de l\'article.'),
+                ->onlyOnForms()
+                ->setHelp('La description affichée dans les moteurs de recherche. 160 caractères maxi. Il s\'agit d\'une description en 1 phrase ou 2 qui va mettre en valeur au moins un mot-clé important de l\'article.'),
         ];
     }
 
