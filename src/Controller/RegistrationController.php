@@ -147,6 +147,11 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $user =  $userRepository->findOneByEmail($form->get('email')->getData());
 
+            if ($user->isVerified() === true) {
+                $this->addFlash('error', 'Votre adresse e-mail est déjà vérifiée.');
+                return $this->redirectToRoute('app_request_verify_email');
+            }
+
             // On recherche l'email et le nom du site dans Setting pour injecter dans le mail
             $siteEmail = $settings->getSiteEmail();
             $siteName = $settings->getSiteName();

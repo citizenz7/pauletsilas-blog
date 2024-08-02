@@ -19,6 +19,21 @@
     color: var(--title-color);
 }
 
+.register .message-error {
+    color: var(--color-danger);
+    font-size: clamp(15px, 3vw, 18px);
+    margin-top: 10px;
+    text-align: center;
+}
+
+.register .request-title {
+    text-align: center;
+    font-size: clamp(20px, 5vw, 30px);
+    color: var(--title-color);
+    margin-bottom: 80px;
+    padding: 0 15px;
+}
+
 .register .intro {
     position: relative;
     text-align: center;
@@ -102,6 +117,10 @@
 @media screen and (max-width: 768px) {
     .register {
         max-width: 100%;
+    }
+
+    .register .request-title {
+        margin-bottom: 50px;
     }
 
     .register form {
