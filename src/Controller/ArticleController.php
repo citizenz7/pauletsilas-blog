@@ -13,6 +13,7 @@ use App\Repository\ArticleRepository;
 use App\Repository\SettingRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\SocialRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,7 +34,8 @@ class ArticleController extends AbstractController
         EntityManagerInterface $em,
         PaginatorInterface $paginator,
         ArticlePageRepository $articlePageRepository,
-        SocialRepository $socialRepository
+        SocialRepository $socialRepository,
+        UserRepository $userRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
@@ -42,6 +44,8 @@ class ArticleController extends AbstractController
         $articlePage = $articlePageRepository->findOneBy([]);
 
         $socials = $socialRepository->findBy(['active' => true], []);
+
+        $users = $userRepository->findBy(['active' => true], ['lastname' => 'ASC']);
 
         // Pagination
         $dql = "SELECT a FROM App\Entity\Article a WHERE a.active = true ORDER BY a.postedAt DESC";
@@ -73,6 +77,7 @@ class ArticleController extends AbstractController
             'articlePage' => $articlePage,
             'groupedArticles' => $groupedArticles,
             'socials' => $socials,
+            'users' => $users,
             'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
             'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
             'seoUrl' => $articlePage->getSlug(),
@@ -89,7 +94,8 @@ class ArticleController extends AbstractController
         EntityManagerInterface $em,
         PaginatorInterface $paginator,
         ArticlePageRepository $articlePageRepository,
-        SocialRepository $socialRepository
+        SocialRepository $socialRepository,
+        UserRepository $userRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
@@ -98,6 +104,8 @@ class ArticleController extends AbstractController
         $articlePage = $articlePageRepository->findOneBy([]);
 
         $socials = $socialRepository->findBy(['active' => true], []);
+
+        $users = $userRepository->findBy(['active' => true], ['lastname' => 'ASC']);
 
         // Pagination
         $dql = "SELECT a FROM App\Entity\Article a WHERE a.active = true ORDER BY a.postedAt ASC";
@@ -129,6 +137,7 @@ class ArticleController extends AbstractController
             'articlePage' => $articlePage,
             'groupedArticles' => $groupedArticles,
             'socials' => $socials,
+            'users' => $users,
             'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
             'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
             'seoUrl' => $articlePage->getSlug(),
@@ -146,7 +155,8 @@ class ArticleController extends AbstractController
         EntityManagerInterface $em,
         PaginatorInterface $paginator,
         ArticlePageRepository $articlePageRepository,
-        SocialRepository $socialRepository
+        SocialRepository $socialRepository,
+        UserRepository $userRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
@@ -155,6 +165,8 @@ class ArticleController extends AbstractController
         $articlePage = $articlePageRepository->findOneBy([]);
 
         $socials = $socialRepository->findBy(['active' => true], []);
+
+        $users = $userRepository->findBy(['active' => true], ['lastname' => 'ASC']);
 
         // Pagination
         $dql = "SELECT a FROM App\Entity\Article a WHERE a.active = true ORDER BY a.postedAt DESC";
@@ -186,6 +198,7 @@ class ArticleController extends AbstractController
             'articlePage' => $articlePage,
             'groupedArticles' => $groupedArticles,
             'socials' => $socials,
+            'users' => $users,
             'seoTitle' => html_entity_decode($articlePage->getSeoTitle()),
             'seoDescription' => html_entity_decode($articlePage->getSeoDescription()),
             'seoUrl' => $articlePage->getSlug(),

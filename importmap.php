@@ -72,6 +72,10 @@ return [
         'path' => './assets/js/comment.js',
         'entrypoint' => true,
     ],
+    'user' => [
+        'path' => './assets/js/user.js',
+        'entrypoint' => true,
+    ],
     'admin' => [
         'path' => './assets/js/admin.js',
         'entrypoint' => true,

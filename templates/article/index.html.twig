@@ -27,12 +27,9 @@
             {# Par auteur #}
             <select>
                 <option value="">Trier les articles par auteur</option>
-                {% for authorFirstName, articles in groupedArticles %}
-                    <optgroup label="{{ authorFirstName }}">
-                        {% for article in articles %}
-                            <option value="{{ path('app_article_show', {'slug': article.slug}) }}">{{ article.title }}</option>
-                        {% endfor %}
-                    </optgroup>
+                {# Trouver tous les auteurs #}
+                {% for author in users %}
+                    <option value="{{ path('app_user_show', {'id': author.id}) }}">{{ author.firstName }} {{ author.lastName }}</option>
                 {% endfor %}
             </select>
         </div>
