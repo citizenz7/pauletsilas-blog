@@ -29,7 +29,7 @@
                 <option value="">Trier les articles par auteur</option>
                 {# Trouver tous les auteurs... qui ont publié au moins un article #}
                 {% for author in users %}
-                    {% if author.articles|length > 0 %}
+                    {% if author.articles|length != 0 %}
                         <option value="{{ path('app_user_show', {'slug': author.slug,}) }}">{{ author.firstName }} {{ author.lastName }}</option>
                     {% endif %}
                 {% endfor %}
