@@ -19,7 +19,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 )]
 
 // Créer un admin directement en console :
-// php bin/console app:create-admin EMAIL PASSWORD FIRSTNAME LASTNAME AUTHORBIO
+// php bin/console app:create-admin EMAIL PASSWORD FIRSTNAME LASTNAME
 
 class CreateAdminCommand extends Command
 {
@@ -40,8 +40,7 @@ class CreateAdminCommand extends Command
         $this->addArgument('email', InputArgument::REQUIRED, 'Email')
             ->addArgument('password', InputArgument::REQUIRED, 'Password')
             ->addArgument('firstname', InputArgument::REQUIRED, 'Firstname')
-            ->addArgument('lastname', InputArgument::REQUIRED, 'Lastname')
-            ->addArgument('authorBio', InputArgument::REQUIRED, 'AuthorBio');
+            ->addArgument('lastname', InputArgument::REQUIRED, 'Lastname');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -66,8 +65,6 @@ class CreateAdminCommand extends Command
         $user->setFirstname($input->getArgument('firstname'));
 
         $user->setLastname($input->getArgument('lastname'));
-
-        $user->setAuthorBio($input->getArgument('authorBio'));
 
         $this->entityManagerInterface->persist($user);
         $this->entityManagerInterface->flush();

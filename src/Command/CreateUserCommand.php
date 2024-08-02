@@ -19,7 +19,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 )]
 
 // Créer un user directement en console :
-// php bin/console app:create-user EMAIL PASSWORD FIRSTNAME LASTNAME AUTHORBIO
+// php bin/console app:create-user EMAIL PASSWORD FIRSTNAME LASTNAME
 
 class CreateUserCommand extends Command
 {
@@ -40,8 +40,7 @@ class CreateUserCommand extends Command
         $this->addArgument('email', InputArgument::REQUIRED, 'Email')
             ->addArgument('password', InputArgument::REQUIRED, 'Password')
             ->addArgument('firstname', InputArgument::REQUIRED, 'Firstname')
-            ->addArgument('lastname', InputArgument::REQUIRED, 'Lastname')
-            ->addArgument('authorbio', InputArgument::REQUIRED, 'Authorbio');
+            ->addArgument('lastname', InputArgument::REQUIRED, 'Lastname');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -66,8 +65,6 @@ class CreateUserCommand extends Command
         $user->setFirstname($input->getArgument('firstname'));
 
         $user->setLastname($input->getArgument('lastname'));
-
-        $user->setAuthorbio($input->getArgument('authorbio'));
 
         $this->entityManagerInterface->persist($user);
         $this->entityManagerInterface->flush();

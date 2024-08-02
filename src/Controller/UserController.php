@@ -68,7 +68,7 @@ class UserController extends AbstractController
             'categories' => $categories,
             'socials' => $socials,
             'seoTitle' => 'Auteur : ' . $user->getFirstname() . ' ' . $user->getLastname(),
-            'seoDescription' => html_entity_decode($user->getAuthorBio()),
+            'seoDescription' => str_replace('"', '', $user->getAuthorBio()),
             'seoUrl' => 'auteurs/' . $user->getId(),
             'pageTitle' => 'Auteur : ' . $user->getFirstname() . ' ' . $user->getLastname()
         ]);
