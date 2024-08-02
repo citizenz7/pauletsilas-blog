@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ConfidentialiteController extends AbstractController
 {
-    #[Route('/confidentialite', name: 'app_confidentialite')]
+    #[Route('/politique-confidentialite', name: 'app_confidentialite')]
     public function index(
         SettingRepository $settingRepository,
         ConfidentialitePageRepository $confidentialitePageRepository,

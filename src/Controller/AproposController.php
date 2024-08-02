@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AproposController extends AbstractController
 {
-    #[Route('/apropos', name: 'app_apropos')]
+    #[Route('/a-propos', name: 'app_apropos')]
     public function index(
         SettingRepository $settingRepository,
         AproposPageRepository $aproposPageRepository,
