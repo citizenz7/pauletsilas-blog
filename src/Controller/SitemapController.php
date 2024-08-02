@@ -73,7 +73,7 @@ class SitemapController extends AbstractController
 
         // Boucle sur tous les utilisateurs authors
         foreach($users as $user) {
-            $urls[] = ['loc' => $this->generateUrl('app_user_show', ['firstname' => $user->getFirstName(), 'lastname' => $user->getLastName()]), 'lastmod' => $lastmod];
+            $urls[] = ['loc' => $this->generateUrl('app_user_show', ['slug' => $user->getSlug()]), 'lastmod' => $lastmod];
         }
 
         // Create the XML response

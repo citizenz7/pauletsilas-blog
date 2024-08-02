@@ -92,7 +92,7 @@
                 {% for article in lastArticles %}
                     {% for file in article.fichiers|slice(0, 5) %}
                         <div class="links">
-                            <a href="{{ asset('uploads/files/articles/' ~ file.fichierFile) }}" title="Article : {{ article.title }}">
+                            <a target="_blank" href="{{ asset('uploads/files/articles/' ~ file.fichierFile) }}" title="Article : {{ article.title }}">
                                 <i class="fa-solid fa-file-pdf fa-3x"></i>
                                 <br>
                                 {{ file.title }}

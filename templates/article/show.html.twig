@@ -108,7 +108,7 @@
             <h2 id="fichiers" class="fichiers-title">{{ articlePage.documentsTitle }}</h2>
             <div class="fichiers">
                 {% for file in article.fichiers %}
-                    <a href="{{ asset('uploads/files/articles/' ~ file.fichierFile) }}">
+                    <a target="_blank" href="{{ asset('uploads/files/articles/' ~ file.fichierFile) }}">
                     <i class="fa-solid fa-file-pdf fa-4x"></i><br>{{ file.title }}</a>
                 {% endfor %}
             </div>
