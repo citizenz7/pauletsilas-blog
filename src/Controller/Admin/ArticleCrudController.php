@@ -25,6 +25,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class ArticleCrudController extends AbstractCrudController
 {
@@ -56,6 +57,9 @@ class ArticleCrudController extends AbstractCrudController
     {
         return [
             FormField::addTab('Infos générales'),
+            BooleanField::new('active', 'Publié')
+                ->setColumns(12)
+                ->setPermission('ROLE_ADMIN'),
             TextField::new('title', 'Titre de l\'article')
                 ->setHelp('Titre principal de l\'article. 90 caractères max.')
                 ->setColumns(6),
@@ -65,7 +69,7 @@ class ArticleCrudController extends AbstractCrudController
                 ->setColumns(6)
                 ->hideOnIndex(),
             AssociationField::new('categories', 'Catégories')
-                ->setHelp('Choissiez une ou plusiuers catégories pour l\'article.')
+                ->setHelp('Choisissez une ou plusieurs catégories pour l\'article.')
                 ->setRequired(true)
                 ->setColumns(6)
                 ->formatValue(function ($value, $entity) {
@@ -99,6 +103,7 @@ class ArticleCrudController extends AbstractCrudController
                 ->setHelp('Texte principal de l\'article.')
                 ->setColumns(12)
                 ->setFormType(CKEditorType::class)
+                ->setFormTypeOption('config', ['height' => '350px'])
                 ->hideOnIndex()
                 ->hideOnDetail(),
             TextareaField::new('content', 'Contenu')
@@ -108,7 +113,7 @@ class ArticleCrudController extends AbstractCrudController
 
             FormField::addTab('Images'),
             ImageField::new('mainImage', 'Image principale')
-                ->setHelp('Image principale de l\'article. Attention à la taille de l\'image (1920x1080 maxi). Attention au poids de l\'image (500 Ko maxi).')
+                ->setHelp('Image principale de l\'article. Taille de l\'image 1920x1080 maxi. Poids de l\'image 500 Ko maxi.')
                 ->setRequired(false)
                 ->setColumns(6)
                 ->setBasePath('uploads/img/articles')
@@ -128,8 +133,8 @@ class ArticleCrudController extends AbstractCrudController
                 ->setHelp('Texte alternatif de l\'image. 90 caractères max.')
                 ->setColumns(6)
                 ->hideOnIndex(),
-            CollectionField::new('mediapic', 'Galerie d\'images')
-                ->setHelp('Ajoutez des images de l\'article. Attention à la taille et au poids de chaque image. 500 Ko maxi par image.')
+            CollectionField::new('mediapic', 'Galerie d\'images (facultatif)')
+                ->setHelp('Ajoutez des images à l\'article (galerie d\'images). Taille de l\'image 1920x1080 maxi. Poids de l\'image 500 Ko maxi.')
                 ->setColumns(12)
                 ->setRequired(false)
                 ->hideOnIndex()
