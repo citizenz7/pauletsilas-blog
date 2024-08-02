@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\ArticleRepository;
 use App\Repository\SettingRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,7 +18,8 @@ class SitemapController extends AbstractController
         Request $request,
         SettingRepository $settingRepository,
         CategoryRepository $categoryRepository,
-        ArticleRepository $articleRepository
+        ArticleRepository $articleRepository,
+        UserRepository $userRepository
     ): Response
     {
         $settings = $settingRepository->findOneBy([]);
@@ -27,6 +29,8 @@ class SitemapController extends AbstractController
         $articles = $articleRepository->findBy(['active' => true], []);
 
         $hostname = $request->getSchemeAndHttpHost();
+
+        $users = $userRepository->findBy(['active' => true], ['lastname' => 'ASC']);
 
         $lastmod = date('Y-m-d');
 
@@ -67,6 +71,10 @@ class SitemapController extends AbstractController
             $urls[] = ['loc' => $this->generateUrl('app_article_show', ['slug' => $article->getSlug()]), 'lastmod' => $lastmod];
         }
 
+        // Boucle sur tous les utilisateurs authors
+        foreach($users as $user) {
+            $urls[] = ['loc' => $this->generateUrl('app_user_show', ['firstname' => $user->getFirstName(), 'lastname' => $user->getLastName()]), 'lastmod' => $lastmod];
+        }
 
         // Create the XML response
         $response = new Response(

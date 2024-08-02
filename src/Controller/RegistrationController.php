@@ -19,13 +19,16 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
-    public function __construct(private EmailVerifier $emailVerifier)
-    {
-    }
+    public function __construct(
+        private EmailVerifier $emailVerifier,
+        private SluggerInterface $slugger
+    )
+    {}
 
     #[Route('/register', name: 'app_register')]
     public function register(
@@ -47,6 +50,9 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Generate the slug before persisting
+            $user->generateSlug($this->slugger);
+
             // encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(

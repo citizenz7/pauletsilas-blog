@@ -45,18 +45,22 @@ class UserController extends AbstractController
     //     ]);
     // }
 
-    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
+    #[Route('/{slug}', name: 'app_user_show', methods: ['GET'])]
     public function show(
-        User $user,
+        // User $user,
+        UserRepository $userRepository,
         SettingRepository $settingRepository,
         CategoryRepository $categoryRepository,
         SocialRepository $socialRepository,
+        string $slug
     ): Response {
         $settings = $settingRepository->findOneBy([]);
 
         $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
 
         $socials = $socialRepository->findBy(['active' => true], []);
+
+        $user = $userRepository->findOneBy(['slug' => $slug]);
 
         return $this->render('user/show.html.twig', [
             'user' => $user,

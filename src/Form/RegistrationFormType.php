@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -66,6 +67,28 @@ class RegistrationFormType extends AbstractType
                 ],
                 'first_options' => ['label' => 'Mot de passe', 'attr' => ['style' => 'text-align: center;']],
                 'second_options' => ['label' => 'Confirmez le mot de passe', 'attr' => ['style' => 'text-align: center;']]
+            ])
+            ->add('firstname', TextType::class, [
+                'label' => 'Prénom',
+                'attr' => [
+                    'autocomplete' => 'firstname'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez renseigner votre prénom',
+                    ]),
+                ],
+            ])
+            ->add('lastname', TextType::class, [
+                'label' => 'Nom',
+                'attr' => [
+                    'autocomplete' => 'lastname'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez renseigner votre nom',
+                    ]),
+                ],
             ])
         ;
     }

@@ -59,6 +59,9 @@ class UserCrudController extends AbstractCrudController
                 ->setColumns(3),
             TextField::new('lastname', 'Nom')
                 ->setColumns(3),
+            TextField::new('slug', 'Adresse page auteur')
+                ->onlyOnIndex()
+                ->setDisabled(true),
             EmailField::new('email', 'Adresse e-mail')
                 ->setColumns(3),
             ChoiceField::new('roles', 'Rôle')

@@ -29,7 +29,7 @@
                 <option value="">Trier les articles par auteur</option>
                 {# Trouver tous les auteurs #}
                 {% for author in users %}
-                    <option value="{{ path('app_user_show', {'id': author.id}) }}">{{ author.firstName }} {{ author.lastName }}</option>
+                    <option value="{{ path('app_user_show', {'slug': author.slug,}) }}">{{ author.firstName }} {{ author.lastName }}</option>
                 {% endfor %}
             </select>
         </div>
