@@ -50,7 +50,7 @@
         <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.mainImageAlt }}" class="img">
 
         <div class="intro">{{ article.intro|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': '',})|raw }}</div>
-        <div class="content">{{ article.content|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': '',})|raw }}</div>
+        <div class="content">{{ article.content|replace({'<div>': '', '</div>': '',})|raw }}</div>
 
 
         {# Article précédent et suivant #}
