@@ -116,6 +116,19 @@ class SettingCrudController extends AbstractCrudController
                 ->hideOnForm()
                 ->hideOnIndex()
                 ->setTemplatePath('admin/fields/text.html.twig'),
+
+            FormField::addTab('Autres pages')
+                ->setIcon('fas fa-file-alt')
+                ->setHelp('Autres pages'),
+            TextEditorField::new('siteRegisterText', 'Texte de la page d\'inscription')
+                ->setColumns(12)
+                ->hideOnIndex()
+                ->hideOnDetail()
+                ->setFormType(CKEditorType::class),
+            TextareaField::new('siteRegisterText', 'Texte de la page d\'inscription')
+                ->hideOnForm()
+                ->hideOnIndex()
+                ->setTemplatePath('admin/fields/text.html.twig'),
         ];
     }
 

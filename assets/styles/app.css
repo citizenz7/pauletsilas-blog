@@ -141,7 +141,7 @@ footer .footer {
     flex-wrap: wrap;
     gap: 70px;
     position: relative;
-    z-index: 999;
+    z-index: 9;
 }
 
 footer .footer .pres {
@@ -264,7 +264,7 @@ footer .copyright {
     gap: 5px;
     font-size: clamp(12px, 3vw, 14px);
     position: relative;
-    z-index: 999;
+    z-index: 9;
 }
 
 footer .copyright::before {

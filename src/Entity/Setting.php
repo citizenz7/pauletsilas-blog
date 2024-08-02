@@ -47,6 +47,9 @@ class Setting
     #[ORM\Column(type: Types::TEXT)]
     private ?string $siteDocumentation = null;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $siteRegisterText = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -180,6 +183,18 @@ class Setting
     public function setSiteDocumentation(string $siteDocumentation): static
     {
         $this->siteDocumentation = $siteDocumentation;
+
+        return $this;
+    }
+
+    public function getSiteRegisterText(): ?string
+    {
+        return $this->siteRegisterText;
+    }
+
+    public function setSiteRegisterText(string $siteRegisterText): static
+    {
+        $this->siteRegisterText = $siteRegisterText;
 
         return $this;
     }
