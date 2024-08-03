@@ -28,6 +28,7 @@
                 {% if article.updatedAt %}
                     | Mis à jour le : {{ article.updatedAt|date('d-m-Y') }}
                 {% endif %}
+                | Vues : {{ article.views }}
             </div>
             <div>
                 {% set nbc = article.comments|length %}

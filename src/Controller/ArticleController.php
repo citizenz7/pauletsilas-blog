@@ -245,6 +245,11 @@ class ArticleController extends AbstractController
 
         $article = $articleRepository->findOneBy(['slug' => $slug]);
 
+        // Set +1 view for each visit
+        $article->setViews($article->getViews() + 1);
+        $em->persist($article);
+        $em->flush();
+
         $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
 
         $articlePage = $articlePageRepository->findOneBy([]);

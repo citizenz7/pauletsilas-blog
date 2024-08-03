@@ -40,7 +40,6 @@
     color: var(--title-color-hover);
 }
 
-
 .articles .cards {
     display: flex;
     flex-wrap: wrap;
@@ -125,6 +124,11 @@
 
 .articles .cards .card .card-body .title a:hover {
     color: var(--title-color-hover);
+}
+
+.articles .cards .card .card-body .title .views {
+    font-size: clamp(12px, 5vw, 13px);
+    font-weight: 400;
 }
 
 .articles .cards .card .img {

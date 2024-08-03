@@ -1,15 +1,7 @@
 .presentation {
-    /* margin: calc(var(--header-height)) auto 15px auto; */
     margin: 0 auto 15px auto;
     position: relative;
 }
-
-/* .presentation .bg {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 15px;
-    border-radius: 5px;
-} */
 
 .presentation h1 {
     position: absolute;
@@ -22,7 +14,6 @@
     font-family: var(--title-font-family);
     color: var(--color-white);
     text-align: center;
-    /* padding: 10px; */
 }
 
 .presentation p {
@@ -232,6 +223,11 @@
 
 .home .cards .card .title a:hover {
     color: var(--title-color-hover);
+}
+
+.home .cards .card .title .views {
+    font-size: clamp(12px, 5vw, 13px);
+    font-weight: 400;
 }
 
 .home .cards .card .meta {

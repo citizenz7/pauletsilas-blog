@@ -77,6 +77,9 @@ class Article
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'article', orphanRemoval: true)]
     private Collection $comments;
 
+    #[ORM\Column]
+    private ?int $views = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -354,6 +357,18 @@ class Article
                 $comment->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getViews(): ?int
+    {
+        return $this->views;
+    }
+
+    public function setViews(int $views): static
+    {
+        $this->views = $views;
 
         return $this;
     }

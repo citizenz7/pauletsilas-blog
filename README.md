@@ -6,6 +6,8 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 * PHP 8.2+
 * Composer 2
 * AssetMapper
+* Glightbox
+* Font Awesome
 
 ### ADMIN/BackOffice
 * Url : /admin
@@ -26,14 +28,14 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 * friendsofsymfony/ckeditor-bundle (Installer les assets : `php bin/console assets:install public`)
 * symfony/asset-mapper
 * knplabs/knp-paginator-bundle
-* twig/cssinliner-extra
 * twig/extra-bundle
 * victor-prdh/recaptcha-bundle
-* ...
+* symfonycasts/reset-password-bundle
+* symfonycasts/verify-email-bundle
 
 ### Fonts
-* Poppins
-* Rubik
+* Poppins (body)
+* Rubik (title)
 
 ### COMMANDES
 * commande Symfony pour la création d'un admin :
@@ -86,9 +88,9 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 * ~~CGU~~
 * ~~Confidentialite~~
 * ~~constraints dans crud controller sur images et fichiers~~
-* Mentions légales
+* ~~Mentions légales~~
 
-* Un utlisateur qui n'aura pas validé son adresse e-mail ne pourra pas proposer d'article.
+* ~~Un utlisateur qui n'aura pas validé son adresse e-mail ne pourra pas proposer d'article~~
 
 ### Mise en PROD
 **Installer/compiler les assets**
@@ -96,11 +98,11 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 2. `php bin/console asset-map:compile` : compiler les assets dans public à chaque fois qu'il y a un changement de fichier CSS
 
 **robots.txt**
-* Ajouter sitemap dans robots.txt : `Sitemap: https://www.monsite.fr/sitemap.xml`
+* ~~Ajouter sitemap dans robots.txt : `Sitemap: https://www.monsite.fr/sitemap.xml`~~
 
 **Analytics (prod)**
-* Google Analytics 4
-* Google Search Console + soumission sitemap
+* ~~Google Analytics 4~~
+* ~~Google Search Console + soumission sitemap~~
 
 
 

@@ -26,6 +26,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
 class ArticleCrudController extends AbstractCrudController
 {
@@ -133,6 +134,8 @@ class ArticleCrudController extends AbstractCrudController
                 ->setHelp('Texte alternatif de l\'image. 90 caractères max.')
                 ->setColumns(6)
                 ->hideOnIndex(),
+            IntegerField::new('views', 'Vues')
+                ->onlyOnIndex(),
             CollectionField::new('mediapic', 'Galerie d\'images (facultatif)')
                 ->setHelp('Ajoutez des images à l\'article (galerie d\'images). Taille de l\'image 1920x1080 maxi. Poids de l\'image 500 Ko maxi.')
                 ->setColumns(12)
