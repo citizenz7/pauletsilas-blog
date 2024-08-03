@@ -44,10 +44,27 @@
                     </a>
                     <div class="card-body">
                         <div class="categories">
-                            {% for category in article.categories %}
-                                <a class="cat" href="{{ path('app_category_show', {'slug': category.slug}) }}">{{ category.title }}</a>
-                            {% endfor %}
+                            <div>
+                                {% for category in article.categories %}
+                                    <a class="cat" href="{{ path('app_category_show', {'slug': category.slug}) }}">{{ category.title }}</a>
+                                {% endfor %}
+                            </div>
+                            {# Commentaires #}
+                            {% if article.comments %}
+                                {% if article.comments|length  == 0 %}
+                                    <span class="comments"><i class="fa-solid fa-comment-slash"></i></span>
+                                {% elseif article.comments|length  == 1 %}
+                                    <span class="comments">{{ article.comments|length }}
+                                        <a href="{{ path('app_article_show', {'slug': article.slug}) }}#commentsarticle"><i class="fa-solid fa-comment"></i></a>
+                                    </span>
+                                {% else %}
+                                    <span class="comments">{{ article.comments|length }}
+                                        <a href="{{ path('app_article_show', {'slug': article.slug}) }}#commentsarticle"><i class="fa-solid fa-comments"></i></a>
+                                    </span>
+                                {% endif %}
+                            {% endif %}
                         </div>
+
                         <h2 class="title">
                             <a href="{{ path('app_article_show', {'slug': article.slug}) }}">
                                 {{ article.title }}

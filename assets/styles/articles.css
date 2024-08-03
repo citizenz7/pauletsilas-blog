@@ -65,6 +65,8 @@
 .articles .cards .card-body .categories {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
     gap: 5px;
 }
 
@@ -81,6 +83,21 @@
 }
 
 .articles .cards .card .card-body .categories .cat:hover {
+    color: var(--title-color-hover);
+}
+
+.articles .cards .card .card-body .categories .comments {
+    position: relative;
+}
+
+.articles .cards .card .card-body .categories .comments a {
+    font-size: clamp(11px, 1.5vw, 13px);
+    font-weight: 300;
+    text-decoration: none;
+    color: var(--title-color);
+}
+
+.articles .cards .card .card-body .categories .comments a:hover {
     color: var(--title-color-hover);
 }
 
