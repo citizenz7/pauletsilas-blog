@@ -112,6 +112,13 @@ header nav .burger span {
     transition: all 0.3s linear;
 }
 
+
+/* TARTEAUCITRON */
+.tarteaucitronIconBottomRight {
+    bottom: 85px !important;
+}
+
+
 /* FOOTER */
 footer {
     position: relative;
