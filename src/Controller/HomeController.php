@@ -24,9 +24,30 @@ class HomeController extends AbstractController
     {
         $settings = $settingRepository->findOneBy([]);
 
+        // Récupérer les 6 derniers articles actifs triés par date de publication
         $articles = $articleRepository->findBy(['active' => true], ['postedAt' => 'DESC'], 6);
 
-        $lastArticles = $articleRepository->findBy(['active' => true], ['postedAt' => 'DESC'], 3);
+        // Récupérer tous les articles actifs triés par date de publication
+        $lastArticles = $articleRepository->findBy(['active' => true], ['postedAt' => 'DESC']);
+
+        // Récupérer tous les fichiers de tous les articles
+        $allFiles = [];
+        foreach ($lastArticles as $article) {
+            foreach ($article->getFichiers() as $file) {
+                $allFiles[] = [
+                    'article' => $article,
+                    'file' => $file,
+                ];
+            }
+        }
+
+        // Trier les fichiers par id
+        usort($allFiles, function ($a, $b) {
+            return $b['file']->getId() <=> $a['file']->getId();
+        });
+
+        // Sélectionner les 5 derniers fichiers
+        $lastFiles = array_slice($allFiles, 0, 5);
 
         $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
 
@@ -38,6 +59,7 @@ class HomeController extends AbstractController
             'settings' => $settings,
             'articles' => $articles,
             'lastArticles' => $lastArticles,
+            'lastFiles' => $lastFiles,
             'homePage' => $homePage,
             'categories' => $categories,
             'socials' => $socials,

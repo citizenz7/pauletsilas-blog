@@ -90,16 +90,14 @@
             <img src="{{ asset('uploads/img/bg-hp.png') }}" alt="Fichiers pdf des articles" class="image-bg">
             <h2>{{ homePage.lastFilesTitle }}</h2>
             <div class="fichiers">
-                {% for article in lastArticles %}
-                    {% for file in article.fichiers|slice(0, 5) %}
-                        <div class="links">
-                            <a target="_blank" href="{{ asset('uploads/files/articles/' ~ file.fichierFile) }}" title="Article : {{ article.title }}">
-                                <i class="fa-solid fa-file-pdf fa-3x"></i>
-                                <br>
-                                {{ file.title }}
-                            </a>
-                        </div>
-                    {% endfor %}
+                {% for entry in lastFiles %}
+                    <div class="links">
+                        <a target="_blank" href="{{ asset('uploads/files/articles/' ~ entry.file.fichierFile) }}" title="Article : {{ entry.article.title }}">
+                            <i class="fa-solid fa-file-pdf fa-3x"></i>
+                            <br>
+                            {{ entry.file.title }}
+                        </a>
+                    </div>
                 {% endfor %}
             </div>
         </div>
