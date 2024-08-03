@@ -107,14 +107,21 @@
         <div class="pics">
             <h2>{{ homePage.lastPicsTitle }}</h2>
             <div class="images">
-                {% for article in lastArticles %}
-                    {% for pic in article.mediapic|slice(0, 5) %}
+                {# {% for article in lastArticles %}
+                    {% for pic in article.mediapic %}
                         <div class="links">
                             <a href="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" class="glightbox">
                                 <img src="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" alt="{{ pic.imageAlt }}" class="img">
                             </a>
                         </div>
                     {% endfor %}
+                {% endfor %} #}
+                {% for entry in lastPics %}
+                    <div class="links">
+                        <a href="{{ asset('uploads/img/articles/pics/' ~ entry.pic.image) }}" class="glightbox">
+                            <img src="{{ asset('uploads/img/articles/pics/' ~ entry.pic.image) }}" alt="{{ entry.pic.imageAlt }}" class="img">
+                        </a>
+                    </div>
                 {% endfor %}
             </div>
         </div>

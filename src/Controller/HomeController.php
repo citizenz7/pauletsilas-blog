@@ -49,6 +49,25 @@ class HomeController extends AbstractController
         // Sélectionner les 5 derniers fichiers
         $lastFiles = array_slice($allFiles, 0, 5);
 
+        // Récupérer toutes les images de tous les articles
+        $allPics = [];
+        foreach ($lastArticles as $article) {
+            foreach ($article->getMediapic() as $pic) {
+                $allPics[] = [
+                    'article' => $article,
+                    'pic' => $pic,
+                ];
+            }
+        }
+
+        // Trier les images par id
+        usort($allPics, function ($a, $b) {
+            return $b['pic']->getId() <=> $a['pic']->getId();
+        });
+
+        // Sélectionner les 6 dernières images
+        $lastPics = array_slice($allPics, 0, 6);
+
         $categories = $categoryRepository->findBy([], ['title' => 'ASC']);
 
         $homePage = $homePageRepository->findOneBy([]);
@@ -60,6 +79,7 @@ class HomeController extends AbstractController
             'articles' => $articles,
             'lastArticles' => $lastArticles,
             'lastFiles' => $lastFiles,
+            'lastPics' => $lastPics,
             'homePage' => $homePage,
             'categories' => $categories,
             'socials' => $socials,
