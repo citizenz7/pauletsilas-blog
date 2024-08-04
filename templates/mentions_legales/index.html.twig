@@ -7,7 +7,7 @@
 {% block body %}
 
     <div class="presentation">
-        <img src="{{ asset('uploads/img/mentions/' ~ mentions.image) }}" alt="{{ mentions.imageAlt}}">
+        <img src="{{ asset('uploads/img/mentions/' ~ mentions.image)|imagine_filter('heroHome') }}" alt="{{ mentions.imageAlt}}">
         <h1>{{ mentions.mainTitle }}</h1>
     </div>
 

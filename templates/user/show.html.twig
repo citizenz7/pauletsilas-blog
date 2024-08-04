@@ -9,7 +9,7 @@
         <h1>Auteur : {{ user.firstname}} {{ user.lastname }}</h1>
         <div class="description">
             <div class="col1">
-                <img src="{{ asset('uploads/img/users/' ~ user.image) }}" alt="{{ user.firstname }} {{ user.lastname }}">
+                <img src="{{ asset('uploads/img/users/' ~ user.image)|imagine_filter('authorImage') }}" alt="{{ user.firstname }} {{ user.lastname }}">
             </div>
             <div class="col2">
                 {{ user.authorBio|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': ''})|raw }}

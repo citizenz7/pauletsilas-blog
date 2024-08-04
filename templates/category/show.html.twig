@@ -9,7 +9,7 @@
         <h1>Catégorie d'articles : {{ category.title }}</h1>
         <div class="description">
             <div class="col1">
-                <img src="{{ asset('uploads/img/categories/' ~ category.image) }}" alt="{{ category.title }}">
+                <img src="{{ asset('uploads/img/categories/' ~ category.image)|imagine_filter('categoryImage') }}" alt="{{ category.title }}">
             </div>
             <div class="col2">
                 {{ category.description|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': ''})|raw }}
@@ -22,7 +22,7 @@
                 {% else %}
                     <div class="card">
                         <a href="{{ path('app_article_show', {'slug': article.slug}) }}">
-                            <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.title }}" class="image">
+                            <img src="{{ asset('uploads/img/articles/' ~ article.mainImage)|imagine_filter('articlesPics')  }}" alt="{{ article.title }}" class="image">
                             <h2>{{ article.title }}</h2>
                         </a>
                     </div>

@@ -31,3 +31,6 @@
 /site-sync-prod.sh
 /mysqldump.sql
 /mysqldump.zip
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

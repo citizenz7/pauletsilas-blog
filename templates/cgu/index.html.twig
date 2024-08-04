@@ -7,7 +7,7 @@
 {% block body %}
 
     <div class="presentation">
-        <img src="{{ asset('uploads/img/cgu/' ~ cguPage.image) }}" alt="{{ cguPage.imageAlt}}">
+        <img src="{{ asset('uploads/img/cgu/' ~ cguPage.image)|imagine_filter('heroHome') }}" alt="{{ cguPage.imageAlt}}">
         <h1>{{ cguPage.mainTitle }}</h1>
     </div>
 

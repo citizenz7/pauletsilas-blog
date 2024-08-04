@@ -7,7 +7,7 @@
 {% block body %}
 
     <div class="presentation">
-        <img src="{{ asset('uploads/img/contact/' ~ contact.image) }}" alt="{{ contact.imageAlt}}">
+        <img src="{{ asset('uploads/img/contact/' ~ contact.image)|imagine_filter('heroHome') }}" alt="{{ contact.imageAlt}}">
         <h1>{{ contact.mainTitle }}</h1>
         {# <p>{{ home.content|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': '',})|raw }}</p> #}
     </div>

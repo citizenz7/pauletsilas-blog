@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.mainImageAlt }}" class="img">
+        <img src="{{ asset('uploads/img/articles/' ~ article.mainImage)|imagine_filter('articleMainImage') }}" alt="{{ article.mainImageAlt }}" class="img">
 
         <div class="intro">{{ article.intro|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': '',})|raw }}</div>
         <div class="content">{{ article.content|replace({'<div>': '', '</div>': '',})|raw }}</div>
@@ -99,7 +99,7 @@
             <div class="mediapics">
                 {% for pic in article.mediapic %}
                     <a href="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" target="_blank" class="glightbox">
-                        <img src="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" alt="{{ pic.imageAlt }}">
+                        <img src="{{ asset('uploads/img/articles/pics/' ~ pic.image)|imagine_filter('articlesPics') }}" alt="{{ pic.imageAlt }}">
                     </a>
                 {% endfor %}
             </div>

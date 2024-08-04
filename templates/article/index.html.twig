@@ -40,7 +40,7 @@
             {% for article in articles %}
                 <div class="card">
                     <a href="{{ path('app_article_show', {'slug': article.slug}) }}">
-                        <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" class="img" alt="{{ article.mainImageAlt }}">
+                        <img src="{{ asset('uploads/img/articles/' ~ article.mainImage)|imagine_filter('articleArticle') }}" class="img" alt="{{ article.mainImageAlt }}">
                     </a>
                     <div class="card-body">
                         <div class="categories">
