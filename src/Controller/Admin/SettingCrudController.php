@@ -129,6 +129,26 @@ class SettingCrudController extends AbstractCrudController
                 ->hideOnForm()
                 ->hideOnIndex()
                 ->setTemplatePath('admin/fields/text.html.twig'),
+            ImageField::new('siteRegisterImage', 'Image de la page d\'inscription')
+                ->setColumns(6)
+                ->hideOnIndex()
+                ->setRequired(false)
+                ->setBasePath('uploads/img')
+                ->setUploadDir('public/uploads/img')
+                ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
+                ->setFileConstraints(new Image(
+                    maxWidth: 1920,
+                    maxWidthMessage: 'L\'image est trop large. La largeur max est 1920 px.',
+                    maxHeight: 1080,
+                    maxHeightMessage: 'L\'image est trop grande. La hauteur max est 1080 px.',
+                    maxSize: '500k',
+                    maxSizeMessage: 'L\'image est trop volumineuse. Le poids max est 500 Ko.',
+                    mimeTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
+                    mimeTypesMessage: 'Seuls les formats jpeg, jpg, png, webp sont acceptés.'
+                )),
+            TextField::new('siteRegisterImageAlt', 'Description de l\'image de la page d\'inscription')
+                ->setColumns(6)
+                ->hideOnIndex(),
         ];
     }
 

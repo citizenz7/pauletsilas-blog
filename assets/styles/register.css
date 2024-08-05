@@ -1,8 +1,39 @@
 .register {
     max-width: 1320px;
     margin: calc(var(--header-height) + 20px) auto 35px auto;
-    padding: 15px 0 35px 0;
+    padding: 15px 0;
     position: relative;
+}
+
+.register .register-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 55px;
+    justify-content: space-between;
+}
+
+.register .register-container .col1 {
+    width: 50%;
+}
+
+.register .register-container .col1 img {
+    max-width: 100%;
+    width: 100%;
+    height: 145px;
+    object-fit: cover;
+    object-position: 50% 50%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    filter: grayscale(50%);
+}
+
+.register .register-container .col2 {
+    width: 45%;
 }
 
 .register .alert-danger {
@@ -37,7 +68,7 @@
 .register .intro {
     position: relative;
     text-align: center;
-    font-size: clamp(11px, 3vw, 14px);
+    font-size: clamp(13px, 1.5vw, 16px);
     color: var(--color-success);
     padding: 15px;
     margin-bottom: 15px;
@@ -51,7 +82,8 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-width: clamp(300px, 50vw, 500px);
+    /* max-width: clamp(300px, 50vw, 500px); */
+    width: 100%;
     margin: 25px auto 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -128,9 +160,43 @@
 
 
 
+@media screen and (max-width: 1099px) {
+    .register .register-container {
+        gap: 10px;
+    }
+
+    .register .register-container .col1 {
+        width: 45%;
+    }
+
+    .register .register-container .col2 {
+        width: 50%;
+    }
+}
+
+
 @media screen and (max-width: 768px) {
     .register {
         max-width: 100%;
+    }
+
+    .register .register-container {
+        gap: 2px;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .register .register-container .col1 {
+        width: 90%;
+    }
+
+    /* .register .register-container .col1 img {
+        display: none;
+    } */
+
+    .register .register-container .col2 {
+        width: 100%;
     }
 
     .register .request-title {

@@ -50,6 +50,12 @@ class Setting
     #[ORM\Column(type: Types::TEXT)]
     private ?string $siteRegisterText = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $siteRegisterImage = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $siteRegisterImageAlt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -195,6 +201,30 @@ class Setting
     public function setSiteRegisterText(string $siteRegisterText): static
     {
         $this->siteRegisterText = $siteRegisterText;
+
+        return $this;
+    }
+
+    public function getSiteRegisterImage(): ?string
+    {
+        return $this->siteRegisterImage;
+    }
+
+    public function setSiteRegisterImage(string $siteRegisterImage): static
+    {
+        $this->siteRegisterImage = $siteRegisterImage;
+
+        return $this;
+    }
+
+    public function getSiteRegisterImageAlt(): ?string
+    {
+        return $this->siteRegisterImageAlt;
+    }
+
+    public function setSiteRegisterImageAlt(string $siteRegisterImageAlt): static
+    {
+        $this->siteRegisterImageAlt = $siteRegisterImageAlt;
 
         return $this;
     }

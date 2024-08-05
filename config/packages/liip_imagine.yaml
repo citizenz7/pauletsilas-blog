@@ -73,3 +73,11 @@ liip_imagine:
                 thumbnail:
                     size: [175, 175]
                     mode: outbound
+
+        registerImage:
+            format: webp
+            quality: 75
+            filters:
+                thumbnail:
+                    size: [600, 145]
+                    mode: outbound
