@@ -148,8 +148,12 @@
 
 
 @media screen and (max-width: 768px) {
+    .presentation {
+        margin-top: calc(var(--header-height)
+        );
+    }
     .presentation h1 {
-        top: 60%;
+        top: 45%;
         width: 100%;
     }
 

@@ -53,6 +53,44 @@
         <div class="intro">{{ article.intro|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': '',})|raw }}</div>
         <div class="content">{{ article.content|replace({'<div>': '', '</div>': '',})|raw }}</div>
 
+        <div class="author-bio">
+            {% if article.author.image %}
+                <div class="col1">
+                    <img src="{{ asset('uploads/img/users/' ~ article.author.image) }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
+                </div>
+            {% else %}
+                <div class="col1">
+                    <img src="{{ asset('uploads/img/users/no-image.png') }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
+                </div>
+            {% endif %}
+            <div class="col2">
+                <div class="bio-name">{{ article.author }}</div>
+                <div class="bio-text">{{ article.author.authorBio|raw }}</div>
+            </div>
+        </div>
+
+        {# Photos (pics) de l'article #}
+        {% if article.mediapic is not empty %}
+            <h2 id="pics" class="galerie-title">{{ articlePage.galerieTitle }}</h2>
+            <div class="mediapics">
+                {% for pic in article.mediapic %}
+                    <a href="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" target="_blank" class="glightbox">
+                        <img src="{{ asset('uploads/img/articles/pics/' ~ pic.image)|imagine_filter('articlesPics') }}" alt="{{ pic.imageAlt }}">
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {# Fichiers de l'article #}
+        {% if article.fichiers is not empty %}
+            <h2 id="fichiers" class="fichiers-title">{{ articlePage.documentsTitle }}</h2>
+            <div class="fichiers">
+                {% for file in article.fichiers %}
+                    <a target="_blank" href="{{ asset('uploads/files/articles/' ~ file.fichierFile) }}">
+                    <i class="fa-solid fa-file-pdf fa-4x"></i><br>{{ file.title }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
 
         {# Article précédent et suivant #}
         <div class="prevnext">
@@ -77,43 +115,6 @@
                 </a>
             {% endif %}
         </div>
-
-        <div class="author-bio">
-            {% if article.author.image %}
-                <div class="col1">
-                    <img src="{{ asset('uploads/img/users/' ~ article.author.image) }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
-                </div>
-            {% else %}
-                <div class="col1">
-                    <img src="{{ asset('uploads/img/users/no-image.png') }}" alt="{{ article.author.firstName }} {{ article.author.lastName }}" class="author-image">
-                </div>
-            {% endif %}
-            <div class="col2">
-                <div class="bio-name">{{ article.author }}</div>
-                <div class="bio-text">{{ article.author.authorBio|raw }}</div>
-            </div>
-        </div>
-
-        {% if article.mediapic is not empty %}
-            <h2 id="pics" class="galerie-title">{{ articlePage.galerieTitle }}</h2>
-            <div class="mediapics">
-                {% for pic in article.mediapic %}
-                    <a href="{{ asset('uploads/img/articles/pics/' ~ pic.image) }}" target="_blank" class="glightbox">
-                        <img src="{{ asset('uploads/img/articles/pics/' ~ pic.image)|imagine_filter('articlesPics') }}" alt="{{ pic.imageAlt }}">
-                    </a>
-                {% endfor %}
-            </div>
-        {% endif %}
-
-        {% if article.fichiers is not empty %}
-            <h2 id="fichiers" class="fichiers-title">{{ articlePage.documentsTitle }}</h2>
-            <div class="fichiers">
-                {% for file in article.fichiers %}
-                    <a target="_blank" href="{{ asset('uploads/files/articles/' ~ file.fichierFile) }}">
-                    <i class="fa-solid fa-file-pdf fa-4x"></i><br>{{ file.title }}</a>
-                {% endfor %}
-            </div>
-        {% endif %}
 
         {# Flash message #}
         {% for flash in app.flashes('success') %}
