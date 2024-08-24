@@ -24,5 +24,6 @@ class EasyAdminSubscriberArticleCreatedAt implements EventSubscriberInterface
         }
 
         $article->setPostedAt(new \DateTime());
+        $article->setViews(1);
     }
 }
