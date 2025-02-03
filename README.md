@@ -1,5 +1,4 @@
 # Paul et Silas
-Musique chrétienne, louange chrétienne, actualités de la musique à message chrétien, partage de ressources musicales techniques : guitare, piano, etc.
 
 ### ENVIRONNEMENT
 * Symfony 7
@@ -11,17 +10,6 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 
 ### ADMIN/BackOffice
 * Url : /admin
-
-**Comptes Admin**
-* Login : citizenz7@protonmail.com
-* Password : 72szG7gU6EvR6nQ5
-
-**Comptes Utilisateurs**
-* Login : shadrak@protonmail.com
-* Password : 66N9DWFu7N52zfku
-
-* Login : tornzen@protonmail.com
-* Password : Jap2DG8Lwc737T2e
 
 ### BUNDLES
 * easycorp/easyadmin-bundle
@@ -52,13 +40,6 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 
 ### Créer un mot de passe hashé en console
 `symfony console security:hash-password`
-
-### Google reCapctha
-* clé du site : 6LeYW4cpAAAAAB9iLAuhwSlg73CzzsYIvgU94Bwh
-* clé secrète : 6LeYW4cpAAAAACC4oIkReiAgW5Ads3S_FE6aq52G
-
-### Google Analytics
-* G-B8FER475XX
 
 ### AssetMapper
 * Installer un package JS (exemple avec SplideJS) : `php bin/console importmap:require @splidejs/splide`
@@ -103,7 +84,6 @@ Musique chrétienne, louange chrétienne, actualités de la musique à message c
 **Analytics (prod)**
 * ~~Google Analytics 4~~
 * ~~Google Search Console + soumission sitemap~~
-
 
 
 ### COMMENT CA MARCHE ?
